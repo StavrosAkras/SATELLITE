@@ -329,6 +329,8 @@ As for NGC 7009, the number of rows to the top and bottom of the raw
 maps are 35 and 35, respectively, and the extra columns to the left and
 right side are 4 and 6, respectively.
 
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/chb_2Dimage.png?raw=true)
+
 ![Illustrative example of a line flux map and the rows/columns that have
 to be added in order to coincide the CS with the CM of the new
 map.](reorder_map_example.pdf)
@@ -513,6 +515,7 @@ the integrated line fluxes.
 If the slit width and length are larger than the maximum number the
 software return the following message: ‘‘Sorry, your slit width or/and
 length are larger than the true size of the image’’.
+
 
 ### TeNe\_angles\_script, ionicabundances\_angles\_script and element\_abundances\_ICFs\_angles\_script
 
