@@ -1,0 +1,83 @@
+position_angle_step          10
+minimum_position_angle        0 
+maximum_position_angle      360 
+add_pixels_above             35
+add_pixels_below             35
+add_pixels_left               4
+add_pixels_right              6
+total_num_pixels_verti      310
+total_num_pixels_horiz      320
+
+slit_width_in_spaxels        20     
+slit_length_in_spaxels      160
+S79_H83_CCM89               031
+PYNEB_21_01                   0
+number_fake_obs_MC            1
+
+angle_for_radial_flux        79    
+pixel_scale                 100
+limit_radial_in_arcsec       20
+energy_parameter            -20
+
+x_coor_of_CS                157    
+y_coor_of_CS                125
+
+PA_for_specific_slit_1       79   
+width_for_specific_slit_1    10   
+length_for_specific_slit_1  320 
+x_coor_of_spec_slit_1       153 
+y_coor_of_spec_slit_1       106
+
+PA_for_specific_slit_2       79   
+width_for_specific_slit_2     8   
+length_for_specific_slit_2   25 
+x_coor_of_spec_slit_2        37 
+y_coor_of_spec_slit_2       148
+
+PA_for_specific_slit_3       79   
+width_for_specific_slit_3     8   
+length_for_specific_slit_3   21 
+x_coor_of_spec_slit_3        68 
+y_coor_of_spec_slit_3       142
+
+PA_for_specific_slit_4       79   
+width_for_specific_slit_4     8   
+length_for_specific_slit_4   42 
+x_coor_of_spec_slit_4       104 
+y_coor_of_spec_slit_4       135
+
+PA_for_specific_slit_5       79   
+width_for_specific_slit_5     8   
+length_for_specific_slit_5   18 
+x_coor_of_spec_slit_5       140 
+y_coor_of_spec_slit_5       128
+
+PA_for_specific_slit_6       79   
+width_for_specific_slit_6     8   
+length_for_specific_slit_6    8 
+x_coor_of_spec_slit_6       169 
+y_coor_of_spec_slit_6       123
+
+PA_for_specific_slit_7       79   
+width_for_specific_slit_7     8   
+length_for_specific_slit_7   46 
+x_coor_of_spec_slit_7       202 
+y_coor_of_spec_slit_7       116
+
+PA_for_specific_slit_8       79   
+width_for_specific_slit_8     8   
+length_for_specific_slit_8   25 
+x_coor_of_spec_slit_8       254 
+y_coor_of_spec_slit_8       106
+
+PA_for_specific_slit_9       79   
+width_for_specific_slit_9     8   
+length_for_specific_slit_9   25 
+x_coor_of_spec_slit_9       285 
+y_coor_of_spec_slit_9       100
+
+PA_for_specific_slit_10      79
+width_for_specific_slit_10    8   
+length_for_specific_slit_10 320 
+x_coor_of_spec_slit_10      154 
+y_coor_of_spec_slit_10      126
