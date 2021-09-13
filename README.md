@@ -627,123 +627,99 @@ Last but not least, satellite computes and returns an ASCII file with the mean v
 25% (Q1), 50% (median), 75% (Q3), 95% for all the nebular parameters and emission line ratios for a thorough statistical analysis of the observed
 nebula.
 
-![Fig. 10. (Hbeta) map of NGC 7009.](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/chb_2Dimage.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/chb_2Dimage.png?raw=true)
+
+Fig. 10. c(H\(beta) map of NGC 7009.
 
 
-![Ne and Te maps obtained from the \[S II\] and
-\[S III\] diagnostic lines of
-NGC 7009.](Ne\(SII6716_31\)_Te\(NII6548_84\)_2Dimage.png)
-![Ne and Te maps obtained from the \[S II\] and
-\[S III\] diagnostic lines of
-NGC 7009.](Te\(SIII6312_9069\)_Ne\(ClIII5517_38\)_2Dimage.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/Ne(SII6716_31)_Te(NII6548_84)_2Dimage.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/Te(SIII6312_9069)_Ne(ClIII5517_38)_2Dimage.png?raw=true)
 
-![Log(\[N II\]/\[O III\]) and log(\[S II\]/S III\]) line ratio maps of
-NGC 7009.](log\(\(N2_6548s+N2_6583s\)_\(O3_4959s+O3_5007s\)\)_2Dimage.png)
-![Log(\[N II\]/\[O III\]) and log(\[S II\]/S III\]) line ratio maps of
-NGC 7009.](log\(\(S2_6716s+S2_6731s\)_\(S3_6312s+S3_9069s\)\)_2Dimage.png)
+Fig. 11. Ne and Te maps obtained from the [S II] and [S III] diagnostic lines of NGC 7009.
 
-![The histogram of c(H\(\beta\) map.](histc_Hb.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/log((N2_6548s+N2_6583s)_(O3_4959s+O3_5007s))_2Dimage.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/log((S2_6716s+S2_6731s)_(S3_6312s+S3_9069s))_2Dimage.png?raw=true)
 
-![The histograms of Ne\[S II\] and Te\[S III\]
-maps.](histNe\(SII6716_31\)_Te\(NII6548_84\).png) ![The histograms of
-Ne\[S II\] and Te\[S III\]
-maps.](histTe\(NII6548_84\)_Ne\(SII6716_31\).png)
+Fig. 12. Log([N II]/[O III]) and log([S II]/[S III]) line ratio maps of NGC 7009
 
-![A representative example of emission line diagnostic diagram: \[S II\]
-6716/6731 versus H\(\alpha\)/\[N II\] 6548+6584. Cyan dots correspond to
-the values of individual pixels, pink circles and yellow diamonds show
-the values obtained from the simulated long-slits of the rotational
-analysis task with position angles from 0 to 360 degrees with 10 degrees
-step and the values from the 10 simulated slits in the specific slits
-task, respectively. The inset plot illustrate the variation of the line
-ratios with the position angle of the simulated
-slits.](fig_SII_HaNII.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/histc_Hb.png?raw=true)
 
-![A representative example of emission line diagnostic diagram:
-\[O III\] 5007/H\(\beta\) versus \[S II\] 6716+6731/H\(\alpha\). Cyan
-dots correspond to the values of individual pixels, pink circles and
-yellow diamonds show the values obtained from the simulated long-slits
-of the rotational analysis task with position angles from 0 to 360
-degrees with 10 degrees step and the values from the 10 simulated slits
-in the specific slits task, respectively. The inset plot illustrate the
-variation of the line ratios with the position angle of the simulated
-slits. The regimes of the PNe, H ii regions and supernova
-remnants are also drawn.](fig_OIIIHb_SIIHa.png)
+Fig. 13. The histogram of c(H\(beta\) map.
 
-![An example of the *diagnostic\_diagrams\_input.txt* file
-for NGC 7009 and the parameters that the user can select for the
-diagnostic diagrams in the *2D\_analysis\_module*
-module.](DD_input.pdf)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/histNe(SII6716_31)_Te(NII6548_84).png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/histTe(NII6548_84)_Ne(SII6716_31).png?raw=true)
+
+Fig. 14. The histograms of Ne[S II] and Te[S III] maps.
+
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_SII_HaNII.png?raw=true)
+
+Fig. 15. A representative example of emission line diagnostic diagram: [S II] 6716/6731 versus H\(alpha\)/[N II] 6548+6584. Cyan dots correspond to
+the values of individual pixels, pink circles and yellow diamonds show the values obtained from the simulated long-slits of the rotational
+analysis task with position angles from 0 to 360 degrees with 10 degrees step and the values from the 10 simulated slits in the specific slits
+task, respectively. The inset plot illustrate the variation of the line ratios with the position angle of the simulated
+slits.
+
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_OIIIHb_SIIHa.png?raw=true)
+
+Fig. 16. A representative example of emission line diagnostic diagram: [O III] 5007/H\(beta\) versus [S II] 6716+6731/H\(alpha\). Cyan
+dots correspond to the values of individual pixels, pink circles and yellow diamonds show the values obtained from the simulated long-slits
+of the rotational analysis task with position angles from 0 to 360 degrees with 10 degrees step and the values from the 10 simulated slits
+in the specific slits task, respectively. The inset plot illustrate the variation of the line ratios with the position angle of the simulated
+slits. The regimes of the PNe, H ii regions and supernova remnants are also drawn.
+
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/DD_input.png?raw=true)
+
+Fig. 17. An example of the *diagnostic\_diagrams\_input.txt* file for NGC 7009 and the parameters that the user can select for the
+diagnostic diagrams in the *2D\_analysis\_module* module.
 
 ## radial analysis module
 
-The final module in the current version of satellite (v1.2)
-conducts a radial spectroscopic analysis considering a pseudo-slit with
-specific width, length and position angle
-(parameter=angle\_for\_radial\_flux) provided by the user in the
-*numerical\_input.txt* file. The user must also select the
-emission lines that will be used for this analysis. This can be made in
-the third column of the *input.txt* file: radial\_yes, or
-radial\_no.  
-**Note1:** It is recommended to disable all other modules
-when the *radial\_analysis* module is executed.  
+The final module in the current version of satellite (v1.2) conducts a radial spectroscopic analysis considering a pseudo-slit with
+specific width, length and position angle (parameter=angle\_for\_radial\_flux) provided by the user in the
+*numerical\_input.txt* file. The user must also select the emission lines that will be used for this analysis. This can be made in
+the third column of the *input.txt* file: radial\_yes, or radial\_no.
+
+**Note1:** It is recommended to disable all other modules when the *radial\_analysis* module is executed.
 The main outcomes of this module are:
 
   - (I) the radial profiles of all the selected emission lines in the
     *input.txt* normalized by the peak flux.
 
-  - (II) the calculation of all the nebular parameters (c(H\(\beta\)),
+  - (II) the calculation of all the nebular parameters (c(H\(beta\)),
     line intensities, line ratios, Te, Ne, ionic,
     elemental abundances, ICFs and abundances ratios) as functions of
     the distance from the central star or the central point of the
     nebula or galaxy in general.
 
-The normalization of the radial profiles is made using the peak of the
-flux of each emission line. However, the user can also select the range
-from where this peak can be obtained by providing the code with the
-minimum radius (*limit\_radial\_in\_arcsec* parameter).
-This option permit to investigate the radial distribution of emission
-lines for regions/substructures with specific interest.
+The normalization of the radial profiles is made using the peak of the flux of each emission line. However, the user can also select the range
+from where this peak can be obtained by providing the code with the minimum radius (*limit\_radial\_in\_arcsec* parameter).
+This option permit to investigate the radial distribution of emission lines for regions/substructures with specific interest.
 
-The radial profile of various emission lines for the example of NGC 7009
-are shown in Figure [28](#fig11) (**Hint:** It is
-recommended to use maximum 4-6 lines for the construction of more
-illustrative plots.). All radial profiles are normalized to a peak flux
-found for distances r\(>\)20 arcsec (\_radial\_in\_arcsec\(>\)20)
-focused to the low-ionization structures/knot of NGC 7009. The
-calculation are made in the *find\_maxvlaue\_script*.
-Hence, satellite returns the distance between the peak of
-each selected line and the central star in arcsec. Table 1 lists the
-distances for the example of NGC 7009 and it can be seen that there is a
-spatial offset of 1 arcsec between the high/moderate- and low-ionization
-lines. The values of each radial step (pixel scale of the IFU) are also
-saved in an ASCII file, so the user can build his/her own radial
-profiles.
+The radial profile of various emission lines for the example of NGC 7009 are shown in Figure [28](#fig11) (**Hint:** It is
+recommended to use maximum 4-6 lines for the construction of more illustrative plots.). All radial profiles are normalized to a peak flux
+found for distances r\(>\)20 arcsec (\_radial\_in\_arcsec > 20) focused to the low-ionization structures/knot of NGC 7009. The
+calculation are made in the *find\_maxvlaue\_script*. Hence, satellite returns the distance between the peak of
+each selected line and the central star in arcsec. Table 1 lists the distances for the example of NGC 7009 and it can be seen that there is a
+spatial offset of 1 arcsec between the high/moderate- and low-ionization lines. The values of each radial step (pixel scale of the IFU) are also
+saved in an ASCII file, so the user can build his/her own radial profiles.
 
-The radial variation of c(H\(\beta\)), Te, and Ne
-parameters of NGC 7009 are shown in Figure [31](#fig12)
+The radial variation of c(H\(beta\)), Te, and Ne parameters of NGC 7009 are shown in Figure [31](#fig12)
 
-![Radial profiles for several emission lines of NGC 7009 at
-PA=79 degrees. Upper panel shows all the radial profiles, while the
-lower panel zooms-in to the much fainter emission
-lines.](radial_distribution_1.png) ![Radial profiles for several
-emission lines of NGC 7009 at PA=79 degrees. Upper panel shows all the
-radial profiles, while the lower panel zooms-in to the much fainter
-emission lines.](radial_distribution_2.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_1.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_2.png?raw=true)
 
-![Representative examples of the radial distribution of c(H\(\beta\))
-upper panel and Te, Ne (lower
-panel).](c\(Hb\)_radial.png) ![Representative examples of the radial
-distribution of c(H\(\beta\)) upper panel and Te,
-Ne (lower
-panel).](Te\(NII6548_84\)_Ne\(SII6716_31\)_both_radial.png)
-![Representative examples of the radial distribution of c(H\(\beta\))
-upper panel and Te, Ne (lower
-panel).](Te\(SIII6312_9069\)_Ne\(ClIII5517_38\)_both_radial.png)
 
-One again, it has to be pointed out that the code sums up the values of
-the pixels which have F(H\(\alpha\))\(>\)0, F(H\(\beta\))\(>\)0 and/or
-F(H\(\alpha\))\(>\)F(H\(\beta\))\*2.86.
+Fig. 18. Radial profiles for several emission lines of NGC 7009 at PA=79 degrees. Upper panel shows all the radial profiles, while the
+lower panel zooms-in to the much fainter emission lines.
+
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/c(Hb)_radial.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/Te(NII6548_84)_Ne(SII6716_31)_both_radial.png?raw=true)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/Te(SIII6312_9069)_Ne(ClIII5517_38)_both_radial.png?raw=true)
+
+Fig. 19. Representative examples of the radial distribution of c(H\(beta\)) upper panel and Te, Ne (lower panel).
+
+One again, it has to be pointed out that the code sums up the values of the pixels which have F(Halpha>0, F(Hbeta)>0 and/or
+F(Halpha)>F(Hbeta)\*2.86.
 
 <div id="distancepeak">
 
@@ -751,19 +727,18 @@ F(H\(\alpha\))\(>\)F(H\(\beta\))\*2.86.
 | :----------------------: | :-----------------: | :---------------------: | :------: |
 |           Line           | distance\(^{\dag}\) |          Line           | distance |
 |                          |      (arcsec)       |                         | (arcsec) |
-|  H i 4861Å  |        23.6         |     \[N II\] 6548Å      |   24.8   |
-|  \([\)O III\(]\) 4959Å   |        23.8         | H i 6563Å  |   23.6   |
-|   \([\)N I\(]\) 5199Å    |        24.8         |     \[N II\] 6584Å      |   24.8   |
-| He ii 5412Å |        20.2         | He i 6678Å |   23.8   |
-|  \([\)Cl III\(]\) 5517Å  |        24.2         |     \[S II\] 6716Å      |   24.8   |
-|  \([\)Cl III\(]\) 5538Å  |        24.4         |     \[S II\] 6731Å      |   24.8   |
-|     \([\)N I\] 5755Å     |        24.2         |    \[Ar III\] 7136Å     |   24.8   |
-| He i 5876Å  |        23.6         |     \[O II\] 7320Å      |   24.8   |
-|   \([\)O II\(]\) 6300Å   |        24.8         |     \[O II\] 7330Å      |   24.8   |
-|  \([\)S III\(]\) 6312Å   |        23.8         |     \[S III\] 9069Å     |   23.8   |
+|  H I 4861                |        23.6         |     [N II] 6548         |   24.8   |
+|  [O III] 4959            |        23.8         |     H I 6563            |   23.6   |
+|  [N I] 5199              |        24.8         |     [N II] 6584         |   24.8   |
+|  He II 5412              |        20.2         |     He I 6678           |   23.8   |
+|  [Cl III] 5517           |        24.2         |     [S II] 6716         |   24.8   |
+|  [Cl III] 5538           |        24.4         |     [S II] 6731         |   24.8   |
+|  [N I] 5755              |        24.2         |     [Ar III] 7136       |   24.8   |
+|  He I 5876               |        23.6         |     [O II] 7320         |   24.8   |
+|  [O II] 6300             |        24.8         |     [O II] 7330         |   24.8   |
+|  [S III] 6312            |        23.8         |     [S III 9069         |   23.8   |
 
-Distances from the central stars of emission line’s peak for a
-pseudo-slit at 79 degree position angle
+Distances from the central stars of emission line's peak for a pseudo-slit at 79 degree position angle
 
 </div>
 
