@@ -330,7 +330,7 @@ right side are 4 and 6, respectively.
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/reorder_map_example.png?raw=true)
 
-Fig.1 Illustrative example of a line flux map and the rows/columns that have to be added in order to 
+Fig.2 Illustrative example of a line flux map and the rows/columns that have to be added in order to 
 coincide the CS with the CM of the new map.
 
 ## Extinction Coefficient
@@ -708,7 +708,6 @@ The radial variation of c(H\(beta\)), Te, and Ne parameters of NGC 7009 are show
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_1.png?raw=true)
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_2.png?raw=true)
 
-
 Fig. 18. Radial profiles for several emission lines of NGC 7009 at PA=79 degrees. Upper panel shows all the radial profiles, while the
 lower panel zooms-in to the much fainter emission lines.
 
@@ -725,7 +724,7 @@ F(Halpha)>F(Hbeta)\*2.86.
 
 |                          |                     |                         |          |
 | :----------------------: | :-----------------: | :---------------------: | :------: |
-|           Line           | distance\(^{\dag}\) |          Line           | distance |
+|           Line           | distance (a)        |          Line           | distance |
 |                          |      (arcsec)       |                         | (arcsec) |
 |  H I 4861                |        23.6         |     [N II] 6548         |   24.8   |
 |  [O III] 4959            |        23.8         |     H I 6563            |   23.6   |
@@ -742,66 +741,47 @@ Distances from the central stars of emission line's peak for a pseudo-slit at 79
 
 </div>
 
-\(^{\dag}\) The spacial resolution of MUSE maps is 0.2 arcsec.
+(a) The spacial resolution of MUSE maps is 0.2 arcsec.
 
 ### radial distance calculations
 
-At this point, it is necessary to further explain how
-satellite calculates the fluxes of the emission lines as
-function of the distance from the central star. Figure [32](#fig20)
-shown an example of a pseudo-slit at PA=90 degrees.
+At this point, it is necessary to further explain how satellite calculates the fluxes of the emission lines as
+function of the distance from the central star. Figure [32](#fig20) shown an example of a pseudo-slit at PA=90 degrees.
 
-The width of the pseudo-slit defines how many pixels will be taken into
-consideration for the flux at each distance. For instance, the fluxes
-(and errors) of 5 pixels are summed up for the first column (or radial
-distance r=0.2 arcsec). Then, the code moves to the second column and
-computes the flux and the corresponding error from the next 5 pixels at
-the radial distance r=0.4 arcsec and so on (see Figure [32](#fig20)).
+The width of the pseudo-slit defines how many pixels will be taken into consideration for the flux at each distance. For instance, the fluxes
+(and errors) of 5 pixels are summed up for the first column (or radial distance r=0.2 arcsec). Then, the code moves to the second column and
+computes the flux and the corresponding error from the next 5 pixels at the radial distance r=0.4 arcsec and so on (see Figure [32](#fig20)).
 
-After finishing the computation of the fluxes and errors for all the
-lines, the code computes the extinction coefficient (c(H\(\beta\))) and
-corrected line intensities (relative to H\(\beta\)=100) as function of
-the radial distance from the central star or geometric centre as well as
-all nebular parameters (Te, Ne, ionic, elemental
-abundances, ICFs and abundance ratios) (Figures [28](#fig11) and
-[31](#fig12)).
+After finishing the computation of the fluxes and errors for all the lines, the code computes the extinction coefficient (c(H\(\beta\))) and
+corrected line intensities (relative to H\(beta\)=100) as function of the radial distance from the central star or geometric centre as well as
+all nebular parameters (Te, Ne, ionic, elemental abundances, ICFs and abundance ratios) (Figures [28](#fig11) and [31](#fig12)).
 
-![An illustrative example of how satellite computes the
-fluxes and radial stances from the central star of the nebula or the
-geometric centre of the nebula.](NGC7009radial.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/NGC7009radial.png?raw=true)
+
+Fig. 20. An illustrative example of how satellite computes the fluxes and radial stances from the central star of the nebula or the
+geometric centre of the nebula.
 
 # Uncertainty calculations
 
-The uncertainties of emission lines and all nebular parameters for all
-four modules are computed following the same Monte Carlo approach. In
-particular, satellite, first, computes the total error of
-the flux for each pseudo-slit or pixel, using the provided error maps +
+The uncertainties of emission lines and all nebular parameters for all four modules are computed following the same Monte Carlo approach. In
+particular, satellite, first, computes the total error of the flux for each pseudo-slit or pixel, using the provided error maps +
 an extra error as the percentage of the flux.
 
 \[\Delta F_{tot}=\Sigma_{i=1}^{N}~(\sigma_{F_i}+\lambda*F_i)^{1/2}\]
-where i corresponds to the pseudo-slit or pixel and range from 1 to the
-total number N, \(\sigma_{F_i}\) is the uncertainties of the flux in the
-pseudo-slit or pixel i based on the provided error maps, F\(_i\) is the
-flux in the pseudo-slit or pixel i and \(\lambda\) corresponds to the
-percentage of the flux (from 0 to 1.0). If \(\lambda\)=0, then the code
-takes into account only the errors from the maps. The \(\lambda\)=0
-parameter is given to the code by the user in the
-*input.txt* file (forth column). There is also the option
-not to use the error maps. This is defined in the
-*input.txt* file (forth column) even rows (the rows of
-errors). If a non-zero value is provided, the code uses the formula (1)
-while for a "0" value , the code uses the formula (2).
+
+where i corresponds to the pseudo-slit or pixel and range from 1 to the total number N, \(\sigma_{F_i}\) is the uncertainties of the flux in the
+pseudo-slit or pixel i based on the provided error maps, F\(_i\) is the flux in the pseudo-slit or pixel i and \(\lambda\) corresponds to the
+percentage of the flux (from 0 to 1.0). If \(\lambda\)=0, then the code takes into account only the errors from the maps. The \(\lambda\)=0
+parameter is given to the code by the user in the *input.txt* file (forth column). There is also the option
+not to use the error maps. This is defined in the *input.txt* file (forth column) even rows (the rows of
+errors). If a non-zero value is provided, the code uses the formula (1) while for a "0" value , the code uses the formula (2).
 
 \[\Delta F_{tot}=\Sigma_{i=1}^{N}~(\lambda*F_i)^{1/2}\]
 
-These resultant uncertainties of the line fluxes are then used to
-replicate the spectrum of a pseudo-slit or pixel, and a number of
-additional spectra are generated using a Monte Carlo algorithm. The
-number of the replicate spectra is given by the user in the
-*numerical\_input.txt*. satellite computes all
-the nebular parameters, e.g. Te, Ne, ionic,
-elemental abundances and ICFs for all the replicate spectra and the
-standard deviation of each parameters is the uncertainty of the
+These resultant uncertainties of the line fluxes are then used to replicate the spectrum of a pseudo-slit or pixel, and a number of
+additional spectra are generated using a Monte Carlo algorithm. The number of the replicate spectra is given by the user in the
+*numerical\_input.txt*. satellite computes all the nebular parameters, e.g. Te, Ne, ionic,
+elemental abundances and ICFs for all the replicate spectra and the standard deviation of each parameters is the uncertainty of the
 parameter that the satellite code provides.
 
 # General Notes:
@@ -842,25 +822,23 @@ described.
     *total\_num\_pixels\_horiz* in the
     *numerical\_input.txt* file.
 
-![An example of error in case the He II line is missing (in the
-*input.txt* file, it has been set as "no") but the
-He I/He II ratio is required to be computed (in the
-*output.txt*, the He I/He II ratio is still
-"yes").](linemissing.png)
+    
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/linemissing.png?raw=true)
 
-![An example of error in case a physical parameter is required to be
-computed and the corresponding line is missing (in the
-*input.txt* file, it has been set as "no". In this example,
-the T\(_{e}\) and N\(_{e}\) from the \[N II\] and \[Cl III\] diagnostic
-lines have to be computed but a diagnostic line is
-missing.](linemissing2.png)
+Fig. 21. An example of error in case the He II line is missing (in the *input.txt* file, it has been set as "no") but the
+He I/He II ratio is required to be computed (in the *output.txt*, the He I/He II ratio is still "yes").
 
-![An example of error in case there is a problem with the dimensions of
-the arrays that correspond to the emission lines. In this case, the
-error is because the size of the flux maps is not consistent with the
-*total\_num\_pixels\_verti* and
-*total\_num\_pixels\_horiz* parameters in the
-*numerical\_input.txt* file. ](error_with_tables.png)
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/linemissing2.png?raw=true)
+
+Fig. 22. An example of error in case a physical parameter is required to be computed and the corresponding line is missing (in the
+*input.txt* file, it has been set as "no". In this example, the Te and Ne from the [N II] and [Cl III] diagnostic
+lines have to be computed but a diagnostic line is missing.
+
+![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/error_with_tables.png?raw=true)
+
+Fig. 23. An example of error in case there is a problem with the dimensions of the arrays that correspond to the emission lines. In this case, the
+error is because the size of the flux maps is not consistent with the *total\_num\_pixels\_verti* and
+*total\_num\_pixels\_horiz* parameters in the *numerical\_input.txt* file. 
 
 # How to Cite satellite in a publication? 
 
