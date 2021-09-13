@@ -1,3 +1,9 @@
+"SATELLITE" Documentation
+Dr. Stavros Akras
+Institute for Astronomy, Astrophysics, Space Applications and Remote Sensing,
+National Observatory of Athens
+2021
+
 # Introduction
 
 The Spectroscopic Analysis Tool for intEgraL fieLd unIt daTacubEs
@@ -172,7 +178,7 @@ the most commonly detected and relatively bright emission line in
 ionized nebula such as the H and He recombination lines (recombination
 lines from O or N will be implemented to future versions) and
 collisionaly excited lines from O+, O++, N+, N++ ,S+, S++, etc. (see
-Figure [1](#fig1)).
+Figure 1.
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/input_lines.png?raw=true)
 
@@ -211,7 +217,7 @@ each line defined in the *input.txt* file pixel-by-pixel
 and save the values in 2D arrays.
 
 For the example of NGC 7009, the selected emission lines are presented
-in Figure. [1](#fig1)
+in Figure 1.
 
 ## read\_input\_lines\_parameters\_script
 
@@ -292,7 +298,7 @@ very important in order to properly rotate the maps and measure the line
 fluxes in each pseudo-slit. **Note:** **The final
 maps have to have the same number of columns and rows\!**
 
-Figure [2](#fig2) presents a cartoon that illustrates the numbers of
+Figure 2 presents a cartoon that illustrates the numbers of
 rows of pixels need to be added to the top and bottom of the raw map as
 well as the columns of pixels to the left and right parts of the raw
 maps. The value these extra pixels have is **zero** and
@@ -393,7 +399,7 @@ other three modules.
 The *rotation\_analysis* module deals with the
 spectroscopic analysis of a number of radial placed pseudo-slits from
 the centre to outer parts with position angles (PA) between 0 and 360.
-Figure [3](#fig4) illustrates as example the position of these
+Figure 3 illustrates as example the position of these
 pseudo-slits on the [N II] 6584 emission line map of NGC 7009. The
 minimum and maximum values of the PA, the step in PA , the width and the
 length of the pseudo-slits are provided by the user in the file
@@ -417,7 +423,7 @@ The outcomes from this module are multiple and are saved in different
 files:
 
   - an ASCII file with the c(H\(beta\)) and the intensity of each
-    emission line and for each PA \(\rightarrow\)  
+    emission line and for each PA -> 
     *output\_linesintensities\_per\_angles.txt*
 
   - an ASCII file with various line ratios defined by the user for each
@@ -443,11 +449,11 @@ files:
 The user can use the ASCII files to carry out any further analysis
 and/or construct his/her own proper plots.
 
-Figure [6](#fig6a) and [9](#fig6b) present the plots of c(H\(beta\)),
+Figure [4] and [5] present the plots of c(H\(beta\)),
 Te, Ne, ionic, elemental abundances and ICFs of N
 as functions of the position angle of the pseudo-slits for the analysis
 of NGC 7009. Te and Ne are shown in the same plot
-as in Figures [6](#fig6a) and [9](#fig6b) or in two separate plots.
+as in Figures [4] and [5] or in two separate plots.
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_cHbeta_angles.png?raw=true)
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_Te(NII6548_84)_Ne(SII6716_31)_both_angles.png?raw=true)
@@ -506,26 +512,21 @@ length are larger than the true size of the image".
 
 ### TeNe\_angles\_script, ionicabundances\_angles\_script and element\_abundances\_ICFs\_angles\_script
 
-Te, Ne, ionic/elemental abundances, ICFs and
-abundance ratios are also computed for each pseudo-slit. Various
-diagnostic lines can be used for Te/Ne. The user
-can also choose which T e/Ne combination will be
-applied for the abundances of each ion (see Figure [11](#fig7)). All
-these parameters are defined by the user in the
-*outputs.txt* file. Te and Ne parameters are computed in the *TeNe\_angles\_script*,
-while the ionic,elemental abundances and ICFs are computed in the
-*ionicabundances\_angles\_script* and
-*element\_abundances\_ICFs\_angles\_script*. All the
+Te, Ne, ionic/elemental abundances, ICFs and abundance ratios are also computed for each pseudo-slit. Various
+diagnostic lines can be used for Te/Ne. The user can also choose which T e/Ne combination will be
+applied for the abundances of each ion (see Figure 6)). All these parameters are defined by the user in the
+*outputs.txt* file. Te and Ne parameters are computed in the *TeNe\_angles\_script*, while the ionic,elemental abundances and ICFs 
+are computed in the *ionicabundances\_angles\_script* and *element\_abundances\_ICFs\_angles\_script*. All the
 scripts make use of the *PyNeb* package.
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/outputsfile.png?raw=true)
 
-Fig. 6.  An example of the *outputs.txt* file for NGC 7009 and the parameters that the user has to define for the calculations of
+Fig. 5.  An example of the *outputs.txt* file for NGC 7009 and the parameters that the user has to define for the calculations of
 Te, Ne, ionic/elemental abundances, ICFs and abundance ratios. 
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/output_abund.png?raw=true)
 
-Fig. 7. An example of the *outputs.txt* file for NGC 7009 and the parameters that the user has to define for the calculations of Te, Ne,
+Fig. 6. An example of the *outputs.txt* file for NGC 7009 and the parameters that the user has to define for the calculations of Te, Ne,
 ionic/elemental abundances, ICFs and abundance ratios. 
 
 ## specific\_slit\_analysis module
@@ -551,8 +552,7 @@ pseudo-slits in the *specific\_slit\_analysis* module.
 
   - y\_coor\_of\_spec\_slit\_n (in pixels)
 
-where n is the number of the pseudo-slit from 1 to 10 (see
-Figure [12](#fig8)). The x\_coor\_of\_spec\_slit\_n, and
+where n is the number of the pseudo-slit from 1 to 10 (see Figure 7). The x\_coor\_of\_spec\_slit\_n, and
 y\_coor\_of\_spec\_slit\_n parameters refer to the centre of each slit.
 
 
@@ -563,14 +563,11 @@ The position of the centre (x, y coordinates), position angle, width and length 
 parameters provided by the user. Slits 1 and 10 represent the slits position from  and , respectively. Numbered
 regions from 2 to 9 correspond to the sub-structures of knots and jet-like, or sub-regions of rims defined in [3]. 
 
-Satellite calculates the H\(beta\) flux, line intensities
-(normalized to Hb=100 and corrected for interstellar extinction),
+Satellite calculates the H\(beta\) flux, line intensities (normalized to Hb=100 and corrected for interstellar extinction),
 emission line ratios (from the *output.txt* file), nebular
-parameters (Te, Ne), ionic/total elemental
-abundances, ICFs and abundance ratios for all 10 pseudo-slits. This
+parameters (Te, Ne), ionic/total elemental abundances, ICFs and abundance ratios for all 10 pseudo-slits. This
 module is executed from the *specificPA\_line\_fluxes\_script*. The scripts
-*slit\_line\_flux\_script* is employed in this module for
-each pseudo-slit.
+*slit\_line\_flux\_script* is employed in this module for each pseudo-slit.
 
 c(H\(beta\)), emission line intensities and line ratios are saved in the *output\_linesintensities\_per\_angles.txt* and
 *output\_lineratios\_per\_angles.txt* files, respectively. So, the user can also perform any extra analysis he/she wants.
@@ -580,15 +577,15 @@ Similarly, Te and Ne parameters are computed in the *TeNe\_specific\_slits\_scri
 finally and the elemental abundances, ICFs and abundance ratios are computed in the
 *element\_abundances\_ICFs\_specific\_slits\_script* and are saved in the PyNeb\_output\_total\_abund\_ICFs\_specific\_slits file.
 
-Figure [13](#fig9) shows the position of the specific areas/regions selected for the study of NGC 7009 overlaid on the \[N II\] flux map.
-The selected regions are the same as those defined by for a direct comparison of the results from the *specific\_slit\_analysis
+Figure 8 shows the position of the specific areas/regions selected for the study of NGC 7009 overlaid on the [N II] flux map.
+The selected regions are the same as those defined by Goncalves et al. (2003) for a direct comparison of the results from the *specific\_slit\_analysis
 module* with 1D long-slit spectroscopic data. Possible differences between the two studies can be associated with the position
 of the pseudo-slits. At this point, it is worth mentioning the *slit\_position\_testing* module of the
 satellite code. This module is used to verify the position of the pseudo-slits before use the software. **Hint:** When
 the *slit\_position\_testing* module is used first deselect all other modules. Moreover, at least an emission line has to be used
-and defined in the *input.txt* file in order to properly use this module (e.g., H\(\alpha\) and H\(\beta\) to avoid multiple
+and defined in the *input.txt* file in order to properly use this module (e.g., Halpha) and Hbeta to avoid multiple
 maps). The output of this module is 10 figures (in png and pdf formats) with the position of each pseudo-slit overlaid on the emission line map
-(see Figure [15](#fig10)).
+(see Figure 9).
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_slit0.png?raw=true)
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/fig_slit4.png?raw=true)
@@ -605,19 +602,18 @@ simultaneously using the entire maps. For this module, the analysis2D\_script, T
 generate\_2D\_lineratio\_maps\_script, ionicabundances\_2D\_script, element\_abundances\_ICFs\_2D\_script and
 diagnotic\_diagrams\_script are employed.
 
-c(H\(beta\)), line intensities, line ratios, Te, Ne, ionic, elemental abundances, ICFs and abundances ratios
+c(Hbeta), line intensities, line ratios, Te, Ne, ionic, elemental abundances, ICFs and abundances ratios
 are computed for each individual pixels, if the criteria F(Ha)>0, F(Hb) > 0 and F(Ha) > F(Hb)*2.86 are satisfied, 
 otherwise a value equals to **"zero"** is applied.
 
 The main outcomes from this module are 2D maps for all the aforementioned nebular parameters saved in the
-*output\_images* folder. In Figures [16](#fig14), [18](#fig15) and [20](#fig16), the maps of
-c(H\(beta\)), Te and Ne using the [S III] and [S II] diagnostic lines, the line ratios log([N II]/[O III]) and
-log([S II]/S III]) are presented as representative examples of the outcomes from this module.
+*output\_images* folder. In Figures 10, 11 and 12, the maps of c(Hbeta), Te and Ne using the [S III] and [S II] diagnostic lines, 
+the line ratios log([N II]/[O III]) and log([S II]/S III]) are presented as representative examples of the outcomes from this module.
 
 The *2D\_spectroscopic\_analysis* module also calculates and returns the distribution of each maps (histogram plots), e.g.,
-c(H\(\beta\)), Ne and Te maps (see Figures [21](#fig17) and [23](#fig18)) as well as emission line diagnostic diagrams 
-(see Figures [24](#fig19a) and [25](#fig19b)) using the diagnotic\_diagrams\_script which are selected by the
-user in the *diagnostic\_diagrams\_input* file (see Figure [26](#fig13)).  
+c(H\(\beta\)), Ne and Te maps (see Figures 12 and 13) as well as emission line diagnostic diagrams 
+(see Figures 15 and 16) using the diagnotic\_diagrams\_script which are selected by the
+user in the *diagnostic\_diagrams\_input* file (see Figure 17). 
 
 **Note1:** At this point, it has to be clarified that when the *specific\_slits\_analysis* and/or
 *rotation\_analysis* modules are used together with the *2D\_analysis* module, the emission lines ratios for the
@@ -695,7 +691,7 @@ The normalization of the radial profiles is made using the peak of the flux of e
 from where this peak can be obtained by providing the code with the minimum radius (*limit\_radial\_in\_arcsec* parameter).
 This option permit to investigate the radial distribution of emission lines for regions/substructures with specific interest.
 
-The radial profile of various emission lines for the example of NGC 7009 are shown in Figure [28](#fig11) (**Hint:** It is
+The radial profile of various emission lines for the example of NGC 7009 are shown in Figure 18 (**Hint:** It is
 recommended to use maximum 4-6 lines for the construction of more illustrative plots.). All radial profiles are normalized to a peak flux
 found for distances r\(>\)20 arcsec (\_radial\_in\_arcsec > 20) focused to the low-ionization structures/knot of NGC 7009. The
 calculation are made in the *find\_maxvlaue\_script*. Hence, satellite returns the distance between the peak of
@@ -703,7 +699,7 @@ each selected line and the central star in arcsec. Table 1 lists the distances f
 spatial offset of 1 arcsec between the high/moderate- and low-ionization lines. The values of each radial step (pixel scale of the IFU) are also
 saved in an ASCII file, so the user can build his/her own radial profiles.
 
-The radial variation of c(H\(beta\)), Te, and Ne parameters of NGC 7009 are shown in Figure [31](#fig12)
+The radial variation of c(H\(beta\)), Te, and Ne parameters of NGC 7009 are shown in Figure 19.
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_1.png?raw=true)
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/radial_distribution_2.png?raw=true)
@@ -746,15 +742,15 @@ Distances from the central stars of emission line's peak for a pseudo-slit at 79
 ### radial distance calculations
 
 At this point, it is necessary to further explain how satellite calculates the fluxes of the emission lines as
-function of the distance from the central star. Figure [32](#fig20) shown an example of a pseudo-slit at PA=90 degrees.
+function of the distance from the central star. Figure 20 shows an example of a pseudo-slit at PA=90 degrees.
 
 The width of the pseudo-slit defines how many pixels will be taken into consideration for the flux at each distance. For instance, the fluxes
 (and errors) of 5 pixels are summed up for the first column (or radial distance r=0.2 arcsec). Then, the code moves to the second column and
-computes the flux and the corresponding error from the next 5 pixels at the radial distance r=0.4 arcsec and so on (see Figure [32](#fig20)).
+computes the flux and the corresponding error from the next 5 pixels at the radial distance r=0.4 arcsec and so on (see Figure 20).
 
 After finishing the computation of the fluxes and errors for all the lines, the code computes the extinction coefficient (c(H\(\beta\))) and
 corrected line intensities (relative to H\(beta\)=100) as function of the radial distance from the central star or geometric centre as well as
-all nebular parameters (Te, Ne, ionic, elemental abundances, ICFs and abundance ratios) (Figures [28](#fig11) and [31](#fig12)).
+all nebular parameters (Te, Ne, ionic, elemental abundances, ICFs and abundance ratios) (Figures 18 and 19).
 
 ![alt text](https://github.com/StavrosAkras/SATELLITE/blob/main/Docs/figures/NGC7009radial.png?raw=true)
 
@@ -807,16 +803,16 @@ described.
     third columns of the corresponding line. If the user has forgotten
     to properly change the *output.txt* file or the
     *diagnostic\_diagram\_input.txt* file, an error will be
-    return, see Figure [33](#figmissingline).
+    return, see Figure 21.
 
   - In case an emission line is missing, but the user has forgotten to
     properly change the *output.txt* file or the
     *diagnostic\_diagram\_input.txt* file and a physical
     parameters has to be computed such as Te, Ne, abundances, an error
-    will be return like in Figure [34](#figmissingline2).
+    will be return like in Figure 22.
 
   - In case, the arrays of the emission lines have different sizes an
-    error will be return like in Figure [35](#figerrorimages). Moreover,
+    error will be return like in Figure 23. Moreover,
     the error line may also be related to the parameters
     *total\_num\_pixels\_verti* and
     *total\_num\_pixels\_horiz* in the
