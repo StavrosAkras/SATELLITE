@@ -1,7 +1,11 @@
 "SATELLITE" Documentation
+
 Dr. Stavros Akras
+
 Institute for Astronomy, Astrophysics, Space Applications and Remote Sensing,
+
 National Observatory of Athens
+
 2021
 
 # Introduction
@@ -228,65 +232,58 @@ are read by the code via the
 read\_input\_lines\_parameters\_script. Below, the most
 important parameters are listed together with the ascii files:
 
-  - the pixel scale of the IFU in arcsec (x10\(^{2}\)) \(\rightarrow\)
+  - the pixel scale of the IFU in arcsec (x10\(^{2}\)) ->
     *numerical\_input.txt*
 
-  - the interstellar extinction law (Rx10\(^{1}\)) \(\rightarrow\)
+  - the interstellar extinction law (Rx10\(^{1}\)) ->
     *numerical\_input.txt*
 
-  - atomic data \(\rightarrow\) *numerical\_input.txt*
+  - atomic data -> *numerical\_input.txt*
 
   - the width, length, position angle (PA) and coordinates of the
-    pseudo-slits for the 1D analysis in the
-    *rotation\_analysis*, *radial\_analysis*,
-    and *specific\_slits\_analysis* modules \(\rightarrow\)
-    *numerical\_input.txt*
+    pseudo-slits for the 1D analysis in the *rotation\_analysis*, *radial\_analysis*,
+    and *specific\_slits\_analysis* modules -> *numerical\_input.txt*
 
   - the coordinates of the central star or the centre of the nebula
-    \(\rightarrow\) *numerical\_input.txt* file
+    -> *numerical\_input.txt* file
 
   - number of replicate spectra for the determination of the
-    uncertainties \(\rightarrow\) *numerical\_input.txt*
+    uncertainties -> *numerical\_input.txt*
     file
 
   - the minimum radius from which the maximum line flux will be
-    determined and the profiles will be normalized to 1. \(\rightarrow\)
+    determined and the profiles will be normalized to 1. ->
     *numerical\_input.txt* file
 
   - the number of column and row pixels that have to be added to the raw
     maps in order to put the centre of the nebula at the center of the
-    map \(\rightarrow\) *numerical\_input.txt*  
+    map -> *numerical\_input.txt*  
 
-  - the module or modules that the code will execute \(\rightarrow\)
+  - the module or modules that the code will execute ->
     *outputs.txt* file
 
   - the emission line ratios that the code will compute based on the
-    available line maps \(\rightarrow\) *outputs.txt*
+    available line maps -> *outputs.txt*
 
   - the physical parameters (c, Te, Ne that the
-    code will compute based on the available line maps \(\rightarrow\)
-    *outputs.txt*
+    code will compute based on the available line maps -> *outputs.txt*
 
   - the Te and Ne from specific diagnostic lines
-    that will be used to compute ionic abundances \(\rightarrow\)
-    *outputs.txt*
+    that will be used to compute ionic abundances -> *outputs.txt*
 
   - the elemental abundances and ICFs that the code will compute based
-    on the available line maps \(\rightarrow\)
-    *outputs.txt*  
+    on the available line maps -> *outputs.txt*  
 
-  - the diagnostic diagrams that the code will construct \(\rightarrow\)
+  - the diagnostic diagrams that the code will construct ->
     *diagnostic\_diagrams\_input.txt*
 
   - the xmin/xmax and ymin/ymax for the diagnostic diagrams
-    \(\rightarrow\) *diagnostic\_diagrams\_input.txt*
+    -> *diagnostic\_diagrams\_input.txt*
 
   - if the user wants to over-plot the selection criteria from
-    Kewley2001 and Kauffmann2003 \(\rightarrow\)
-    *diagnostic\_diagrams\_input.txt*
+    Kewley2001 and Kauffmann2003 -> *diagnostic\_diagrams\_input.txt*
 
-  - ymin/ymax for the scatter plots \(\rightarrow\)
-    *plots\_parameters\_input.txt* file
+  - ymin/ymax for the scatter plots -> *plots\_parameters\_input.txt* file
 
 ## Reorder line flux and error maps
 
@@ -427,24 +424,22 @@ files:
     *output\_linesintensities\_per\_angles.txt*
 
   - an ASCII file with various line ratios defined by the user for each
-    PA \(\rightarrow\)*output\_lineratios\_per\_angles.txt*
+    PA -> *output\_lineratios\_per\_angles.txt*
 
   - an ASCII file with Te and Ne defined by the
-    user for each PA
-    \(\rightarrow\)*PyNeb\_output\_Te\_and\_Ne\_per\_angles.txt*
+    user for each PA -> *PyNeb\_output\_Te\_and\_Ne\_per\_angles.txt*
 
   - an ASCII file with the ionic abundances for each ion defined by the
-    user for each PA \(\rightarrow\)  
+    user for each PA ->
     *PyNeb\_output\_total\_abund\_ICFs\_per\_angles.txt*
 
   - an ASCII file with the elemental abundances and ICFs for each
     element defined by the user for each PA
-    \(\rightarrow\) *PyNeb\_output\_ionic\_abund\_per\_angles.txt*
+    -> *PyNeb\_output\_ionic\_abund\_per\_angles.txt*
 
   - plots of c(H\(beta\)), Te, Ne, ionic,
     elemental abundances, ICFs and abundances ratios as function of the
-    PA                                                   \(\rightarrow\)
-      *output\_angles\_plots* folder
+    PA -> *output\_angles\_plots* folder
 
 The user can use the ASCII files to carry out any further analysis
 and/or construct his/her own proper plots.
