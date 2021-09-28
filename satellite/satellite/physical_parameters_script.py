@@ -3,26 +3,6 @@
 # for each module to compute the Te and Ne parameters.
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-import numpy as np
-import seaborn as sns
-import pyneb as pn
-
-from satellite import diagnotic_diagrams_script as dds
 from satellite import TeNe_angles_script as TeNeangles
 from satellite import TeNe_specific_slits_script as TeNeslits
 from satellite import TeNe_2D_script as TeNe2Ds

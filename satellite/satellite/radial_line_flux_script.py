@@ -8,23 +8,8 @@
 # (C) Stavros Akras
 
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
 from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-
-
 
 ###
 ### This script/function 
@@ -107,7 +92,7 @@ def radialfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width,pi
                 ll=ll+1
         
         file10 = open('general_output_file.txt','a')        
-        if widthslit>max_width or lengthslit>max_width: print >>file10, "Sorry, your slit width or/and length are larger that the true size of the image"
+        if widthslit>max_width or lengthslit>max_width: print("Sorry, your slit width or/and length are larger that the true size of the image", file=file10)
         
         return radial_flux_table2,radial_flux_table2_error,arcsec2       
                 

@@ -5,31 +5,11 @@
 # from the rotation analysis module. 
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-import numpy as np
-import seaborn as sns
 import pyneb as pn
-import os, fnmatch
 import warnings
 from numpy import inf
 
-
-from satellite import diagnotic_diagrams_script as dds
-from satellite import mean_value_script as mvs
 
 
 def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,j,line_names,lines_available,ion_abun,ion_abun_error,param_estimated,param_requered,Te_PA,Ne_PA,param_mod_name):
