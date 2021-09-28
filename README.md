@@ -164,7 +164,7 @@ files.
 command: "**python setup.py install** "
 Setup.py also installs all the necessary python packages need to use satellite included pyneb.
 
-3) run the code command: "**./satellite > outputLog.txt.** "
+3) from the test directory, run the code command: "**./test_satellite.py > outputLog.txt.** "
 
 A number of general comments provided from the different modules of the
 code are written in the *outputLog.txt* ASCII file.
