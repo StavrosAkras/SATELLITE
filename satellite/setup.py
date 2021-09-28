@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup( name='satellite',
-	version='1.2',
+	version='1.3',
 	description='Spectroscopic Analysis Tool for intEgraL FieLd unIt daTacubEs',
 	url='',
 	author='Stavros Akras',
