@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python
  
 # SATELLITE, the Spectroscopic Analysis Tool for intEgraL fieLd unIt daTacubEs
 # (C) 2021- Stavros Akras
