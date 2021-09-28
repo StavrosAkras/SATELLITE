@@ -16,6 +16,7 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
+from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -321,10 +322,10 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
     for j in range(0,sizey):
         for i in range(0,sizex):
             if(flux2D.Ha_6563[i,j]>0.0 and flux2D.Hb_4861[i,j]>0.0 and flux2D.Ha_6563[i,j]>2.85*flux2D.Hb_4861[i,j]):
-                print(("spaxles:",i,j))
+                print("spaxles:",i,j)
                 file3 = open('test.dat','w')
                 
-                print("LINE test err", file=file3)
+                print >>file3, "LINE test err"
                 
             
                 index_extra_error=line_names.index("HI_6563e")          
@@ -346,9 +347,9 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraHb=float(line_ext_error[index_extra_error])
                         flux2D_error.Hb_4861[i,j]=flux2D.Hb_4861[i,j]*errextraHb
                 error=nfes.flux_Error(flux2D.Ha_6563[i,j],flux2D_error.Ha_6563[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_6563A", '{:03.3f}'.format(flux2D.Ha_6563[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_6563A", '{:03.3f}'.format(flux2D.Ha_6563[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 error=nfes.flux_Error(flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4861A", '{:03.3f}'.format(flux2D.Hb_4861[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4861A", '{:03.3f}'.format(flux2D.Hb_4861[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 
 
                 index_extra_error=line_names.index("HI_4340e")          
@@ -361,7 +362,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.Hg_4340[i,j]=flux2D.Hg_4340[i,j]*errextraHg  
 
                 error=nfes.flux_Error(flux2D.Hg_4340[i,j],flux2D_error.Hg_4340[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4341A", '{:03.3f}'.format(flux2D.Hg_4340[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4341A", '{:03.3f}'.format(flux2D.Hg_4340[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "H1r_4341Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HI_4101e")          
@@ -374,7 +375,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.Hd_4101[i,j]=flux2D.Hd_4101[i,j]*errextraHd
                         
                 error=nfes.flux_Error(flux2D.Hd_4101[i,j],flux2D_error.Hd_4101[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4102A", '{:03.3f}'.format(flux2D.Hd_4101[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4102A", '{:03.3f}'.format(flux2D.Hd_4101[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "H1r_4102Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeII_4686e")          
@@ -386,7 +387,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraHeIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.HeIIa_4686[i,j]=flux2D.HeIIa_4686[i,j]*errextraHeIIa 
                 error=nfes.flux_Error(flux2D.HeIIa_4686[i,j],flux2D_error.HeIIa_4686[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He2r_4686A", '{:03.3f}'.format(flux2D.HeIIa_4686[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_4686A", '{:03.3f}'.format(flux2D.HeIIa_4686[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He2r_4686Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeII_5412e")          
@@ -399,7 +400,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.HeIIb_5412[i,j]=flux2D.HeIIb_5412[i,j]*errextraHeIIb
                         
                 error=nfes.flux_Error(flux2D.HeIIb_5412[i,j],flux2D_error.HeIIb_5412[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He2r_5411A", '{:03.3f}'.format(flux2D.HeIIb_5412[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_5411A", '{:03.3f}'.format(flux2D.HeIIb_5412[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He2r_5411Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeI_5876e")          
@@ -412,7 +413,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.HeIa_5876[i,j]=flux2D.HeIa_5876[i,j]*errextraHeIa
                         
                 error=nfes.flux_Error(flux2D.HeIa_5876[i,j],flux2D_error.HeIa_5876[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He1r_5876A", '{:03.3f}'.format(flux2D.HeIa_5876[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_5876A", '{:03.3f}'.format(flux2D.HeIa_5876[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He1r_5876Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeI_6678e")          
@@ -425,7 +426,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.HeIb_6678[i,j]=flux2D.HeIb_6678[i,j]*errextraHeIb 
                         
                 error=nfes.flux_Error(flux2D.HeIb_6678[i,j],flux2D_error.HeIb_6678[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He1r_6678A", '{:03.3f}'.format(flux2D.HeIb_6678[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_6678A", '{:03.3f}'.format(flux2D.HeIb_6678[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He1r_6678Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S2_6716e")          
@@ -437,7 +438,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraSIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIa_6716[i,j]=flux2D.SIIa_6716[i,j]*errextraSIIa
                 error=nfes.flux_Error(flux2D.SIIa_6716[i,j],flux2D_error.SIIa_6716[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S2_6716A", '{:03.3f}'.format(flux2D.SIIa_6716[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6716A", '{:03.3f}'.format(flux2D.SIIa_6716[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S2_6716Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S2_6731e")          
@@ -449,7 +450,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraSIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIb_6731[i,j]=flux2D.SIIb_6731[i,j]*errextraSIIb
                 error=nfes.flux_Error(flux2D.SIIb_6731[i,j],flux2D_error.SIIb_6731[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S2_6731A", '{:03.3f}'.format(flux2D.SIIb_6731[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6731A", '{:03.3f}'.format(flux2D.SIIb_6731[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S2_6731Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S3_6312e")          
@@ -461,7 +462,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraSIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIIa_6312[i,j]=flux2D.SIIIa_6312[i,j]*errextraSIIIa
                 error=nfes.flux_Error(flux2D.SIIIa_6312[i,j],flux2D_error.SIIIa_6312[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S3_6312A", '{:03.3f}'.format(flux2D.SIIIa_6312[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_6312A", '{:03.3f}'.format(flux2D.SIIIa_6312[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S3_6312Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S3_9069e")          
@@ -473,7 +474,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraSIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIIb_9069[i,j]=flux2D.SIIIb_9069[i,j]*errextraSIIIb
                 error=nfes.flux_Error(flux2D.SIIIb_9069[i,j],flux2D_error.SIIIb_9069[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S3_9069A", '{:03.3f}'.format(flux2D.SIIIb_9069[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_9069A", '{:03.3f}'.format(flux2D.SIIIb_9069[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S3_9069Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("N1_5199e")          
@@ -485,7 +486,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNI=float(line_ext_error[index_extra_error])
                         flux2D_error.NI_5199[i,j]=flux2D.NI_5199[i,j]*errextraNI
                 error=nfes.flux_Error(flux2D.NI_5199[i,j],flux2D_error.NI_5199[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N1_5200A", '{:03.3f}'.format(flux2D.NI_5199[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N1_5200A", '{:03.3f}'.format(flux2D.NI_5199[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "N1_5200Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("N2_5755e")          
@@ -497,7 +498,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIa_5755[i,j]=flux2D.NIIa_5755[i,j]*errextraNIIa
                 error=nfes.flux_Error(flux2D.NIIa_5755[i,j],flux2D_error.NIIa_5755[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_5755A", '{:03.3f}'.format(flux2D.NIIa_5755[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_5755A", '{:03.3f}'.format(flux2D.NIIa_5755[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("N2_6548e")          
                 if lines_available[index_extra_error]=="yes":
@@ -508,7 +509,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIb_6548[i,j]=flux2D.NIIb_6548[i,j]*errextraNIIb 
                 error=nfes.flux_Error(flux2D.NIIb_6548[i,j],flux2D_error.NIIb_6548[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_6548A", '{:03.3f}'.format(flux2D.NIIb_6548[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6548A", '{:03.3f}'.format(flux2D.NIIb_6548[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("N2_6583e")          
                 if lines_available[index_extra_error]=="yes":
@@ -519,7 +520,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNIIc=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIc_6584[i,j]=flux2D.NIIc_6584[i,j]*errextraNIIc
                 error=nfes.flux_Error(flux2D.NIIc_6584[i,j],flux2D_error.NIIc_6584[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_6584A", '{:03.3f}'.format(flux2D.NIIc_6584[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6584A", '{:03.3f}'.format(flux2D.NIIc_6584[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "N2_6584Ae", '{:03.3f}'.format(error)
             
             
@@ -532,7 +533,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIa_5577[i,j]=flux2D.OIa_5577[i,j]*errextraOIa
                 error=nfes.flux_Error(flux2D.OIa_5577[i,j],flux2D_error.OIa_5577[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_5577A", '{:03.3f}'.format(flux2D.OIa_5577[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_5577A", '{:03.3f}'.format(flux2D.OIa_5577[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_5577Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O1_6300e")          
@@ -544,7 +545,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIb_6300[i,j]=flux2D.OIb_6300[i,j]*errextraOIb
                 error=nfes.flux_Error(flux2D.OIb_6300[i,j],flux2D_error.OIb_6300[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_6300A", '{:03.3f}'.format(flux2D.OIb_6300[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6300A", '{:03.3f}'.format(flux2D.OIb_6300[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_6300Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O1_6363e")          
@@ -556,7 +557,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIc=float(line_ext_error[index_extra_error])
                         flux2D_error.OIc_6363[i,j]=flux2D.OIc_6363[i,j]*errextraOIc
                 error=nfes.flux_Error(flux2D.OIc_6363[i,j],flux2D_error.OIc_6363[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_6364A", '{:03.3f}'.format(flux2D.OIc_6363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6364A", '{:03.3f}'.format(flux2D.OIc_6363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_6364Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_3727e")          
@@ -568,7 +569,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIa_3727[i,j]=flux2D.OIIa_3727[i,j]*errextraOIIa
                 error=nfes.flux_Error(flux2D.OIIa_3727[i,j],flux2D_error.OIIa_3727[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_3726A", '{:03.3f}'.format(flux2D.OIIa_3727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3726A", '{:03.3f}'.format(flux2D.OIIa_3727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_3726Ae", '{:03.3f}'.format(error)
             
                 index_extra_error=line_names.index("O2_3729e")          
@@ -580,7 +581,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIb_3729[i,j]=flux2D.OIIb_3729[i,j]*errextraOIIb
                 error=nfes.flux_Error(flux2D.OIIb_3729[i,j],flux2D_error.OIIb_3729[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_3729A", '{:03.3f}'.format(flux2D.OIIb_3729[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3729A", '{:03.3f}'.format(flux2D.OIIb_3729[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_3729Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_7320e")          
@@ -593,7 +594,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.OIIc_7320[i,j]=flux2D.OIIc_7320[i,j]*errextraOIIc
                         
                 error=nfes.flux_Error(flux2D.OIIc_7320[i,j],flux2D_error.OIIc_7320[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_7319A+", '{:03.3f}'.format(flux2D.OIIc_7320[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7319A+", '{:03.3f}'.format(flux2D.OIIc_7320[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_7319A+e", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_7330e")          
@@ -606,7 +607,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         flux2D_error.OIId_7330[i,j]=flux2D.OIId_7330[i,j]*errextraOIId
                         
                 error=nfes.flux_Error(flux2D.OIId_7330[i,j],flux2D_error.OIId_7330[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_7330A+", '{:03.3f}'.format(flux2D.OIId_7330[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7330A+", '{:03.3f}'.format(flux2D.OIId_7330[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_7330A+e", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O3_4363e")          
@@ -618,7 +619,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIa_4363[i,j]=flux2D.OIIIa_4363[i,j]*errextraOIIIa
                 error=nfes.flux_Error(flux2D.OIIIa_4363[i,j],flux2D_error.OIIIa_4363[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_4363A", '{:03.3f}'.format(flux2D.OIIIa_4363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4363A", '{:03.3f}'.format(flux2D.OIIIa_4363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_4363Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O3_4959e")          
@@ -630,7 +631,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIb_4959[i,j]=flux2D.OIIIb_4959[i,j]*errextraOIIIb
                 error=nfes.flux_Error(flux2D.OIIIb_4959[i,j],flux2D_error.OIIIb_4959[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_4959A", '{:03.3f}'.format(flux2D.OIIIb_4959[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4959A", '{:03.3f}'.format(flux2D.OIIIb_4959[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_4959Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("O3_5007e")          
@@ -642,7 +643,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraOIIIc=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIc_5007[i,j]=flux2D.OIIIc_5007[i,j]*errextraOIIIc
                 error=nfes.flux_Error(flux2D.OIIIc_5007[i,j],flux2D_error.OIIIc_5007[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_5007A", '{:03.3f}'.format(flux2D.OIIIc_5007[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_5007A", '{:03.3f}'.format(flux2D.OIIIc_5007[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_5007Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Cl3_5517s")          
@@ -654,7 +655,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraClIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.ClIIIa_5517[i,j]=flux2D.ClIIIa_5517[i,j]*errextraClIIIa
                 error=nfes.flux_Error(flux2D.ClIIIa_5517[i,j],flux2D_error.ClIIIa_5517[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])        
-                print("Cl3_5518A", '{:03.3f}'.format(flux2D.ClIIIa_5517[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Cl3_5518A", '{:03.3f}'.format(flux2D.ClIIIa_5517[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Cl3_5518Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("Cl3_5538e")          
@@ -666,7 +667,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraClIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.ClIIIb_5538[i,j]=flux2D.ClIIIb_5538[i,j]*errextraClIIIb
                 error=nfes.flux_Error(flux2D.ClIIIb_5538[i,j],flux2D_error.ClIIIb_5538[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Cl3_5538A", '{:03.3f}'.format(flux2D.ClIIIb_5538[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)        
+                print >>file3, "Cl3_5538A", '{:03.3f}'.format(flux2D.ClIIIb_5538[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)        
 #               print >>file3, "Cl3_5538Ae", '{:03.3f}'.format(error)        
                 
                 index_extra_error=line_names.index("Ne3_3868e")          
@@ -678,7 +679,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNeIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.NeIIIa_3868[i,j]=flux2D.NeIIIa_3868[i,j]*errextraNeIIIa
                 error=nfes.flux_Error(flux2D.NeIIIa_3868[i,j],flux2D_error.NeIIIa_3868[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ne3_3869A", '{:03.3f}'.format(flux2D.NeIIIa_3868[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ne3_3869A", '{:03.3f}'.format(flux2D.NeIIIa_3868[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ne3_3869Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ne3_3967e")          
@@ -690,7 +691,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraNeIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.NeIIIb_3967[i,j]=flux2D.NeIIIb_3967[i,j]*errextraNeIIIb
                 error=nfes.flux_Error(flux2D.NeIIIb_3967[i,j],flux2D_error.NeIIIb_3967[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ne3_3968A", '{:03.3f}'.format(flux2D.NeIIIb_3967[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)                
+                print >>file3, "Ne3_3968A", '{:03.3f}'.format(flux2D.NeIIIb_3967[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)                
 #               print >>file3, "Ne3_3968Ae", '{:03.3f}'.format(error)                
                 
                 index_extra_error=line_names.index("Ar3_7136e")          
@@ -702,7 +703,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraArIII=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIII_7136[i,j]=flux2D.ArIII_7136[i,j]*errextraArIII
                 error=nfes.flux_Error(flux2D.ArIII_7136[i,j],flux2D_error.ArIII_7136[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar3_7136A", '{:03.3f}'.format(flux2D.ArIII_7136[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar3_7136A", '{:03.3f}'.format(flux2D.ArIII_7136[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar3_7136Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ar4_4712e")          
@@ -714,7 +715,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraArIVa=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIVa_4712[i,j]=flux2D.ArIVa_4712[i,j]*errextraArIVa
                 error=nfes.flux_Error(flux2D.ArIVa_4712[i,j],flux2D_error.ArIVa_4712[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar4_4711A", '{:03.3f}'.format(flux2D.ArIVa_4712[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4711A", '{:03.3f}'.format(flux2D.ArIVa_4712[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar4_4711Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ar4_4740e")          
@@ -726,7 +727,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraArIVb=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIVb_4740[i,j]=flux2D.ArIVb_4740[i,j]*errextraArIVb
                 error=nfes.flux_Error(flux2D.ArIVb_4740[i,j],flux2D_error.ArIVb_4740[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar4_4740A", '{:03.3f}'.format(flux2D.ArIVb_4740[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4740A", '{:03.3f}'.format(flux2D.ArIVb_4740[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar4_4740Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("C1_8727e")          
@@ -738,7 +739,7 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
                         errextraCI=float(line_ext_error[index_extra_error])
                         flux2D_error.CI_8727[i,j]=flux2D.CI_8727[i,j]*errextraCI
                 error=nfes.flux_Error(flux2D.CI_8727[i,j],flux2D_error.CI_8727[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("C1_8728A", '{:03.3f}'.format(flux2D.CI_8727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "C1_8728A", '{:03.3f}'.format(flux2D.CI_8727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "C1_8728Ae", '{:03.3f}'.format(error)
 #               print >>file3, "C2_????A", '{:03.3f}'.format(flux2D.CII_6461[i,j]*100/flux2D.Hb_4861[i,j])
                 
@@ -2272,290 +2273,290 @@ def TeNe(flux2D,flux2D_error,line_names,line_ext_error,lines_available,param_mod
     hs.histogram_plots(elem_abun_DIMS_ratio.ClO,elem_abun_DIMS_ratio_error.ClO,'ClO_ratio_DIMS',line_names,lines_available,param_mod_name,param_model_values,param_estimated,param_requered)  
     
     file11 = open('statisticnumbers_1.txt','w')
-    print('{:32}'.format('Name Parameter'), '{:10}'.format('Nspaxels'),'{:10}'.format('5% value'),'{:10}'.format('Q1 value'), '{:12}'.format('median value'), '{:10}'.format('Q3 value'), '{:10}'.format('95% value'), '{:10}'.format('mean value'), '{:10}'.format('sigma'), file=file11)
+    print >>file11, '{:32}'.format('Name Parameter'), '{:10}'.format('Nspaxels'),'{:10}'.format('5% value'),'{:10}'.format('Q1 value'), '{:12}'.format('median value'), '{:10}'.format('Q3 value'), '{:10}'.format('95% value'), '{:10}'.format('mean value'), '{:10}'.format('sigma')
     
     index=param_estimated.index('c_Hb')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Chbeta_pyneb,sizex,sizey)
-        print('{:32}'.format('c(Hbeta)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('c(Hbeta)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(NII6548_84)_Ne(SII6716_31)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.NIISII,sizex,sizey)
-        print('{:32}'.format('Te(NII6548_84)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(NII6548_84)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(SII6716_31)_Te(NII6548_84)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.NIISII,sizex,sizey)
-        print('{:32}'.format('Ne(SII6716_31)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(SII6716_31)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OI6300_63)_Ne(SII6716_31)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OISII,sizex,sizey)
-        print('{:32}'.format('Te(OI6300_63)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OI6300_63)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(SII6716_31)_Te(OI6300_63)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OISII,sizex,sizey)
-        print('{:32}'.format('Ne(SII6716_31)_Te(OI6300_63)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(SII6716_31)_Te(OI6300_63)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OII3727_29_7320_30)_Ne(SII6716_31)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIISII,sizex,sizey)
-        print('{:32}'.format('Te(OII3727_29_7320_30)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OII3727_29_7320_30)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(SII6716_31)_Te(OII3727_29_7320_30)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIISII,sizex,sizey)
-        print('{:32}'.format('Ne(SII6716_31)_Te(OII3727_29_7320_30)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(SII6716_31)_Te(OII3727_29_7320_30)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
         
     index=param_estimated.index('Te(OIII4959_5007)_Ne(SII6716_31)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIIISII,sizex,sizey)
-        print('{:32}'.format('Te(OIII4959_5007)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OIII4959_5007)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(SII6716_31)_Te(OIII4959_5007)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIIISII,sizex,sizey)
-        print('{:32}'.format('Ne(SII6716_31)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(SII6716_31)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(SIII6312_9069)_Ne(SII6716_31)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.SIIISII,sizex,sizey)
-        print('{:32}'.format('Te(SIII6312_9069)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(SIII6312_9069)_Ne(SII6716_31)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(SII6716_31)_Te(SIII6312_9069)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.SIIISII,sizex,sizey)
-        print('{:32}'.format('Ne(SII6716_31)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(SII6716_31)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OII3727_29_7320_30)_Ne(OII3727_29)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIIOII,sizex,sizey)
-        print('{:32}'.format('Te(OII3727_29_7320_30)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OII3727_29_7320_30)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(OII3727_29)_Te(OII3727_29_7320_30)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIIOII,sizex,sizey)
-        print('{:32}'.format('Ne(OII3727_29)_Te(OII3727_29_7320_30)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(OII3727_29)_Te(OII3727_29_7320_30)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(NII6548_84)_Ne(OII3727_29)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.NIIOII,sizex,sizey)
-        print('{:32}'.format('Te(NII6548_84)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(NII6548_84)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(OII3727_29)_Te(NII6548_84)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.NIIOII,sizex,sizey)
-        print('{:32}'.format('Ne(OII3727_29)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(OII3727_29)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OI6300_63)_Ne(OII3727_29)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIOII,sizex,sizey)
-        print('{:32}'.format('Te(OI6300_63)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OI6300_63)_Ne(OII3727_29)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(OII3727_29)_Te(OI6300_63)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIOII,sizex,sizey)
-        print('{:32}'.format('Ne(OII3727_29)_Te(OI6300_63)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(OII3727_29)_Te(OI6300_63)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OIII4959_5007)_Ne(ClIII5517_38)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIIIClIII,sizex,sizey)
-        print('{:32}'.format('Te(OIII4959_5007)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OIII4959_5007)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(ClIII5517_38)_Te(OIII4959_5007)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIIIClIII,sizex,sizey)
-        print('{:32}'.format('Ne(ClIII5517_38)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(ClIII5517_38)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(SIII6312_9069)_Ne(ClIII5517_38)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.SIIIClIII,sizex,sizey)
-        print('{:32}'.format('Te(SIII6312_9069)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(SIII6312_9069)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(ClIII5517_38)_Te(SIII6312_9069)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.SIIIClIII,sizex,sizey)
-        print('{:32}'.format('Ne(ClIII5517_38)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(ClIII5517_38)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(OIII4959_5007)_Ne(ArVI4712_40)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.OIIIArVI,sizex,sizey)
-        print('{:32}'.format('Te(OIII4959_5007)_Ne(ArVI4712_40)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(OIII4959_5007)_Ne(ArVI4712_40)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(ArVI4712_40)_Te(OIII4959_5007)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.OIIIArVI,sizex,sizey)
-        print('{:32}'.format('Ne(ArVI4712_40)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(ArVI4712_40)_Te(OIII4959_5007)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(SIII6312_9069)_Ne(ArVI4712_40)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.SIIIArVI,sizex,sizey)
-        print('{:32}'.format('Te(SIII6312_9069)_Ne(ArVI4712_40)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(SIII6312_9069)_Ne(ArVI4712_40)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(ArVI4712_40)_Te(SIII6312_9069)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.SIIIArVI,sizex,sizey)
-        print('{:32}'.format('Ne(ArVI4712_40)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(ArVI4712_40)_Te(SIII6312_9069)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Te(NII6548_84)_Ne(ClIII5517_38)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Te.NIIClIII,sizex,sizey)
-        print('{:32}'.format('Te(NII6548_84)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Te(NII6548_84)_Ne(ClIII5517_38)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index=param_estimated.index('Ne(ClIII5517_38)_Te(NII6548_84)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(Ne.NIIClIII,sizex,sizey)
-        print('{:32}'.format('Ne(ClIII5517_38)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne(ClIII5517_38)_Te(NII6548_84)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
 
-    print("###################################################################################", file=file11)
+    print >>file11, "###################################################################################"
     
 
     index_line2=line_names.index("HeI_5876s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.HeIa,sizex,sizey)
-        print('{:32}'.format('HeI_5876s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('HeI_5876s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("HeI_6678s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.HeIb,sizex,sizey)
-        print('{:32}'.format('HeI_6678s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('HeI_6678s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("HeII_4686s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.HeIIa,sizex,sizey)
-        print('{:32}'.format('HeII_4686s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('HeII_4686s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("HeII_5412s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.HeIIb,sizex,sizey)
-        print('{:32}'.format('HeII_5412s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('HeII_5412s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
   
     index_line2=line_names.index("O1_5577s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIa,sizex,sizey)
-        print('{:32}'.format('O1_5577s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O1_5577s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O1_6300s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIb,sizex,sizey)
-        print('{:32}'.format('O1_6300s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O1_6300s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O1_6363s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIc,sizex,sizey)
-        print('{:32}'.format('O1_6363s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O1_6363s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
   
     index_line2=line_names.index("O2_3727s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIa,sizex,sizey)
-        print('{:32}'.format('O2_3727s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O2_3727s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
   
     index_line2=line_names.index("O2_3729s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIb,sizex,sizey)
-        print('{:32}'.format('O2_3729s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O2_3729s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O2_7320s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIc,sizex,sizey)
-        print('{:32}'.format('O2_7320s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O2_7320s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O2_7330s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIId,sizex,sizey)
-        print('{:32}'.format('O2_7330s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O2_7330s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O3_4363s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIIa,sizex,sizey)
-        print('{:32}'.format('O3_4363s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O3_4363s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O3_4959s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIIb,sizex,sizey)
-        print('{:32}'.format('O3_4959s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O3_4959s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("O3_5007s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.OIIIc,sizex,sizey)
-        print('{:32}'.format('O3_5007s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('O3_5007s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
  
     index_line2=line_names.index("N1_5199s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NI,sizex,sizey)
-        print('{:32}'.format('N1_5199s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('N1_5199s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
 
     index_line2=line_names.index("N2_5755s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NIIa,sizex,sizey)
-        print('{:32}'.format('N2_5755s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('N2_5755s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("N2_6548s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NIIb,sizex,sizey)
-        print('{:32}'.format('N2_6548s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('N2_6548s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("N2_6583s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NIIc,sizex,sizey)
-        print('{:32}'.format('N2_6583s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('N2_6583s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
  
     index_line2=line_names.index("S2_6716s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.SIIa,sizex,sizey)
-        print('{:32}'.format('S2_6716s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('S2_6716s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
 
     index_line2=line_names.index("S2_6731s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.SIIb,sizex,sizey)
-        print('{:32}'.format('S2_6731s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('S2_6731s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("S3_6312s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.SIIIa,sizex,sizey)
-        print('{:32}'.format('S3_6312s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('S3_6312s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("S3_9069s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.SIIIb,sizex,sizey)
-        print('{:32}'.format('S3_9069s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('S3_9069s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
  
     index_line2=line_names.index("Cl3_5517s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.ClIIIa,sizex,sizey)
-        print('{:32}'.format('Cl3_5517s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Cl3_5517s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("Cl3_5538s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.ClIIIb,sizex,sizey)
-        print('{:32}'.format('Cl3_5538s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Cl3_5538s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("Ar3_7136s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.ArIII,sizex,sizey)
-        print('{:32}'.format('Ar3_7136s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ar3_7136s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
  
     index_line2=line_names.index("Ar4_4712s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.ArIVa,sizex,sizey)
-        print('{:32}'.format('Ar4_4712s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ar4_4712s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
 
     index_line2=line_names.index("Ar4_4740s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.ArIVb,sizex,sizey)
-        print('{:32}'.format('Ar4_4740s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ar4_4740s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("Ne3_3868s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NeIIIa,sizex,sizey)
-        print('{:32}'.format('Ne3_3868s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne3_3868s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
     
     index_line2=line_names.index("Ne3_3967s")
     if lines_available[index_line2]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(ion_abun.NeIIIb,sizex,sizey)
-        print('{:32}'.format('Ne3_3967s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file11)
+        print >>file11, '{:32}'.format('Ne3_3967s'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
  
     
     file11.close() 

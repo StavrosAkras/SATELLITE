@@ -13,6 +13,7 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
+from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -124,10 +125,10 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
     for j in range(0,sizey):
         for i in range(0,sizex):
             if(flux2D.Ha_6563[i,j]>0.0 and flux2D.Hb_4861[i,j]>0.0 and flux2D.Ha_6563[i,j]>2.85*flux2D.Hb_4861[i,j]):
-                print(("spaxles:",i,j))
+                print("spaxles:",i,j)
                 file3 = open('test.dat','w')
                 
-                print("LINE test err", file=file3)
+                print >>file3, "LINE test err"
                     
                 index_extra_error=line_names.index("HI_6563e")          
                 if lines_available[index_extra_error]=="yes":
@@ -147,9 +148,9 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraHb=float(line_ext_error[index_extra_error])
                         flux2D_error.Hb_4861[i,j]=flux2D.Hb_4861[i,j]*errextraHb
                 error=nfes.flux_Error(flux2D.Ha_6563[i,j],flux2D_error.Ha_6563[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_6563A", '{:03.3f}'.format(flux2D.Ha_6563[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_6563A", '{:03.3f}'.format(flux2D.Ha_6563[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 error=nfes.flux_Error(flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4861A", '{:03.3f}'.format(flux2D.Hb_4861[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4861A", '{:03.3f}'.format(flux2D.Hb_4861[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 
 
                 index_extra_error=line_names.index("HI_4340e")          
@@ -162,7 +163,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.Hg_4340[i,j]=flux2D.Hg_4340[i,j]*errextraHg  
 
                 error=nfes.flux_Error(flux2D.Hg_4340[i,j],flux2D_error.Hg_4340[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4341A", '{:03.3f}'.format(flux2D.Hg_4340[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4341A", '{:03.3f}'.format(flux2D.Hg_4340[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "H1r_4341Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HI_4101e")          
@@ -175,7 +176,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.Hd_4101[i,j]=flux2D.Hd_4101[i,j]*errextraHd
                         
                 error=nfes.flux_Error(flux2D.Hd_4101[i,j],flux2D_error.Hd_4101[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("H1r_4102A", '{:03.3f}'.format(flux2D.Hd_4101[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4102A", '{:03.3f}'.format(flux2D.Hd_4101[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "H1r_4102Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeII_4686e")          
@@ -187,7 +188,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraHeIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.HeIIa_4686[i,j]=flux2D.HeIIa_4686[i,j]*errextraHeIIa 
                 error=nfes.flux_Error(flux2D.HeIIa_4686[i,j],flux2D_error.HeIIa_4686[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He2r_4686A", '{:03.3f}'.format(flux2D.HeIIa_4686[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_4686A", '{:03.3f}'.format(flux2D.HeIIa_4686[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He2r_4686Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeII_5412e")          
@@ -200,7 +201,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.HeIIb_5412[i,j]=flux2D.HeIIb_5412[i,j]*errextraHeIIb
                         
                 error=nfes.flux_Error(flux2D.HeIIb_5412[i,j],flux2D_error.HeIIb_5412[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He2r_5411A", '{:03.3f}'.format(flux2D.HeIIb_5412[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_5411A", '{:03.3f}'.format(flux2D.HeIIb_5412[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He2r_5411Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeI_5876e")          
@@ -213,7 +214,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.HeIa_5876[i,j]=flux2D.HeIa_5876[i,j]*errextraHeIa
                         
                 error=nfes.flux_Error(flux2D.HeIa_5876[i,j],flux2D_error.HeIa_5876[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He1r_5876A", '{:03.3f}'.format(flux2D.HeIa_5876[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_5876A", '{:03.3f}'.format(flux2D.HeIa_5876[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He1r_5876Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("HeI_6678e")          
@@ -226,7 +227,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.HeIb_6678[i,j]=flux2D.HeIb_6678[i,j]*errextraHeIb 
                         
                 error=nfes.flux_Error(flux2D.HeIb_6678[i,j],flux2D_error.HeIb_6678[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("He1r_6678A", '{:03.3f}'.format(flux2D.HeIb_6678[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_6678A", '{:03.3f}'.format(flux2D.HeIb_6678[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "He1r_6678Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S2_6716e")          
@@ -238,7 +239,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraSIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIa_6716[i,j]=flux2D.SIIa_6716[i,j]*errextraSIIa
                 error=nfes.flux_Error(flux2D.SIIa_6716[i,j],flux2D_error.SIIa_6716[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S2_6716A", '{:03.3f}'.format(flux2D.SIIa_6716[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6716A", '{:03.3f}'.format(flux2D.SIIa_6716[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S2_6716Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S2_6731e")          
@@ -250,7 +251,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraSIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIb_6731[i,j]=flux2D.SIIb_6731[i,j]*errextraSIIb
                 error=nfes.flux_Error(flux2D.SIIb_6731[i,j],flux2D_error.SIIb_6731[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S2_6731A", '{:03.3f}'.format(flux2D.SIIb_6731[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6731A", '{:03.3f}'.format(flux2D.SIIb_6731[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S2_6731Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S3_6312e")          
@@ -262,7 +263,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraSIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIIa_6312[i,j]=flux2D.SIIIa_6312[i,j]*errextraSIIIa
                 error=nfes.flux_Error(flux2D.SIIIa_6312[i,j],flux2D_error.SIIIa_6312[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S3_6312A", '{:03.3f}'.format(flux2D.SIIIa_6312[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_6312A", '{:03.3f}'.format(flux2D.SIIIa_6312[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S3_6312Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("S3_9069e")          
@@ -274,7 +275,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraSIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.SIIIb_9069[i,j]=flux2D.SIIIb_9069[i,j]*errextraSIIIb
                 error=nfes.flux_Error(flux2D.SIIIb_9069[i,j],flux2D_error.SIIIb_9069[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("S3_9069A", '{:03.3f}'.format(flux2D.SIIIb_9069[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_9069A", '{:03.3f}'.format(flux2D.SIIIb_9069[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "S3_9069Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("N1_5199e")          
@@ -286,7 +287,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNI=float(line_ext_error[index_extra_error])
                         flux2D_error.NI_5199[i,j]=flux2D.NI_5199[i,j]*errextraNI
                 error=nfes.flux_Error(flux2D.NI_5199[i,j],flux2D_error.NI_5199[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N1_5200A", '{:03.3f}'.format(flux2D.NI_5199[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N1_5200A", '{:03.3f}'.format(flux2D.NI_5199[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "N1_5200Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("N2_5755e")          
@@ -298,7 +299,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIa_5755[i,j]=flux2D.NIIa_5755[i,j]*errextraNIIa
                 error=nfes.flux_Error(flux2D.NIIa_5755[i,j],flux2D_error.NIIa_5755[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_5755A", '{:03.3f}'.format(flux2D.NIIa_5755[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_5755A", '{:03.3f}'.format(flux2D.NIIa_5755[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("N2_6548e")          
                 if lines_available[index_extra_error]=="yes":
@@ -309,7 +310,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIb_6548[i,j]=flux2D.NIIb_6548[i,j]*errextraNIIb 
                 error=nfes.flux_Error(flux2D.NIIb_6548[i,j],flux2D_error.NIIb_6548[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_6548A", '{:03.3f}'.format(flux2D.NIIb_6548[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6548A", '{:03.3f}'.format(flux2D.NIIb_6548[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("N2_6583e")          
                 if lines_available[index_extra_error]=="yes":
@@ -320,7 +321,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNIIc=float(line_ext_error[index_extra_error])
                         flux2D_error.NIIc_6584[i,j]=flux2D.NIIc_6584[i,j]*errextraNIIc
                 error=nfes.flux_Error(flux2D.NIIc_6584[i,j],flux2D_error.NIIc_6584[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("N2_6584A", '{:03.3f}'.format(flux2D.NIIc_6584[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6584A", '{:03.3f}'.format(flux2D.NIIc_6584[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "N2_6584Ae", '{:03.3f}'.format(error)
             
             
@@ -333,7 +334,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIa_5577[i,j]=flux2D.OIa_5577[i,j]*errextraOIa
                 error=nfes.flux_Error(flux2D.OIa_5577[i,j],flux2D_error.OIa_5577[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_5577A", '{:03.3f}'.format(flux2D.OIa_5577[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_5577A", '{:03.3f}'.format(flux2D.OIa_5577[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_5577Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O1_6300e")          
@@ -345,7 +346,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIb_6300[i,j]=flux2D.OIb_6300[i,j]*errextraOIb
                 error=nfes.flux_Error(flux2D.OIb_6300[i,j],flux2D_error.OIb_6300[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_6300A", '{:03.3f}'.format(flux2D.OIb_6300[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6300A", '{:03.3f}'.format(flux2D.OIb_6300[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_6300Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O1_6363e")          
@@ -357,7 +358,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIc=float(line_ext_error[index_extra_error])
                         flux2D_error.OIc_6363[i,j]=flux2D.OIc_6363[i,j]*errextraOIc
                 error=nfes.flux_Error(flux2D.OIc_6363[i,j],flux2D_error.OIc_6363[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O1_6364A", '{:03.3f}'.format(flux2D.OIc_6363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6364A", '{:03.3f}'.format(flux2D.OIc_6363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O1_6364Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_3727e")          
@@ -369,7 +370,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIa_3727[i,j]=flux2D.OIIa_3727[i,j]*errextraOIIa
                 error=nfes.flux_Error(flux2D.OIIa_3727[i,j],flux2D_error.OIIa_3727[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_3726A", '{:03.3f}'.format(flux2D.OIIa_3727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3726A", '{:03.3f}'.format(flux2D.OIIa_3727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_3726Ae", '{:03.3f}'.format(error)
             
                 index_extra_error=line_names.index("O2_3729e")          
@@ -381,7 +382,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIb_3729[i,j]=flux2D.OIIb_3729[i,j]*errextraOIIb
                 error=nfes.flux_Error(flux2D.OIIb_3729[i,j],flux2D_error.OIIb_3729[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_3729A", '{:03.3f}'.format(flux2D.OIIb_3729[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3729A", '{:03.3f}'.format(flux2D.OIIb_3729[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_3729Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_7320e")          
@@ -394,7 +395,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.OIIc_7320[i,j]=flux2D.OIIc_7320[i,j]*errextraOIIc
                         
                 error=nfes.flux_Error(flux2D.OIIc_7320[i,j],flux2D_error.OIIc_7320[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_7319A+", '{:03.3f}'.format(flux2D.OIIc_7320[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7319A+", '{:03.3f}'.format(flux2D.OIIc_7320[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_7319A+e", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O2_7330e")          
@@ -407,7 +408,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         flux2D_error.OIId_7330[i,j]=flux2D.OIId_7330[i,j]*errextraOIId
                         
                 error=nfes.flux_Error(flux2D.OIId_7330[i,j],flux2D_error.OIId_7330[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O2_7330A+", '{:03.3f}'.format(flux2D.OIId_7330[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7330A+", '{:03.3f}'.format(flux2D.OIId_7330[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O2_7330A+e", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O3_4363e")          
@@ -419,7 +420,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIa_4363[i,j]=flux2D.OIIIa_4363[i,j]*errextraOIIIa
                 error=nfes.flux_Error(flux2D.OIIIa_4363[i,j],flux2D_error.OIIIa_4363[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_4363A", '{:03.3f}'.format(flux2D.OIIIa_4363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4363A", '{:03.3f}'.format(flux2D.OIIIa_4363[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_4363Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("O3_4959e")          
@@ -431,7 +432,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIb_4959[i,j]=flux2D.OIIIb_4959[i,j]*errextraOIIIb
                 error=nfes.flux_Error(flux2D.OIIIb_4959[i,j],flux2D_error.OIIIb_4959[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_4959A", '{:03.3f}'.format(flux2D.OIIIb_4959[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4959A", '{:03.3f}'.format(flux2D.OIIIb_4959[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_4959Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("O3_5007e")          
@@ -443,7 +444,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraOIIIc=float(line_ext_error[index_extra_error])
                         flux2D_error.OIIIc_5007[i,j]=flux2D.OIIIc_5007[i,j]*errextraOIIIc
                 error=nfes.flux_Error(flux2D.OIIIc_5007[i,j],flux2D_error.OIIIc_5007[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("O3_5007A", '{:03.3f}'.format(flux2D.OIIIc_5007[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_5007A", '{:03.3f}'.format(flux2D.OIIIc_5007[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "O3_5007Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Cl3_5517e")          
@@ -455,7 +456,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraClIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.ClIIIa_5517[i,j]=flux2D.ClIIIa_5517[i,j]*errextraClIIIa
                 error=nfes.flux_Error(flux2D.ClIIIa_5517[i,j],flux2D_error.ClIIIa_5517[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])        
-                print("Cl3_5518A", '{:03.3f}'.format(flux2D.ClIIIa_5517[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Cl3_5518A", '{:03.3f}'.format(flux2D.ClIIIa_5517[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Cl3_5518Ae", '{:03.3f}'.format(error)
         
                 index_extra_error=line_names.index("Cl3_5538e")          
@@ -467,7 +468,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraClIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.ClIIIb_5538[i,j]=flux2D.ClIIIb_5538[i,j]*errextraClIIIb
                 error=nfes.flux_Error(flux2D.ClIIIb_5538[i,j],flux2D_error.ClIIIb_5538[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Cl3_5538A", '{:03.3f}'.format(flux2D.ClIIIb_5538[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)        
+                print >>file3, "Cl3_5538A", '{:03.3f}'.format(flux2D.ClIIIb_5538[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)        
 #               print >>file3, "Cl3_5538Ae", '{:03.3f}'.format(error)        
                 
                 index_extra_error=line_names.index("Ne3_3868e")          
@@ -479,7 +480,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNeIIIa=float(line_ext_error[index_extra_error])
                         flux2D_error.NeIIIa_3868[i,j]=flux2D.NeIIIa_3868[i,j]*errextraNeIIIa
                 error=nfes.flux_Error(flux2D.NeIIIa_3868[i,j],flux2D_error.NeIIIa_3868[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ne3_3869A", '{:03.3f}'.format(flux2D.NeIIIa_3868[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ne3_3869A", '{:03.3f}'.format(flux2D.NeIIIa_3868[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ne3_3869Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ne3_3967e")          
@@ -491,7 +492,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraNeIIIb=float(line_ext_error[index_extra_error])
                         flux2D_error.NeIIIb_3967[i,j]=flux2D.NeIIIb_3967[i,j]*errextraNeIIIb
                 error=nfes.flux_Error(flux2D.NeIIIb_3967[i,j],flux2D_error.NeIIIb_3967[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ne3_3968A", '{:03.3f}'.format(flux2D.NeIIIb_3967[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)                
+                print >>file3, "Ne3_3968A", '{:03.3f}'.format(flux2D.NeIIIb_3967[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)                
 #               print >>file3, "Ne3_3968Ae", '{:03.3f}'.format(error)                
                 
                 index_extra_error=line_names.index("Ar3_7136e")          
@@ -503,7 +504,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraArIII=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIII_7136[i,j]=flux2D.ArIII_7136[i,j]*errextraArIII
                 error=nfes.flux_Error(flux2D.ArIII_7136[i,j],flux2D_error.ArIII_7136[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar3_7136A", '{:03.3f}'.format(flux2D.ArIII_7136[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar3_7136A", '{:03.3f}'.format(flux2D.ArIII_7136[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar3_7136Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ar4_4712e")          
@@ -515,7 +516,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraArIVa=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIVa_4712[i,j]=flux2D.ArIVa_4712[i,j]*errextraArIVa
                 error=nfes.flux_Error(flux2D.ArIVa_4712[i,j],flux2D_error.ArIVa_4712[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar4_4711A", '{:03.3f}'.format(flux2D.ArIVa_4712[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4711A", '{:03.3f}'.format(flux2D.ArIVa_4712[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar4_4711Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("Ar4_4740e")          
@@ -527,7 +528,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraArIVb=float(line_ext_error[index_extra_error])
                         flux2D_error.ArIVb_4740[i,j]=flux2D.ArIVb_4740[i,j]*errextraArIVb
                 error=nfes.flux_Error(flux2D.ArIVb_4740[i,j],flux2D_error.ArIVb_4740[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("Ar4_4740A", '{:03.3f}'.format(flux2D.ArIVb_4740[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4740A", '{:03.3f}'.format(flux2D.ArIVb_4740[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "Ar4_4740Ae", '{:03.3f}'.format(error)
                 
                 index_extra_error=line_names.index("C1_8727e")          
@@ -539,7 +540,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                         errextraCI=float(line_ext_error[index_extra_error])
                         flux2D_error.CI_8727[i,j]=flux2D.CI_8727[i,j]*errextraCI
                 error=nfes.flux_Error(flux2D.CI_8727[i,j],flux2D_error.CI_8727[i,j],flux2D.Hb_4861[i,j],flux2D_error.Hb_4861[i,j])
-                print("C1_8728A", '{:03.3f}'.format(flux2D.CI_8727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "C1_8728A", '{:03.3f}'.format(flux2D.CI_8727[i,j]*100/flux2D.Hb_4861[i,j]),'{:03.3f}'.format(error)
 #               print >>file3, "C1_8728Ae", '{:03.3f}'.format(error)
 #               print >>file3, "C2_????A", '{:03.3f}'.format(flux2D.CII_6461[i,j]*100/flux2D.Hb_4861[i,j])
                 

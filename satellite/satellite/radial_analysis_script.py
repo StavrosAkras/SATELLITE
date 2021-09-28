@@ -16,6 +16,7 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
+from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -201,15 +202,15 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
     index_angle_radial=param_mod_name.index("angle_for_radial_flux")    
     angle_for_radial=param_model_values[index_angle_radial]
 
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
-    print("#######################################################################################", file=file10)
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
+    print >>file10, "#######################################################################################"
     fig,ax3=plt.subplots(figsize=(12,7))
     
     cHb,cHb_err,radial_dis_arc2=[],[],[]
@@ -242,11 +243,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.Ha_6563/max_flux
         plt.plot(radial_dis_arc,radial,label="HI 6563")
         
-        print("dist ","Ha", file=file2)
+        print >>file2,"dist ","Ha"
         for i in range(0,len(flux_radial.Ha_6563)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Ha_6563[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Ha_6563[i])
             
-        print("Distance in arcsec for the peak of Ha      6563","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of Ha      6563","%.3f" % rad_formax
         index1=1
 
     index_line=line_names.index("HI_4861s")
@@ -269,11 +270,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.Hb_4861/max_flux
         plt.plot(radial_dis_arc,radial,label="HI 4861")
         
-        print("dist ","Hb", file=file2)
+        print >>file2,"dist ","Hb"
         for i in range(0,len(flux_radial.Hb_4861)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hb_4861[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hb_4861[i])
             
-        print("Distance in arcsec for the peak of Hb      4861","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of Hb      4861","%.3f" % rad_formax
         index2=1
 
 
@@ -297,11 +298,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.Hg_4340/max_flux
         plt.plot(radial_dis_arc,radial,label="HI 4340")
         
-        print("dist ","Hc", file=file2)
+        print >>file2,"dist ","Hc"
         for i in range(0,len(flux_radial.Hg_4340)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hg_4340[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hg_4340[i])
             
-        print("Distance in arcsec for the peak of Hg      4340","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of Hg      4340","%.3f" % rad_formax
 
     index_line=line_names.index("HI_4101s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -323,11 +324,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.Hd_4101/max_flux
         plt.plot(radial_dis_arc,radial,label="HI 4861")
         
-        print("dist ","Hd", file=file2)
+        print >>file2,"dist ","Hd"
         for i in range(0,len(flux_radial.Hd_4101)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hd_4101[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.Hd_4101[i])
         
-        print("Distance in arcsec for the peak of Hd      4101","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of Hd      4101","%.3f" % rad_formax
         
     index_line=line_names.index("HeI_5876s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -349,11 +350,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.HeIa_5876/max_flux
         plt.plot(radial_dis_arc,radial,label="He I 5876")
 
-        print("dist ","HeI 5876", file=file2)
+        print >>file2,"dist ","HeI 5876"
         for i in range(0,len(flux_radial.HeIa_5876)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIa_5876[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIa_5876[i])
             
-        print("Distance in arcsec for the peak of He I    5876","%.3f" % rad_formax, file=file10)    
+        print >>file10, "Distance in arcsec for the peak of He I    5876","%.3f" % rad_formax    
         
     index_line=line_names.index("HeI_6678s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -375,11 +376,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.HeIb_6678/max_flux
         plt.plot(radial_dis_arc,radial,label="He I 6678")
 
-        print("dist ","HeI 6678", file=file2)
+        print >>file2,"dist ","HeI 6678"
         for i in range(0,len(flux_radial.HeIb_6678)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIb_6678[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIb_6678[i])
         
-        print("Distance in arcsec for the peak of He I    6678","%.3f" % rad_formax, file=file10)   
+        print >>file10, "Distance in arcsec for the peak of He I    6678","%.3f" % rad_formax   
         
     index_line=line_names.index("HeII_4686s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -401,11 +402,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.HeIIa_4686/max_flux
         plt.plot(radial_dis_arc,radial,label="He II 4686")
         
-        print("dist ","HeII 4686", file=file2)
+        print >>file2,"dist ","HeII 4686"
         for i in range(0,len(flux_radial.HeIIa_4686)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIIa_4686[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIIa_4686[i])
         
-        print("Distance in arcsec for the peak of He II   4686","%.3f" % rad_formax, file=file10)     
+        print >>file10, "Distance in arcsec for the peak of He II   4686","%.3f" % rad_formax     
         
     index_line=line_names.index("HeII_5412s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -427,11 +428,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.HeIIb_5412/max_flux
         plt.plot(radial_dis_arc,radial,label="He II 5412")
         
-        print("dist ","HeII 5412", file=file2)
+        print >>file2,"dist ","HeII 5412"
         for i in range(0,len(flux_radial.HeIIb_5412)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIIb_5412[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.HeIIb_5412[i])
         
-        print("Distance in arcsec for the peak of He II   5412","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of He II   5412","%.3f" % rad_formax
     
     index_line=line_names.index("N2_5755s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -454,11 +455,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NIIa_5755/max_flux
         plt.plot(radial_dis_arc,radial,label="[N II] 5755")
         
-        print("dist ","[N II] 5755", file=file2)
+        print >>file2,"dist ","[N II] 5755"
         for i in range(0,len(flux_radial.NIIa_5755)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIa_5755[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIa_5755[i])
         
-        print("Distance in arcsec for the peak of [N II]  5755","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [N II]  5755","%.3f" % rad_formax
         
     index_line=line_names.index("N2_6548s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -480,11 +481,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NIIb_6548/max_flux
         plt.plot(radial_dis_arc,radial,label="[N II] 6548")
         
-        print("dist ","[N II] 6548", file=file2)
+        print >>file2,"dist ","[N II] 6548"
         for i in range(0,len(flux_radial.NIIb_6548)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIb_6548[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIb_6548[i])
         
-        print("Distance in arcsec for the peak of [N II]  6548","%.3f" % rad_formax, file=file10)   
+        print >>file10, "Distance in arcsec for the peak of [N II]  6548","%.3f" % rad_formax   
     
     index_line=line_names.index("N2_6583s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -506,11 +507,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NIIc_6584/max_flux
         plt.plot(radial_dis_arc,radial,label="[N II] 6584")
         
-        print("dist ","[N II] 6584", file=file2)
+        print >>file2,"dist ","[N II] 6584"
         for i in range(0,len(flux_radial.NIIc_6584)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIc_6584[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NIIc_6584[i])
         
-        print("Distance in arcsec for the peak of [N II]  6584","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [N II]  6584","%.3f" % rad_formax
         
     index_line=line_names.index("N1_5199s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -532,11 +533,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NI_5199/max_flux
         plt.plot(radial_dis_arc,radial,label="[N I] 5199")
         
-        print("dist ","[N I] 5199", file=file2)
+        print >>file2,"dist ","[N I] 5199"
         for i in range(0,len(flux_radial.NI_5199)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NI_5199[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NI_5199[i])
         
-        print("Distance in arcsec for the peak of [N I]   5199","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [N I]   5199","%.3f" % rad_formax
     
     index_line=line_names.index("O3_4363s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -558,11 +559,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIIa_4363/max_flux
         plt.plot(radial_dis_arc,radial,label="[O III] 4363")
         
-        print("dist ","[O III] 4363", file=file2)
+        print >>file2,"dist ","[O III] 4363"
         for i in range(0,len(flux_radial.OIIIa_4363)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIa_4363[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIa_4363[i])
         
-        print("Distance in arcsec for the peak of [O III] 4363","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O III] 4363","%.3f" % rad_formax
         
     index_line=line_names.index("O3_4959s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -584,11 +585,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIIb_4959/max_flux
         plt.plot(radial_dis_arc,radial,label="[O III] 4959")
         
-        print("dist ","[O III] 4959", file=file2)
+        print >>file2,"dist ","[O III] 4959"
         for i in range(0,len(flux_radial.OIIIb_4959)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIb_4959[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIb_4959[i])
         
-        print("Distance in arcsec for the peak of [O III] 4959","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O III] 4959","%.3f" % rad_formax
         
     index_line=line_names.index("O3_5007s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -610,11 +611,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIIc_5007/max_flux
         plt.plot(radial_dis_arc,radial,label="[O III] 5007")
         
-        print("dist ","[O III] 5007", file=file2)
+        print >>file2,"dist ","[O III] 5007"
         for i in range(0,len(flux_radial.OIIIc_5007)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIc_5007[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIIc_5007[i])
         
-        print("Distance in arcsec for the peak of [O III] 5007","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O III] 5007","%.3f" % rad_formax
     
     index_line=line_names.index("O2_3727s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -636,11 +637,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIa_3727/max_flux
         plt.plot(radial_dis_arc,radial,label="[O II] 3727")
         
-        print("dist ","[O II] 3727", file=file2)
+        print >>file2,"dist ","[O II] 3727"
         for i in range(0,len(flux_radial.OIIa_3727)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIa_3727[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIa_3727[i])
         
-        print("Distance in arcsec for the peak of [O II]  3727","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O II]  3727","%.3f" % rad_formax
 
     index_line=line_names.index("O2_3729s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -662,11 +663,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIb_3729/max_flux
         plt.plot(radial_dis_arc,radial,label="[O II] 3729")
         
-        print("dist ","[O II] 3729", file=file2)
+        print >>file2,"dist ","[O II] 3729"
         for i in range(0,len(flux_radial.OIIb_3729)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIb_3729[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIb_3729[i])
         
-        print("Distance in arcsec for the peak of [O II]  3729","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O II]  3729","%.3f" % rad_formax
         
     index_line=line_names.index("O2_7320s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -689,11 +690,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIIc_7320/max_flux
         plt.plot(radial_dis_arc,radial,label="[O II] 7320")
         
-        print("dist ","[O II] 7320", file=file2)
+        print >>file2,"dist ","[O II] 7320"
         for i in range(0,len(flux_radial.OIIc_7320)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIc_7320[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIIc_7320[i])
         
-        print("Distance in arcsec for the peak of [O II]  7320","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O II]  7320","%.3f" % rad_formax
         
     index_line=line_names.index("O2_7330s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -715,11 +716,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIId_7330/max_flux
         plt.plot(radial_dis_arc,radial,label="[O II] 7330")
         
-        print("dist ","[O II] 7330", file=file2)
+        print >>file2,"dist ","[O II] 7330"
         for i in range(0,len(flux_radial.OIId_7330)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIId_7330[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIId_7330[i])
         
-        print("Distance in arcsec for the peak of [O II]  7330","%.3f" % rad_formax, file=file10)   
+        print >>file10, "Distance in arcsec for the peak of [O II]  7330","%.3f" % rad_formax   
     
     index_line=line_names.index("O1_5577s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -741,11 +742,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIa_5577/max_flux
         plt.plot(radial_dis_arc,radial,label="[O I] 5577")
         
-        print("dist ","[O I] 5577", file=file2)
+        print >>file2,"dist ","[O I] 5577"
         for i in range(0,len(flux_radial.OIa_5577)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIa_5577[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIa_5577[i])
         
-        print("Distance in arcsec for the peak of [O I]   5577","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O I]   5577","%.3f" % rad_formax
 
     index_line=line_names.index("O1_6300s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -767,11 +768,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIb_6300/max_flux
         plt.plot(radial_dis_arc,radial,label="[O I] 6300")
         
-        print("dist ","[O I] 6300", file=file2)
+        print >>file2,"dist ","[O I] 6300"
         for i in range(0,len(flux_radial.OIb_6300)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIb_6300[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIb_6300[i])
         
-        print("Distance in arcsec for the peak of [O I]   6300","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O I]   6300","%.3f" % rad_formax
             
     index_line=line_names.index("O1_6363s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -793,11 +794,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.OIc_6363/max_flux
         plt.plot(radial_dis_arc,radial,label="[O I] 6363")
         
-        print("dist ","[O I] 6363", file=file2)
+        print >>file2,"dist ","[O I] 6363"
         for i in range(0,len(flux_radial.OIc_6363)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIc_6363[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.OIc_6363[i])
         
-        print("Distance in arcsec for the peak of [O I]   6363","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [O I]   6363","%.3f" % rad_formax
 
     index_line=line_names.index("S2_6716s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -819,11 +820,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.SIIa_6716/max_flux
         plt.plot(radial_dis_arc,radial,label="[S II] 6716")
         
-        print("dist ","[S II] 6716", file=file2)
+        print >>file2,"dist ","[S II] 6716"
         for i in range(0,len(flux_radial.SIIa_6716)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIa_6716[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIa_6716[i])
         
-        print("Distance in arcsec for the peak of [S II]  6716","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [S II]  6716","%.3f" % rad_formax
         
     index_line=line_names.index("S2_6731s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -845,11 +846,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.SIIb_6731/max_flux
         plt.plot(radial_dis_arc,radial,label="[S II] 6731")
         
-        print("dist ","[S II] 6731", file=file2)
+        print >>file2,"dist ","[S II] 6731"
         for i in range(0,len(flux_radial.SIIb_6731)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIb_6731[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIb_6731[i])
         
-        print("Distance in arcsec for the peak of [S II]  6731","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [S II]  6731","%.3f" % rad_formax
 
     index_line=line_names.index("S3_6312s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -871,11 +872,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.SIIIa_6312/max_flux
         plt.plot(radial_dis_arc,radial,label="[S III] 6312")
         
-        print("dist ","[S III] 6312", file=file2)
+        print >>file2,"dist ","[S III] 6312"
         for i in range(0,len(flux_radial.SIIIa_6312)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIIa_6312[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIIa_6312[i])
         
-        print("Distance in arcsec for the peak of [S III] 6312","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [S III] 6312","%.3f" % rad_formax
         
     index_line=line_names.index("S3_9069s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -897,11 +898,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.SIIIb_9069/max_flux
         plt.plot(radial_dis_arc,radial,label="[S III] 9069")
         
-        print("dist ","[S III] 9069", file=file2)
+        print >>file2,"dist ","[S III] 9069"
         for i in range(0,len(flux_radial.SIIIb_9069)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIIb_9069[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.SIIIb_9069[i])
         
-        print("Distance in arcsec for the peak of [S III] 9069","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [S III] 9069","%.3f" % rad_formax
 
     index_line=line_names.index("Cl3_5517s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -923,11 +924,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.ClIIIa_5517/max_flux
         plt.plot(radial_dis_arc,radial,label="[Cl III] 5517")
         
-        print("dist ","[Cl III] 5517", file=file2)
+        print >>file2,"dist ","[Cl III] 5517"
         for i in range(0,len(flux_radial.ClIIIa_5517)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ClIIIa_5517[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ClIIIa_5517[i])
         
-        print("Distance in arcsec for the peak of [Cl III] 5517","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [Cl III] 5517","%.3f" % rad_formax
 
     index_line=line_names.index("Cl3_5538s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -949,11 +950,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.ClIIIb_5538/max_flux
         plt.plot(radial_dis_arc,radial,label="[Cl III] 5538")
         
-        print("dist ","[Cl III] 5538", file=file2)
+        print >>file2,"dist ","[Cl III] 5538"
         for i in range(0,len(flux_radial.ClIIIb_5538)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ClIIIb_5538[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ClIIIb_5538[i])
         
-        print("Distance in arcsec for the peak of [Cl III] 5538","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [Cl III] 5538","%.3f" % rad_formax
         
     index_line=line_names.index("Ar3_7136s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -975,11 +976,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.ArIII_7136/max_flux
         plt.plot(radial_dis_arc,radial,label="[Ar III] 7136")
         
-        print("dist ","[Ar III] 7136", file=file2)
+        print >>file2,"dist ","[Ar III] 7136"
         for i in range(0,len(flux_radial.ArIII_7136)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIII_7136[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIII_7136[i])
         
-        print("Distance in arcsec for the peak of [Ar III] 7136","%.3f" % rad_formax, file=file10)    
+        print >>file10, "Distance in arcsec for the peak of [Ar III] 7136","%.3f" % rad_formax    
         
     index_line=line_names.index("Ar4_4712s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1001,11 +1002,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.ArIVa_4712/max_flux
         plt.plot(radial_dis_arc,radial,label="[Ar IV] 4712")
         
-        print("dist ","[Ar IV] 4712", file=file2)
+        print >>file2,"dist ","[Ar IV] 4712"
         for i in range(0,len(flux_radial.ArIVa_4712)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIVa_4712[i]), file=file2) 
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIVa_4712[i]) 
         
-        print("Distance in arcsec for the peak of [Ar IV] 4712","%.3f" % rad_formax, file=file10) 
+        print >>file10, "Distance in arcsec for the peak of [Ar IV] 4712","%.3f" % rad_formax 
         
     index_line=line_names.index("Ar4_4740s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1027,11 +1028,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.ArIVb_4740/max_flux
         plt.plot(radial_dis_arc,radial,label="[Ar IV] 4740")
         
-        print("dist ","[Ar IV] 4740", file=file2)
+        print >>file2,"dist ","[Ar IV] 4740"
         for i in range(0,len(flux_radial.ArIVb_4740)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIVb_4740[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.ArIVb_4740[i])
         
-        print("Distance in arcsec for the peak of [Ar IV] 4740","%.3f" % rad_formax, file=file10)    
+        print >>file10, "Distance in arcsec for the peak of [Ar IV] 4740","%.3f" % rad_formax    
         
     index_line=line_names.index("Ne3_3868s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1053,11 +1054,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NeIIIa_3868/max_flux
         plt.plot(radial_dis_arc,radial,label="[Ne III] 3868")
         
-        print("dist ","[Ne III] 3868", file=file2)
+        print >>file2,"dist ","[Ne III] 3868"
         for i in range(0,len(flux_radial.NeIIIa_3868)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NeIIIa_3868[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NeIIIa_3868[i])
         
-        print("Distance in arcsec for the peak of [Ne III] 3868","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [Ne III] 3868","%.3f" % rad_formax
     
     index_line=line_names.index("Ne3_3967s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1080,11 +1081,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.NeIIIb_3967/max_flux
         plt.plot(radial_dis_arc,radial,label="[Ne III] 3967")
         
-        print("dist ","[Ne III] 3967", file=file2)
+        print >>file2,"dist ","[Ne III] 3967"
         for i in range(0,len(flux_radial.NeIIIb_3967)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NeIIIb_3967[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.NeIIIb_3967[i])
         
-        print("Distance in arcsec for the peak of [Ne III] 3967","%.3f" % rad_formax, file=file10)
+        print >>file10, "Distance in arcsec for the peak of [Ne III] 3967","%.3f" % rad_formax
      
     index_line=line_names.index("C1_8727s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1106,11 +1107,11 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.CI_8727/max_flux
         plt.plot(radial_dis_arc,radial,label="[C I] 8727")
         
-        print("dist ","[C I] 8727", file=file2)
+        print >>file2,"dist ","[C I] 8727"
         for i in range(0,len(flux_radial.CI_8727)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.CI_8727[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.CI_8727[i])
         
-        print("Distance in arcsec for the peak of [C I]    8727","%.3f" % rad_formax, file=file10) 
+        print >>file10, "Distance in arcsec for the peak of [C I]    8727","%.3f" % rad_formax 
 
     index_line=line_names.index("C2_6461s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
@@ -1132,13 +1133,13 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial.CII_6461/max_flux
         plt.plot(radial_dis_arc,radial,label="[C II] 6461")
         
-        print("dist ","[C II] 6461", file=file2)
+        print >>file2,"dist ","[C II] 6461"
         for i in range(0,len(flux_radial.CII_6461)):
-            print('{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.CII_6461[i]), file=file2)
+            print >>file2, '{:03.3f}'.format(radial_dis_arc[i]),'{:06.3f}'.format(flux_radial.CII_6461[i])
         
-        print("Distance in arcsec for the peak of [C II]   6461","%.3f" % rad_formax, file=file10)  
+        print >>file10, "Distance in arcsec for the peak of [C II]   6461","%.3f" % rad_formax  
      
-    print("#######################################################################################", file=file10)
+    print >>file10, "#######################################################################################"
     
     max_len=max(len(flux_radial.Ha_6563),len(flux_radial.Hb_4861),len(flux_radial.Hg_4340),len(flux_radial.Hd_4101),len(flux_radial.HeIa_5876),len(flux_radial.HeIb_6678),len(flux_radial.HeIIa_4686),len(flux_radial.HeIIb_5412),len(flux_radial.OIa_5577),len(flux_radial.OIb_6300),len(flux_radial.OIc_6363),len(flux_radial.OIIa_3727),len(flux_radial.OIIb_3729),len(flux_radial.OIIc_7320),len(flux_radial.OIId_7330),len(flux_radial.OIIIa_4363),len(flux_radial.OIIIb_4959),len(flux_radial.OIIIc_5007),len(flux_radial.NI_5199),len(flux_radial.NIIa_5755),len(flux_radial.NIIb_6548),len(flux_radial.NIIc_6584),len(flux_radial.SIIa_6716),len(flux_radial.SIIb_6731),len(flux_radial.SIIIa_6312),len(flux_radial.SIIIb_9069),len(flux_radial.NeIIIa_3868),len(flux_radial.NeIIIb_3967),len(flux_radial.ArIII_7136),len(flux_radial.ArIVa_4712),len(flux_radial.ArIVb_4740),len(flux_radial.ClIIIa_5517),len(flux_radial.ClIIIb_5538),len(flux_radial.CI_8727),len(flux_radial.CII_6461))
     
@@ -1149,7 +1150,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         if flux_radial.Hb_4861[jrad]>0 and flux_radial.Ha_6563[jrad]>0:
             
             file3 = open('test.dat','w')
-            print("LINE test err", file=file3)
+            print >>file3, "LINE test err"
 
             radial_dis_arc3.append(0)
             radial_dis_arc3[jrad]=radial_dis_arc[jrad]
@@ -1157,172 +1158,172 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
             index_line=line_names.index("HI_6563s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.Ha_6563[jrad],flux_radial_error.Ha_6563[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("H1r_6563A", '{:03.3f}'.format(flux_radial.Ha_6563[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_6563A", '{:03.3f}'.format(flux_radial.Ha_6563[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HI_4861s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("H1r_4861A", '{:03.3f}'.format(flux_radial.Hb_4861[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4861A", '{:03.3f}'.format(flux_radial.Hb_4861[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HI_4340s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.Hg_4340[jrad],flux_radial_error.Hg_4340[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("H1r_4341A", '{:03.3f}'.format(flux_radial.Hg_4340[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4341A", '{:03.3f}'.format(flux_radial.Hg_4340[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HI_4101s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.Hd_4101[jrad],flux_radial_error.Hd_4101[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("H1r_4102A", '{:03.3f}'.format(flux_radial.Hg_4340[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "H1r_4102A", '{:03.3f}'.format(flux_radial.Hg_4340[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HeII_4686s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.HeIIa_4686[jrad],flux_radial_error.HeIIa_4686[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("He2r_4686A", '{:03.3f}'.format(flux_radial.HeIIa_4686[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_4686A", '{:03.3f}'.format(flux_radial.HeIIa_4686[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HeII_5412s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.HeIIb_5412[jrad],flux_radial_error.HeIIb_5412[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("He2r_5411A", '{:03.3f}'.format(flux_radial.HeIIb_5412[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He2r_5411A", '{:03.3f}'.format(flux_radial.HeIIb_5412[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HeI_5876s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.HeIa_5876[jrad],flux_radial_error.HeIa_5876[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("He1r_5876A", '{:03.3f}'.format(flux_radial.HeIa_5876[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_5876A", '{:03.3f}'.format(flux_radial.HeIa_5876[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("HeI_6678s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.HeIb_6678[jrad],flux_radial_error.HeIb_6678[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("He1r_6678A", '{:03.3f}'.format(flux_radial.HeIb_6678[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "He1r_6678A", '{:03.3f}'.format(flux_radial.HeIb_6678[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("S2_6716s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.SIIa_6716[jrad],flux_radial_error.SIIa_6716[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("S2_6716A", '{:03.3f}'.format(flux_radial.SIIa_6716[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6716A", '{:03.3f}'.format(flux_radial.SIIa_6716[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("S2_6731s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.SIIb_6731[jrad],flux_radial_error.SIIb_6731[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("S2_6731A", '{:03.3f}'.format(flux_radial.SIIb_6731[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S2_6731A", '{:03.3f}'.format(flux_radial.SIIb_6731[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("S3_6312s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.SIIIa_6312[jrad],flux_radial_error.SIIIa_6312[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("S3_6312A", '{:03.3f}'.format(flux_radial.SIIIa_6312[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_6312A", '{:03.3f}'.format(flux_radial.SIIIa_6312[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("S3_9069s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.SIIIb_9069[jrad],flux_radial_error.SIIIb_9069[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("S3_9069A", '{:03.3f}'.format(flux_radial.SIIIb_9069[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "S3_9069A", '{:03.3f}'.format(flux_radial.SIIIb_9069[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("N1_5199s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NI_5199[jrad],flux_radial_error.NI_5199[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("N1_5200A", '{:03.3f}'.format(flux_radial.NI_5199[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N1_5200A", '{:03.3f}'.format(flux_radial.NI_5199[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("N2_5755s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NIIa_5755[jrad],flux_radial_error.NIIa_5755[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("N2_5755A", '{:03.3f}'.format(flux_radial.NIIa_5755[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_5755A", '{:03.3f}'.format(flux_radial.NIIa_5755[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("N2_6548s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NIIb_6548[jrad],flux_radial_error.NIIb_6548[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("N2_6548A", '{:03.3f}'.format(flux_radial.NIIb_6548[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6548A", '{:03.3f}'.format(flux_radial.NIIb_6548[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("N2_6583s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NIIc_6584[jrad],flux_radial_error.NIIc_6584[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("N2_6584A", '{:03.3f}'.format(flux_radial.NIIc_6584[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "N2_6584A", '{:03.3f}'.format(flux_radial.NIIc_6584[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O1_5577s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.v[jrad],flux_radial_error.OIa_5577[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O1_5577A", '{:03.3f}'.format(flux_radial.OIa_5577[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_5577A", '{:03.3f}'.format(flux_radial.OIa_5577[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O1_6300s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIb_6300[jrad],flux_radial_error.OIb_6300[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O1_6300A", '{:03.3f}'.format(flux_radial.OIb_6300[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6300A", '{:03.3f}'.format(flux_radial.OIb_6300[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O1_6363s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIc_6363[jrad],flux_radial_error.OIc_6363[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O1_6364A", '{:03.3f}'.format(flux_radial.OIc_6363[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O1_6364A", '{:03.3f}'.format(flux_radial.OIc_6363[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O2_3727s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIa_3727[jrad],flux_radial_error.OIIa_3727[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O2_3726A", '{:03.3f}'.format(flux_radial.OIIa_3727[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3726A", '{:03.3f}'.format(flux_radial.OIIa_3727[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O2_3729s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIb_3729[jrad],flux_radial_error.OIIb_3729[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O2_3729A", '{:03.3f}'.format(flux_radial.OIIb_3729[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_3729A", '{:03.3f}'.format(flux_radial.OIIb_3729[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O2_7320s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIc_7320[jrad],flux_radial_error.OIIc_7320[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O2_7319A+", '{:03.3f}'.format(flux_radial.OIIc_7320[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7319A+", '{:03.3f}'.format(flux_radial.OIIc_7320[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O2_7330s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIId_7330[jrad],flux_radial_error.OIId_7330[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O2_7330A+", '{:03.3f}'.format(flux_radial.OIId_7330[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O2_7330A+", '{:03.3f}'.format(flux_radial.OIId_7330[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O3_4363s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIIa_4363[jrad],flux_radial_error.OIIIa_4363[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O3_4363A", '{:03.3f}'.format(flux_radial.OIIIa_4363[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4363A", '{:03.3f}'.format(flux_radial.OIIIa_4363[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O3_4959s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIIb_4959[jrad],flux_radial_error.OIIIb_4959[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O3_4959A", '{:03.3f}'.format(flux_radial.OIIIb_4959[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_4959A", '{:03.3f}'.format(flux_radial.OIIIb_4959[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("O3_5007s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.OIIIc_5007[jrad],flux_radial_error.OIIIc_5007[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("O3_5007A", '{:03.3f}'.format(flux_radial.OIIIc_5007[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "O3_5007A", '{:03.3f}'.format(flux_radial.OIIIc_5007[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("Cl3_5517s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.ClIIIa_5517[jrad],flux_radial_error.ClIIIa_5517[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Cl3_5518A", '{:03.3f}'.format(flux_radial.ClIIIa_5517[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Cl3_5518A", '{:03.3f}'.format(flux_radial.ClIIIa_5517[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("Cl3_5517s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.ClIIIb_5538[jrad],flux_radial_error.ClIIIb_5538[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Cl3_5538A", '{:03.3f}'.format(flux_radial.ClIIIb_5538[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)     
+                print >>file3, "Cl3_5538A", '{:03.3f}'.format(flux_radial.ClIIIb_5538[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)     
             
             index_line=line_names.index("Ne3_3868s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NeIIIa_3868[jrad],flux_radial_error.NeIIIa_3868[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Ne3_3869A", '{:03.3f}'.format(flux_radial.NeIIIa_3868[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ne3_3869A", '{:03.3f}'.format(flux_radial.NeIIIa_3868[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("Ne3_3967s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.NeIIIb_3967[jrad],flux_radial_error.NeIIIb_3967[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Ne3_3968A", '{:03.3f}'.format(flux_radial.NeIIIb_3967[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)               
+                print >>file3, "Ne3_3968A", '{:03.3f}'.format(flux_radial.NeIIIb_3967[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)               
             
             index_line=line_names.index("Ar3_7136s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.ArIII_7136[jrad],flux_radial_error.ArIII_7136[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Ar3_7136A", '{:03.3f}'.format(flux_radial.ArIII_7136[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar3_7136A", '{:03.3f}'.format(flux_radial.ArIII_7136[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("Ar4_4712s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.ArIVa_4712[jrad],flux_radial_error.ArIVa_4712[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Ar4_4711A", '{:03.3f}'.format(flux_radial.ArIVa_4712[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4711A", '{:03.3f}'.format(flux_radial.ArIVa_4712[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("Ar4_4740s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.ArIVb_4740[jrad],flux_radial_error.ArIVb_4740[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("Ar4_4740A", '{:03.3f}'.format(flux_radial.ArIVb_4740[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "Ar4_4740A", '{:03.3f}'.format(flux_radial.ArIVb_4740[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             index_line=line_names.index("C1_8727s")
             if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
                 error=nfes.flux_Error(flux_radial.CI_8727[jrad],flux_radial_error.CI_8727[jrad],flux_radial.Hb_4861[jrad],flux_radial_error.Hb_4861[jrad])
-                print("C1_8728A", '{:03.3f}'.format(flux_radial.CI_8727[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error), file=file3)
+                print >>file3, "C1_8728A", '{:03.3f}'.format(flux_radial.CI_8727[jrad]*100/flux_radial.Hb_4861[jrad]),'{:03.3f}'.format(error)
             
             
             file3.close() 
@@ -2107,145 +2108,145 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         radial=flux_radial_derred.CII_6461/max_flux
         plt.plot(radial_dis_arc3,radial,label="[C II] 6461")
     
-    print("dist ","Ha", file=file22)
+    print >>file22,"dist ","Ha"
     for i in range(0,len(flux_radial_derred.Ha_6563)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Ha_6563[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Ha_6563[i])
                     
 #    print >>file22,"dist ","Hb"
 #    for i in range(0,len(flux_radial_derred.Hb_4861)):
 #        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Hb_4861[i])
             
-    print("dist ","Hc", file=file22)
+    print >>file22,"dist ","Hc"
     for i in range(0,len(flux_radial_derred.Hg_4340)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Hg_4340[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Hg_4340[i])
     
-    print("dist ","Hd", file=file22)
+    print >>file22,"dist ","Hd"
     for i in range(0,len(flux_radial_derred.Hd_4101)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Hd_4101[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.Hd_4101[i])
 
-    print("dist ","HeI 5876", file=file22)
+    print >>file22,"dist ","HeI 5876"
     for i in range(0,len(flux_radial_derred.HeIa_5876)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIa_5876[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIa_5876[i])
             
-    print("dist ","HeI 6678", file=file22)
+    print >>file22,"dist ","HeI 6678"
     for i in range(0,len(flux_radial_derred.HeIb_6678)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIb_6678[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIb_6678[i])
     
-    print("dist ","HeII 4686", file=file22)
+    print >>file22,"dist ","HeII 4686"
     for i in range(0,len(flux_radial_derred.HeIIa_4686)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIIa_4686[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIIa_4686[i])
         
-    print("dist ","HeII 5412", file=file22)
+    print >>file22,"dist ","HeII 5412"
     for i in range(0,len(flux_radial_derred.HeIIb_5412)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIIb_5412[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.HeIIb_5412[i])
     
-    print("dist ","[N II] 5755", file=file22)
+    print >>file22,"dist ","[N II] 5755"
     for i in range(0,len(flux_radial_derred.NIIa_5755)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIa_5755[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIa_5755[i])
 
-    print("dist ","[N II] 6548", file=file22)
+    print >>file22,"dist ","[N II] 6548"
     for i in range(0,len(flux_radial_derred.NIIb_6548)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIb_6548[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIb_6548[i])
         
-    print("dist ","[N II] 6584", file=file22)
+    print >>file22,"dist ","[N II] 6584"
     for i in range(0,len(flux_radial_derred.NIIc_6584)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIc_6584[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NIIc_6584[i])
     
-    print("dist ","[N I] 5199", file=file22)
+    print >>file22,"dist ","[N I] 5199"
     for i in range(0,len(flux_radial_derred.NI_5199)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NI_5199[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NI_5199[i])
         
-    print("dist ","[O III] 4363", file=file22)
+    print >>file22,"dist ","[O III] 4363"
     for i in range(0,len(flux_radial_derred.OIIIa_4363)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIa_4363[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIa_4363[i])
        
-    print("dist ","[O III] 4959", file=file22)
+    print >>file22,"dist ","[O III] 4959"
     for i in range(0,len(flux_radial_derred.OIIIb_4959)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIb_4959[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIb_4959[i])
     
-    print("dist ","[O III] 5007", file=file22)
+    print >>file22,"dist ","[O III] 5007"
     for i in range(0,len(flux_radial_derred.OIIIc_5007)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIc_5007[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIIc_5007[i])
     
-    print("dist ","[O II] 3727", file=file22)
+    print >>file22,"dist ","[O II] 3727"
     for i in range(0,len(flux_radial_derred.OIIa_3727)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIa_3727[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIa_3727[i])
         
-    print("dist ","[O II] 3729", file=file22)
+    print >>file22,"dist ","[O II] 3729"
     for i in range(0,len(flux_radial_derred.OIIb_3729)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIb_3729[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIb_3729[i])
         
-    print("dist ","[O II] 7320", file=file22)
+    print >>file22,"dist ","[O II] 7320"
     for i in range(0,len(flux_radial_derred.OIIc_7320)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIc_7320[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIIc_7320[i])
         
-    print("dist ","[O II] 7330", file=file22)
+    print >>file22,"dist ","[O II] 7330"
     for i in range(0,len(flux_radial_derred.OIId_7330)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIId_7330[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIId_7330[i])
         
-    print("dist ","[O I] 5577", file=file22)
+    print >>file22,"dist ","[O I] 5577"
     for i in range(0,len(flux_radial_derred.OIa_5577)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIa_5577[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIa_5577[i])
         
-    print("dist ","[O I] 6300", file=file22)
+    print >>file22,"dist ","[O I] 6300"
     for i in range(0,len(flux_radial_derred.OIb_6300)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIb_6300[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIb_6300[i])
         
-    print("dist ","[O I] 6363", file=file22)
+    print >>file22,"dist ","[O I] 6363"
     for i in range(0,len(flux_radial_derred.OIc_6363)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIc_6363[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.OIc_6363[i])
         
-    print("dist ","[S II] 6716", file=file22)
+    print >>file22,"dist ","[S II] 6716"
     for i in range(0,len(flux_radial_derred.SIIa_6716)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIa_6716[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIa_6716[i])
    
-    print("dist ","[S II] 6731", file=file22)
+    print >>file22,"dist ","[S II] 6731"
     for i in range(0,len(flux_radial_derred.SIIb_6731)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIb_6731[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIb_6731[i])
     
-    print("dist ","[S III] 6312", file=file22)
+    print >>file22,"dist ","[S III] 6312"
     for i in range(0,len(flux_radial_derred.SIIIa_6312)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIIa_6312[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIIa_6312[i])
         
-    print("dist ","[S III] 9069", file=file22)
+    print >>file22,"dist ","[S III] 9069"
     for i in range(0,len(flux_radial_derred.SIIIb_9069)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIIb_9069[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.SIIIb_9069[i])
         
-    print("dist ","[Cl III] 5517", file=file22)
+    print >>file22,"dist ","[Cl III] 5517"
     for i in range(0,len(flux_radial_derred.ClIIIa_5517)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ClIIIa_5517[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ClIIIa_5517[i])
         
-    print("dist ","[Cl III] 5538", file=file22)
+    print >>file22,"dist ","[Cl III] 5538"
     for i in range(0,len(flux_radial_derred.ClIIIb_5538)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ClIIIb_5538[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ClIIIb_5538[i])
         
-    print("dist ","[Ar III] 7136", file=file22)
+    print >>file22,"dist ","[Ar III] 7136"
     for i in range(0,len(flux_radial_derred.ArIII_7136)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIII_7136[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIII_7136[i])
         
-    print("dist ","[Ar IV] 4712", file=file22)
+    print >>file22,"dist ","[Ar IV] 4712"
     for i in range(0,len(flux_radial_derred.ArIVa_4712)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIVa_4712[i]), file=file22) 
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIVa_4712[i]) 
 
-    print("dist ","[Ar IV] 4740", file=file22)
+    print >>file22,"dist ","[Ar IV] 4740"
     for i in range(0,len(flux_radial_derred.ArIVb_4740)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIVb_4740[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.ArIVb_4740[i])
     
-    print("dist ","[Ne III] 3868", file=file22)
+    print >>file22,"dist ","[Ne III] 3868"
     for i in range(0,len(flux_radial_derred.NeIIIa_3868)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NeIIIa_3868[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NeIIIa_3868[i])
 
-    print("dist ","[Ne III] 3967", file=file22)
+    print >>file22,"dist ","[Ne III] 3967"
     for i in range(0,len(flux_radial_derred.NeIIIb_3967)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NeIIIb_3967[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.NeIIIb_3967[i])
        
-    print("dist ","[C I] 8727", file=file22)
+    print >>file22,"dist ","[C I] 8727"
     for i in range(0,len(flux_radial_derred.CI_8727)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.CI_8727[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.CI_8727[i])
             
-    print("dist ","[C II] 6461", file=file22)
+    print >>file22,"dist ","[C II] 6461"
     for i in range(0,len(flux_radial_derred.CII_6461)):
-        print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.CII_6461[i]), file=file22)
+        print >>file22, '{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.CII_6461[i])
     
     
     plt.legend(loc='upper right')

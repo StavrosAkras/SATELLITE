@@ -12,6 +12,7 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
+from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -45,7 +46,7 @@ def NIISIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log(Ha/[N II] 6548+6584)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(Ha/[S II] 6716+6731)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log(Ha/[N II] 6548+6584)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(Ha/[S II] 6716+6731)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -123,7 +124,7 @@ def OIIINIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 6584/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 6584/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -201,7 +202,7 @@ def OIIISIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([S II] 6716+6731/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([S II] 6716+6731/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -279,7 +280,7 @@ def OIIIHeII4686plot(numerator1,denominator1,numerator2,denominator2,sizex,sizey
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 4686/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 4686/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -357,7 +358,7 @@ def OIIIHeII5412plot(numerator1,denominator1,numerator2,denominator2,sizex,sizey
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 5412/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 5412/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -436,7 +437,7 @@ def OIIINIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N I] 5199/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N I] 5199/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -514,7 +515,7 @@ def OIIIOIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O I] 6300/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O I] 6300/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -594,7 +595,7 @@ def OIIINII5755plot(numerator1,denominator1,numerator2,denominator2,sizex,sizey)
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 5755/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 5755/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -674,7 +675,7 @@ def SII67166731HaSIIplot(numerator1,denominator1,numerator2,denominator2,sizex,s
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("[S II] 6716/6731","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ha/[S II] 6716+6731)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "[S II] 6716/6731","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ha/[S II] 6716+6731)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -754,7 +755,7 @@ def SII67166731HaNIIplot(numerator1,denominator1,numerator2,denominator2,sizex,s
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("[S II] 6716/6731","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ha/[N II] 6548+6584)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "[S II] 6716/6731","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ha/[N II] 6548+6584)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -835,7 +836,7 @@ def NIISIISIIOIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey)
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([N II] 6548+6584/[S II] 6716+6731)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([S II] 6716+6731/[O I] 6300+6363)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([N II] 6548+6584/[S II] 6716+6731)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([S II] 6716+6731/[O I] 6300+6363)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -915,7 +916,7 @@ def NIISIINIIOIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey)
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([N II] 6548+6584/[S II] 6716+6731)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 658+6584/[O I] 6300+6363)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([N II] 6548+6584/[S II] 6716+6731)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 658+6584/[O I] 6300+6363)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -994,7 +995,7 @@ def OIIINII6584OIplot(numerator1,denominator1,numerator2,denominator2,sizex,size
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 6584/[O I] 6300)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N II] 6584/[O I] 6300)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1073,7 +1074,7 @@ def OIIIOII732030OIIIplot(numerator1,denominator1,numerator2,denominator2,sizex,
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 7320+7330/[O III] 5007)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 7320+7330/[O III] 5007)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1153,7 +1154,7 @@ def OIIIOII372729OIIIplot(numerator1,denominator1,numerator2,denominator2,sizex,
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 3727+3729/[O III] 5007)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 3727+3729/[O III] 5007)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1233,7 +1234,7 @@ def OIIIOII372729Hbplot(numerator1,denominator1,numerator2,denominator2,sizex,si
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 3727+3729/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 3727+3729/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1312,7 +1313,7 @@ def OIIIOII732030Haplot(numerator1,denominator1,numerator2,denominator2,sizex,si
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 7320+7330/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O II] 7320+7330/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1393,7 +1394,7 @@ def OIIIHeIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He I 5876/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He I 5876/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1473,7 +1474,7 @@ def OIIIArIIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ar III] 7136/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ar III] 7136/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1553,7 +1554,7 @@ def OIIIOIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O III] 5007/[O I] 6300)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O III] 5007/[O I] 6300)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1633,7 +1634,7 @@ def OIIININIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N I] 5199/[N II] 6584)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([N I] 5199/[N II] 6584)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1713,7 +1714,7 @@ def OIIINeIIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ne III] 3869/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([Ne III] 3869/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1792,7 +1793,7 @@ def OIIIOIIIHgplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O III] 4363/Hg)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([O III] 4363/Hg)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1871,7 +1872,7 @@ def OIIIArIVplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"[Ar IV] 4712/4740","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"[Ar IV] 4712/4740","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -1951,7 +1952,7 @@ def OIIICIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C I] 8727/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C I] 8727/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -2031,7 +2032,7 @@ def OIIICIIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C II] 6461/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O III] 5007/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C II] 6461/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -2111,7 +2112,7 @@ def OICIplot(numerator1,denominator1,numerator2,denominator2,sizex,sizey):
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([O I] 6300/Ha)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C I] 8727/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([O I] 6300/Ha)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log([C I] 8727/Ha)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -2192,7 +2193,7 @@ def ArIVHeII4686plot(numerator1,denominator1,numerator2,denominator2,sizex,sizey
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([Ar IV] 4712+4740/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 4686/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2, file=file10)
+    print >>file10, "log([Ar IV] 4712+4740/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 4686/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2
 
     maxper=75
     minper=25
@@ -2271,7 +2272,7 @@ def ArIVHeII5412plot(numerator1,denominator1,numerator2,denominator2,sizex,sizey
     mean_ratio2=mvs.meanvalue(data_pos_ratio2,-10) 
     std_ratio2=svs.stdvalue(data_pos_ratio2,mean_ratio2,-10) 
 
-    print("log([Ar IV] 4712+4740/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 5412/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2 >>file10, end=' ', file=file10) 
+    print >>file10, "log([Ar IV] 4712+4740/Hb)","%.3f" % mean_ratio1,"sigma","%.3f" % std_ratio1,"log(He II 5412/Hb)","%.3f" % mean_ratio2,"sigma","%.3f" % std_ratio2 >>file10, 
 
     maxper=75
     minper=25
