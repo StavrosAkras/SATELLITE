@@ -12,7 +12,6 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -47,9 +46,9 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     else:
         pn.atomicData.addAllChianti()
         
-    print >>file10, "################################"    
-    print >>file10, "################################"    
-    print >>file10, "ionic abudnances for slit number", i
+    print("################################", file=file10)    
+    print("################################", file=file10)    
+    print("ionic abudnances for slit number", i, file=file10)
 #############################################################
     He1 = pn.RecAtom('He',1)
     
@@ -193,8 +192,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(He1b_abund_fake)==True: He1b_abund_fake=0
     ion_abun_error.HeIb[i]=He1b_abund_fake
     
-    print >>file10, 'He+(5786)/H+ = {:5.2e}'.format(ion_abun.HeIa[i]),'He+(6678)/H+ = {:5.2e}'.format(ion_abun.HeIb[i])
-    print >>file10, 'error He+(5786)/H+ = {:5.2e}'.format(ion_abun_error.HeIa[i]),'He+(6678)/H+ = {:5.2e}'.format(ion_abun_error.HeIb[i]) 
+    print('He+(5786)/H+ = {:5.2e}'.format(ion_abun.HeIa[i]),'He+(6678)/H+ = {:5.2e}'.format(ion_abun.HeIb[i]), file=file10)
+    print('error He+(5786)/H+ = {:5.2e}'.format(ion_abun_error.HeIa[i]),'He+(6678)/H+ = {:5.2e}'.format(ion_abun_error.HeIb[i]), file=file10) 
 #############################################################
 
 #############################################################
@@ -338,8 +337,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(He2b_abund_fake)==True: He2b_abund_fake=0
     ion_abun_error.HeIIb[i]=He2b_abund_fake
     
-    print >>file10, 'He+2(4686)/H+ = {:5.2e}'.format(ion_abun.HeIIa[i]),'He+2(5412)/H+ = {:5.2e}'.format(ion_abun.HeIIb[i])
-    print >>file10, 'He+2(4686)/H+ = {:5.2e}'.format(ion_abun_error.HeIIa[i]),'He+2(5412)/H+ = {:5.2e}'.format(ion_abun_error.HeIIb[i])
+    print('He+2(4686)/H+ = {:5.2e}'.format(ion_abun.HeIIa[i]),'He+2(5412)/H+ = {:5.2e}'.format(ion_abun.HeIIb[i]), file=file10)
+    print('He+2(4686)/H+ = {:5.2e}'.format(ion_abun_error.HeIIa[i]),'He+2(5412)/H+ = {:5.2e}'.format(ion_abun_error.HeIIb[i]), file=file10)
 #############################################################
 
 
@@ -518,8 +517,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(O1c_abund_fake)==True: O1c_abund_fake=0
     ion_abun_error.OIc[i]=O1c_abund_fake
     
-    print >>file10, 'Oo(5577)/H+ = {:5.2e}'.format(ion_abun.OIa[i]),'Oo(6300)/H+ = {:5.2e}'.format(ion_abun.OIb[i]),'Oo(6363)/H+ = {:5.2e}'.format(ion_abun.OIc[i])
-    print >>file10, 'Oo(5577)/H+ = {:5.2e}'.format(ion_abun_error.OIa[i]),'Oo(6300)/H+ = {:5.2e}'.format(ion_abun_error.OIb[i]),'Oo(6363)/H+ = {:5.2e}'.format(ion_abun_error.OIc[i])
+    print('Oo(5577)/H+ = {:5.2e}'.format(ion_abun.OIa[i]),'Oo(6300)/H+ = {:5.2e}'.format(ion_abun.OIb[i]),'Oo(6363)/H+ = {:5.2e}'.format(ion_abun.OIc[i]), file=file10)
+    print('Oo(5577)/H+ = {:5.2e}'.format(ion_abun_error.OIa[i]),'Oo(6300)/H+ = {:5.2e}'.format(ion_abun_error.OIb[i]),'Oo(6363)/H+ = {:5.2e}'.format(ion_abun_error.OIc[i]), file=file10)
 #############################################################
 
 #############################################################
@@ -730,8 +729,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(O2d_abund_fake)==True: O2d_abund_fake=0
     ion_abun_error.OIId[i]=O2d_abund_fake
     
-    print >>file10, 'O+(3727)/H+ = {:5.2e}'.format(ion_abun.OIIa[i]),'O+(3729)/H+ = {:5.2e}'.format(ion_abun.OIIb[i]),'O+(7320)/H+ = {:5.2e}'.format(ion_abun.OIIc[i]),'O+(7330)/H+ = {:5.2e}'.format(ion_abun.OIId[i])
-    print >>file10, 'O+(3727)/H+ = {:5.2e}'.format(ion_abun_error.OIIa[i]),'O+(3729)/H+ = {:5.2e}'.format(ion_abun_error.OIIb[i]),'O+(7320)/H+ = {:5.2e}'.format(ion_abun_error.OIIc[i]),'O+(7330)/H+ = {:5.2e}'.format(ion_abun_error.OIId[i])
+    print('O+(3727)/H+ = {:5.2e}'.format(ion_abun.OIIa[i]),'O+(3729)/H+ = {:5.2e}'.format(ion_abun.OIIb[i]),'O+(7320)/H+ = {:5.2e}'.format(ion_abun.OIIc[i]),'O+(7330)/H+ = {:5.2e}'.format(ion_abun.OIId[i]), file=file10)
+    print('O+(3727)/H+ = {:5.2e}'.format(ion_abun_error.OIIa[i]),'O+(3729)/H+ = {:5.2e}'.format(ion_abun_error.OIIb[i]),'O+(7320)/H+ = {:5.2e}'.format(ion_abun_error.OIIc[i]),'O+(7330)/H+ = {:5.2e}'.format(ion_abun_error.OIId[i]), file=file10)
 
 #############################################################
 
@@ -908,8 +907,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(O3c_abund_fake)==True: O3c_abund_fake=0
     ion_abun_error.OIIIc[i]=O3c_abund_fake
     
-    print >>file10, 'O+2(4363)/H+ = {:5.2e}'.format(ion_abun.OIIIa[i]),'O+2(4959)/H+ = {:5.2e}'.format(ion_abun.OIIIb[i]),'O+2(5007)/H+ = {:5.2e}'.format(ion_abun.OIIIc[i])
-    print >>file10, 'O+2(4363)/H+ = {:5.2e}'.format(ion_abun_error.OIIIa[i]),'O+2(4959)/H+ = {:5.2e}'.format(ion_abun_error.OIIIb[i]),'O+2(5007)/H+ = {:5.2e}'.format(ion_abun_error.OIIIc[i])
+    print('O+2(4363)/H+ = {:5.2e}'.format(ion_abun.OIIIa[i]),'O+2(4959)/H+ = {:5.2e}'.format(ion_abun.OIIIb[i]),'O+2(5007)/H+ = {:5.2e}'.format(ion_abun.OIIIc[i]), file=file10)
+    print('O+2(4363)/H+ = {:5.2e}'.format(ion_abun_error.OIIIa[i]),'O+2(4959)/H+ = {:5.2e}'.format(ion_abun_error.OIIIb[i]),'O+2(5007)/H+ = {:5.2e}'.format(ion_abun_error.OIIIc[i]), file=file10)
 #############################################################
 
 #############################################################
@@ -1026,8 +1025,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     ion_abun_error.NI[i]=N1b_abund_fake
 
 #    print('No(5199)/H+ = {:5.2e}'.format(N1a_abund),'No(5200)/H+ = {:5.2e}'.format(N1b_abund))
-    print >>file10, 'No(5200)/H+ = {:5.2e}'.format(ion_abun.NI[i])
-    print >>file10, 'No(5200)/H+ = {:5.2e}'.format(ion_abun_error.NI[i])
+    print('No(5200)/H+ = {:5.2e}'.format(ion_abun.NI[i]), file=file10)
+    print('No(5200)/H+ = {:5.2e}'.format(ion_abun_error.NI[i]), file=file10)
 #############################################################
 
 
@@ -1204,8 +1203,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     ion_abun_error.NIIc[i]=N2c_abund_fake
 
 
-    print >>file10, 'N+(5755)/H+ = {:5.2e}'.format(ion_abun.NIIa[i]),'N+(6548)/H+ = {:5.2e}'.format(ion_abun.NIIb[i]),'N+(6584)/H+ = {:5.2e}'.format(ion_abun.NIIc[i])
-    print >>file10, 'N+(5755)/H+ = {:5.2e}'.format(ion_abun_error.NIIa[i]),'N+(6548)/H+ = {:5.2e}'.format(ion_abun_error.NIIb[i]),'N+(6584)/H+ = {:5.2e}'.format(ion_abun_error.NIIc[i])
+    print('N+(5755)/H+ = {:5.2e}'.format(ion_abun.NIIa[i]),'N+(6548)/H+ = {:5.2e}'.format(ion_abun.NIIb[i]),'N+(6584)/H+ = {:5.2e}'.format(ion_abun.NIIc[i]), file=file10)
+    print('N+(5755)/H+ = {:5.2e}'.format(ion_abun_error.NIIa[i]),'N+(6548)/H+ = {:5.2e}'.format(ion_abun_error.NIIb[i]),'N+(6584)/H+ = {:5.2e}'.format(ion_abun_error.NIIc[i]), file=file10)
 #############################################################
      
 #############################################################
@@ -1350,8 +1349,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(S2b_abund_fake)==True: S2b_abund_fake=0
     ion_abun_error.SIIb[i]=S2b_abund_fake
     
-    print >>file10, 'S+(6717)/H+ = {:5.2e}'.format(ion_abun.SIIa[i]),'S+(6731)/H+ = {:5.2e}'.format(ion_abun.SIIb[i])
-    print >>file10, 'S+(6717)/H+ = {:5.2e}'.format(ion_abun_error.SIIa[i]),'S+(6731)/H+ = {:5.2e}'.format(ion_abun_error.SIIb[i])
+    print('S+(6717)/H+ = {:5.2e}'.format(ion_abun.SIIa[i]),'S+(6731)/H+ = {:5.2e}'.format(ion_abun.SIIb[i]), file=file10)
+    print('S+(6717)/H+ = {:5.2e}'.format(ion_abun_error.SIIa[i]),'S+(6731)/H+ = {:5.2e}'.format(ion_abun_error.SIIb[i]), file=file10)
 #############################################################     
     
 #############################################################
@@ -1502,8 +1501,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     ion_abun_error.SIIIb[i]=S3b_abund_fake
     
 #    print('S+2(6312)/H+ = {:5.2e}'.format(S3a_abund),'S+2(9068)/H+ = {:5.2e}'.format(S3b_abund),'S+2(9532)/H+ = {:5.2e}'.format(S3c_abund))
-    print >>file10, 'S+2(6312)/H+ = {:5.2e}'.format(ion_abun.SIIIa[i]),'S+2(9068)/H+ = {:5.2e}'.format(ion_abun.SIIIb[i])
-    print >>file10, 'S+2(6312)/H+ = {:5.2e}'.format(ion_abun_error.SIIIa[i]),'S+2(9068)/H+ = {:5.2e}'.format(ion_abun_error.SIIIb[i])
+    print('S+2(6312)/H+ = {:5.2e}'.format(ion_abun.SIIIa[i]),'S+2(9068)/H+ = {:5.2e}'.format(ion_abun.SIIIb[i]), file=file10)
+    print('S+2(6312)/H+ = {:5.2e}'.format(ion_abun_error.SIIIa[i]),'S+2(9068)/H+ = {:5.2e}'.format(ion_abun_error.SIIIb[i]), file=file10)
 #############################################################   
 
    
@@ -1647,8 +1646,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(Ne3b_abund_fake)==True: Ne3b_abund_fake=0
     ion_abun_error.NeIIIb[i]=Ne3b_abund_fake
     
-    print >>file10, 'Ne+2(3869)/H+ = {:5.2e}'.format(ion_abun.NeIIIa[i]),'Ne+2(3968)/H+ = {:5.2e}'.format(ion_abun.NeIIIb[i])
-    print >>file10, 'Ne+2(3869)/H+ = {:5.2e}'.format(ion_abun_error.NeIIIa[i]),'Ne+2(3968)/H+ = {:5.2e}'.format(ion_abun_error.NeIIIb[i])
+    print('Ne+2(3869)/H+ = {:5.2e}'.format(ion_abun.NeIIIa[i]),'Ne+2(3968)/H+ = {:5.2e}'.format(ion_abun.NeIIIb[i]), file=file10)
+    print('Ne+2(3869)/H+ = {:5.2e}'.format(ion_abun_error.NeIIIa[i]),'Ne+2(3968)/H+ = {:5.2e}'.format(ion_abun_error.NeIIIb[i]), file=file10)
 
 
 #############################################################   
@@ -1760,8 +1759,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(Ar3a_abund_fake)==True: Ar3a_abund_fake=0
     ion_abun_error.ArIII[i]=Ar3a_abund_fake
     
-    print >>file10, 'Ar+2(7136)/H+ = {:5.2e}'.format(ion_abun.ArIII[i])
-    print >>file10, 'Ar+2(7136)/H+ = {:5.2e}'.format(ion_abun_error.ArIII[i])
+    print('Ar+2(7136)/H+ = {:5.2e}'.format(ion_abun.ArIII[i]), file=file10)
+    print('Ar+2(7136)/H+ = {:5.2e}'.format(ion_abun_error.ArIII[i]), file=file10)
 #############################################################  
 
 #############################################################
@@ -1906,8 +1905,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(Ar4b_abund_fake)==True: Ar4b_abund_fake=0
     ion_abun_error.ArIVb[i]=Ar4b_abund_fake
     
-    print >>file10, 'Ar+3(4712)/H+ = {:5.2e}'.format(ion_abun.ArIVa[i]),'Ar+3(4740)/H+ = {:5.2e}'.format(ion_abun.ArIVb[i])
-    print >>file10, 'Ar+3(4712)/H+ = {:5.2e}'.format(ion_abun_error.ArIVa[i]),'Ar+3(4740)/H+ = {:5.2e}'.format(ion_abun_error.ArIVb[i])
+    print('Ar+3(4712)/H+ = {:5.2e}'.format(ion_abun.ArIVa[i]),'Ar+3(4740)/H+ = {:5.2e}'.format(ion_abun.ArIVb[i]), file=file10)
+    print('Ar+3(4712)/H+ = {:5.2e}'.format(ion_abun_error.ArIVa[i]),'Ar+3(4740)/H+ = {:5.2e}'.format(ion_abun_error.ArIVb[i]), file=file10)
 #############################################################  
 
 #############################################################
@@ -2050,8 +2049,8 @@ def ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_
     if np.isnan(Cl3b_abund_fake)==True: Cl3b_abund_fake=0
     ion_abun_error.ClIIIb[i]=Cl3b_abund_fake
     
-    print >>file10, 'Cl+2(5517)/H+ = {:5.2e}'.format(ion_abun.ClIIIa[i]),'Cl+2(5538)/H+ = {:5.2e}'.format(ion_abun.ClIIIb[i])
-    print >>file10, 'Cl+2(5517)/H+ = {:5.2e}'.format(ion_abun_error.ClIIIa[i]),'Cl+2(5538)/H+ = {:5.2e}'.format(ion_abun_error.ClIIIb[i])
+    print('Cl+2(5517)/H+ = {:5.2e}'.format(ion_abun.ClIIIa[i]),'Cl+2(5538)/H+ = {:5.2e}'.format(ion_abun.ClIIIb[i]), file=file10)
+    print('Cl+2(5517)/H+ = {:5.2e}'.format(ion_abun_error.ClIIIa[i]),'Cl+2(5538)/H+ = {:5.2e}'.format(ion_abun_error.ClIIIb[i]), file=file10)
 #############################################################  
     
 

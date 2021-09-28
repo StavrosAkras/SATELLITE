@@ -15,7 +15,6 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -292,174 +291,174 @@ def lineratios(flux2D,line_names,lines_available,lines_radial,param_estimated,pa
 ###################################################################
 
     file12 = open('statisticnumbers_2.txt','w')
-    print >>file12, '{:45}'.format('Parameter Name'), '{:10}'.format('Nspaxels'),'{:10}'.format('5% value'),'{:10}'.format('Q1 value'), '{:12}'.format('median value'), '{:10}'.format('Q3 value'), '{:10}'.format('95% value'), '{:10}'.format('mean value'), '{:10}'.format('sigma')
-    print >>file12, "#############################################################################################"
+    print('{:45}'.format('Parameter Name'), '{:10}'.format('Nspaxels'),'{:10}'.format('5% value'),'{:10}'.format('Q1 value'), '{:12}'.format('median value'), '{:10}'.format('Q3 value'), '{:10}'.format('95% value'), '{:10}'.format('mean value'), '{:10}'.format('sigma'), file=file12)
+    print("#############################################################################################", file=file12)
     
     
     index=param_estimated.index('log(HeI_5876s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeI5876s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeI_5876s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeI_5876s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log(HeI_6678s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeI6678s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeI_6678s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeI_6678s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(HeII_5412s_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeII5412s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeII_5412s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeII_5412s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(HeII_4686s_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeII4686s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeII_4686s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeII_4686s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(HeI_5876s_HeII_4686s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeI5876s_HeII4686s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeI_5876s_HeII_4686s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeI_5876s_HeII_4686s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log(HeI_5876s_HeII_5412s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logHeI5876s_HeII5412s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(HeI_5876s_HeII_5412s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(HeI_5876s_HeII_5412s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(N2_6583s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNII6583s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(N2_6583s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(N2_6583s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(N2_6548s+N2_6583s)_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNII6548sNII6583s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(N2_6548s+N2_6583s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(N2_6548s+N2_6583s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((N2_6548s+N2_6583s)_N2_5755s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNII6548sNII6583s_NII5755s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((N2_6548s+N2_6583s)_N2_5755s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((N2_6548s+N2_6583s)_N2_5755s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((N2_6548s+N2_6583s)_(O3_4959s+O3_5007s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNII6548sNII6583s_OIII4959sOIII5007s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((N2_6548s+N2_6583s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((N2_6548s+N2_6583s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log(N1_5199s_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNI5199s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(N1_5199s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(N1_5199s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((S2_6716s+S2_6731s)_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logSII6716sSII6731s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((S2_6716s+S2_6731s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((S2_6716s+S2_6731s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(S2_6716s_S2_6731s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logSII6716s_S26731s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(S2_6716s_S2_6731s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(S2_6716s_S2_6731s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((S2_6716s+S2_6731s)_(S3_6312s+S3_9069s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logSII6716sSII6731s_SIII6312sSIII9069s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((S2_6716s+S2_6731s)_(S3_6312s+S3_9069s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((S2_6716s+S2_6731s)_(S3_6312s+S3_9069s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O1_6300s+O1_6363s)_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logO16300sO16363s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O1_6300s+O1_6363s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O1_6300s+O1_6363s)_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((O1_6300s+O1_6363s)_O1_5577s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logO16300sO16363s_O15577s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O1_6300s+O1_6363s)_O1_5577s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O1_6300s+O1_6363s)_O1_5577s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((O1_6300s+O1_6363s)_(O3_4959s+O3_5007s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logO16300sO16363s_O34959sO35007s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O1_6300s+O1_6363s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O1_6300s+O1_6363s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O1_6300s+O1_6363s)_(O2_7320s+O2_7330s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logO16300sO16363s_O27320sO27330s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O1_6300s+O1_6363s)_(O2_7320s+O2_7330s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O1_6300s+O1_6363s)_(O2_7320s+O2_7330s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O1_6300s+O1_6363s)_(O2_3727s+O2_3729s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOI6300sOI6363s_OII3727sOII3729s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O1_6300s+O1_6363s)_(O2_3727s+O2_3729s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O1_6300s+O1_6363s)_(O2_3727s+O2_3729s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(O1_6300s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOI6300s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(O1_6300s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(O1_6300s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(O3_5007s_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOIII5007s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(O3_5007s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(O3_5007s_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O3_4959s+O3_5007s)_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOIII4959sOIII5007s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O3_4959s+O3_5007s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O3_4959s+O3_5007s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O3_4959s+O3_5007s)_O3_4363s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOIII4959sOIII5007s_OIII4363s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O3_4959s+O3_5007s)_O3_4363s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O3_4959s+O3_5007s)_O3_4363s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((O2_3727s+O2_3729s)_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOII3727sOII3729s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O2_3727s+O2_3729s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O2_3727s+O2_3729s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((O2_3727s+O2_3729s)_(O3_4959s+O3_5007s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOII3727sOII3729s_OIII4959sOIII5007s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O2_3727s+O2_3729s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O2_3727s+O2_3729s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((O2_7320s+O2_7330s)_(O3_4959s+O3_5007s))')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logOII7320sOII7330s_OIII4959sOIII5007s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((O2_7320s+O2_7330s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((O2_7320s+O2_7330s)_(O3_4959s+O3_5007s))'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(Ar4_4712s_Ar4_4740s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logArVI4712s_ArVI4740s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(Ar4_4712s_Ar4_4740s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(Ar4_4712s_Ar4_4740s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log((Ar4_4712s+Ar4_4740s)_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logArVI4712sArVI4740s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((Ar4_4712s+Ar4_4740s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((Ar4_4712s+Ar4_4740s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((Ne3_3868s+Ne3_3967s)_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logNeIII3868sNeIII3967s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((Ne3_3868s+Ne3_3967s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((Ne3_3868s+Ne3_3967s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log((Cl3_5517s+Cl3_5538s)_HI_4861s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logClIII5517sClIII5538s_HI4861s,sizex,sizey)
-        print >>file12, '{:45}'.format('log((Cl3_5517s+Cl3_5538s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log((Cl3_5517s+Cl3_5538s)_HI_4861s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(Cl3_5517s_Cl3_5538s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logClIII5517s_ClIII5538s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(Cl3_5517s_Cl3_5538s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(Cl3_5517s_Cl3_5538s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
     
     index=param_estimated.index('log(C1_8727s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logCI8727s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(C1_8727s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(C1_8727s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
 
     index=param_estimated.index('log(C2_6461s_HI_6563s)')
     if param_requered[index]=="yes":
         pxl_num,percent5,percentQ1,medianvalue,percentQ3,percent95,meanvalue,sigmavalue= scs.statistic_numbers(lineratios.logCII6461s_HI6563s,sizex,sizey)
-        print >>file12, '{:45}'.format('log(C2_6461s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue)
+        print('{:45}'.format('log(C2_6461s_HI_6563s)'), '{:10.0f}'.format(pxl_num),'{:8.2e}'.format(percent5), '{:8.2e}'.format(percentQ1),'{:10.2e}'.format(medianvalue), '{:8.2e}'.format(percent95),'{:8.2e}'.format(percentQ3), '{:8.2e}'.format(meanvalue),'{:8.2e}'.format(sigmavalue), file=file12)
    
     file12.close() 
 

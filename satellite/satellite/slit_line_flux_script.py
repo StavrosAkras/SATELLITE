@@ -21,7 +21,6 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random
@@ -70,7 +69,7 @@ def slitfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width):
                             k=k+1 
                             
         file10 = open('general_output_file.txt','a')
-        if widthslit>max_width or lengthslit>max_width: print >>file10, "Sorry, your slit width or/and length are larger that the true size of the image"
+        if widthslit>max_width or lengthslit>max_width: print("Sorry, your slit width or/and length are larger that the true size of the image", file=file10)
         
          ###for the entire nebula
         if widthslit==max_width and lengthslit==max_width:

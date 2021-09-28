@@ -12,7 +12,6 @@ from astropy.io.fits import getdata
 from matplotlib.colors import Normalize
 from matplotlib.patches import Ellipse
 from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
 import matplotlib.patches as patches
 import matplotlib.font_manager as font_manager
 import random

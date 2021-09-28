@@ -21,22 +21,6 @@
 # GNU General Public License for more details.
 
 
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-from numpy import array
-#import pyfits as pf
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
 import warnings
 import datetime
 #import imutils
@@ -44,24 +28,11 @@ import datetime
 
 from satellite import read_input_script as read
 from satellite import read_input_lines_parameters_script as read_ilps
-from satellite import positive_values_script as pvs
-from satellite import mean_value_script as mvs
-from satellite import std_value_script as svs
-from satellite import calculations_excluding_outliers_script as ceos 
-from satellite import save_FITSimages_script as sfs 
-from satellite import slit_line_flux_script as slfs
-from satellite import print_results_script as prs
-from satellite import radial_line_flux_script as rlfs
 from satellite import radial_analysis_script as ras
-from satellite import find_maxvlaue_script as fms
-from satellite import specific_line_analysis_script as slas
-from satellite import specific_slit_read_parameters as ssrp
 from satellite import rotate_line_fluxes_script as rotlfs
 from satellite import specificPA_line_fluxes_script as sPAlfs
 from satellite import analysis2D_script as a2Ds
 from satellite import my_analysis2D_script as mya2Ds
-from satellite import physical_parameters_script as pps
-from satellite import histogram_script as hs
 from satellite import TeNe_angles_script as TeNeangles
 from satellite import TeNe_specific_slits_script as TeNeslits
 from satellite import TeNe_2D_script as TeNe2Ds
@@ -69,7 +40,7 @@ from satellite import TeNe_radial_script as TeNers
 from satellite import flux_angles_norm_definition_script as fands
 from satellite import define_Te_Ne_for_null_spaxels_script as dTeNenullspaxelss
 from satellite import exclude_probematic_errors_script as epes
-
+from satellite import physical_parameters_script as pps
 
 class flux2D:
     Ha_6563=[]
@@ -190,8 +161,7 @@ sizex=param_model_values[index_size]
 sizey=param_model_values[index_size]
 pixscale=float(param_model_values[index_pixel_scale])*0.01
 minx=miny=0
-print >>file10, 'x=',sizex,'y=', sizey,'pixel scale=',pixscale
-   
+print('x=',sizex,'y=', sizey,'pixel scale=',pixscale, file=file10)   
 
 #######################################################################################################
 # calculated the exctinction coefficient based of the Ha,Hb,Hg and Hd line images
@@ -328,7 +298,7 @@ if param_requered[index]=="yes":
 #######################################################################################################
 index=param_estimated.index('My_physical_parameters_task')
 if param_requered[index]=="yes":
-    mypps.analysiswithPyNeb(flux2D,flux_angles,flux_spec_slit,angles,line_names,lines_available,lines_radial,param_estimated,param_requered,param_mod_name,param_model_values,hdr)
+    pps.analysiswithPyNeb(flux2D,flux_angles,flux_spec_slit,angles,line_names,lines_available,lines_radial,param_estimated,param_requered,param_mod_name,param_model_values,hdr)
 
 file10.close()
 
