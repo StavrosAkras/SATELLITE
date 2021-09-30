@@ -5,29 +5,12 @@
 # and PyNeb_output_ionic_abund_specific_slits.txt and PyNeb_output_Te_and_Ne_specific_slits.txt)
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-import numpy as np
-import seaborn as sns
 import pyneb as pn
 import os, fnmatch
 from numpy import inf
 
 
-from satellite import diagnotic_diagrams_script as dds
 from satellite import ionicabundances_specific_slits_script as iasss
 from satellite import element_abundances_ICFs_specific_slits_script as eaIsss
 from satellite import norm_flux_error_script as nfes
@@ -310,162 +293,162 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
         pn.atomicData.addAllChianti()
 
     file6 = open('PyNeb_output_total_abund_ICFs_specific_slits.txt','w')
-    print >>file6, 'He      ', 'N_KB    ','ICF(N)_KB','N_DI    ','ICF(N)_DI', 'O_KB    ','ICF(O)_KB', 'O_DI    ','ICF(O)_DI','S_KB    ', 'ICF(S)_KB','S_DI    ','ICF(S)_DI','Ne_KB  ','ICF(Ne)_KB','Ne_DI  ','ICF(Ne)_DI','Cl_KB  ','ICF(Cl)_KB','Cl_DI  ','ICF(Cl)_DI','Ar_KB ','ICF(Ar)_KB','Ar_DI   ','ICF(Ar)_DI' ,'NO_ratio_KB','NO_ratio_DIMS','SO_ratio_KB','SO_ratio_DIMS','NeO_ratio_KB','NeO_ratio_DIMS','ClO_ratio_KB','ClO_ratio_DIMS','ArO_ratio_KB','ArO_ratio_DIMS'   
+    print('He      ', 'N_KB    ','ICF(N)_KB','N_DI    ','ICF(N)_DI', 'O_KB    ','ICF(O)_KB', 'O_DI    ','ICF(O)_DI','S_KB    ', 'ICF(S)_KB','S_DI    ','ICF(S)_DI','Ne_KB  ','ICF(Ne)_KB','Ne_DI  ','ICF(Ne)_DI','Cl_KB  ','ICF(Cl)_KB','Cl_DI  ','ICF(Cl)_DI','Ar_KB ','ICF(Ar)_KB','Ar_DI   ','ICF(Ar)_DI' ,'NO_ratio_KB','NO_ratio_DIMS','SO_ratio_KB','SO_ratio_DIMS','NeO_ratio_KB','NeO_ratio_DIMS','ClO_ratio_KB','ClO_ratio_DIMS','ArO_ratio_KB','ArO_ratio_DIMS', file=file6)   
     
     
     file5 = open('PyNeb_output_ionic_abund_specific_slits.txt','w')
-    print >>file5, 'He+(5876)','He+(6678)','He++(4686)','He++(5412)','N0(5199)','N+(5755)','N+(6548)','N+(6584)','O0(5577)','O0(6300)','O0(6363)','O+(3727)','O+(3729)','O+(7320)','O+(7330)','O+++(4363)','O+++(4959)','O+++(5007)','S+(6716)      ','S+(6731)','S++(6312)','S++(9069)','Ne++(3868)','Ne++(3968)','Cl++(5518)', 'Cl++(5538)','Ar++(7136)','Ar+++(4712)', 'Ar+++(4740)'
+    print('He+(5876)','He+(6678)','He++(4686)','He++(5412)','N0(5199)','N+(5755)','N+(6548)','N+(6584)','O0(5577)','O0(6300)','O0(6363)','O+(3727)','O+(3729)','O+(7320)','O+(7330)','O+++(4363)','O+++(4959)','O+++(5007)','S+(6716)      ','S+(6731)','S++(6312)','S++(9069)','Ne++(3868)','Ne++(3968)','Cl++(5518)', 'Cl++(5538)','Ar++(7136)','Ar+++(4712)', 'Ar+++(4740)', file=file5)
     
     file4 = open('PyNeb_output_Te_and_Ne_specific_slits.txt','w')
-    print >>file4, "Te_NII","Ne_SII ","Te_OI","Ne_SII","Te_OII","Ne_SII","Te_OIII","Ne_SII","Te_SIII","Ne_SII","Te_OII","Ne_OII","Te_NII","Ne_OII","Te_OI ","Ne_OII","Te_OIII","Ne_ClIII","Te_SIII","Ne_ClIII","Te_OIII","Ne_ArVI","Te_SIII","Ne_ArVI","Te_NII","Ne_ClIII"
+    print("Te_NII","Ne_SII ","Te_OI","Ne_SII","Te_OII","Ne_SII","Te_OIII","Ne_SII","Te_SIII","Ne_SII","Te_OII","Ne_OII","Te_NII","Ne_OII","Te_OI ","Ne_OII","Te_OIII","Ne_ClIII","Te_SIII","Ne_ClIII","Te_OIII","Ne_ArVI","Te_SIII","Ne_ArVI","Te_NII","Ne_ClIII", file=file4)
     
     for i in range(0,10):
         Te.NIISII.append(0),Ne.NIISII.append(0),Te.OISII.append(0),Ne.OISII.append(0),Te.OIISII.append(0),Ne.OIISII.append(0),Te.OIIISII.append(0),Ne.OIIISII.append(0),Te.SIIISII.append(0),Ne.SIIISII.append(0),Te.OIIOII.append(0),Ne.OIIOII.append(0),Te.NIIOII.append(0),Ne.NIIOII.append(0),Te.OIOII.append(0),Ne.OIOII.append(0),Te.OIIIClIII.append(0),Ne.OIIIClIII.append(0),Te.SIIIClIII.append(0),Ne.SIIIClIII.append(0),Te.OIIIArVI.append(0),Ne.OIIIArVI.append(0),Te.SIIIArVI.append(0),Ne.SIIIArVI.append(0),Te.NIIClIII.append(0),Ne.NIIClIII.append(0)
         
         Te_error.NIISII.append(0),Ne_error.NIISII.append(0),Te_error.OISII.append(0),Ne_error.OISII.append(0),Te_error.OIISII.append(0),Ne_error.OIISII.append(0),Te_error.OIIISII.append(0),Ne_error.OIIISII.append(0),Te_error.SIIISII.append(0),Ne_error.SIIISII.append(0),Te_error.OIIOII.append(0),Ne_error.OIIOII.append(0),Te_error.NIIOII.append(0),Ne_error.NIIOII.append(0),Te_error.OIOII.append(0),Ne_error.OIOII.append(0),Te_error.OIIIClIII.append(0),Ne_error.OIIIClIII.append(0),Te_error.SIIIClIII.append(0),Ne_error.SIIIClIII.append(0),Te_error.OIIIArVI.append(0),Ne_error.OIIIArVI.append(0),Te_error.SIIIArVI.append(0),Ne_error.SIIIArVI.append(0),Te_error.NIIClIII.append(0),Ne_error.NIIClIII.append(0)
         
-        print >>file4, "######################################"," specific slit number ", i ," ##############################"
-        print >>file5, "######################################"," specific slit number ", i ," ##############################"
-        print >>file6, "######################################"," specific slit number ", i ," ##############################"
+        print("######################################"," specific slit number ", i ," ##############################", file=file4)
+        print("######################################"," specific slit number ", i ," ##############################", file=file5)
+        print("######################################"," specific slit number ", i ," ##############################", file=file6)
 
          
         file3 = open('test.dat','w')
-        print >>file3, "LINE test err"
+        print("LINE test err", file=file3)
 
         error=nfes.flux_Error(flux_angles.Ha_6563[i],flux_angles_error.Ha_6563[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "H1r_6563A", '{:03.3f}'.format(flux_angles.Ha_6563[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("H1r_6563A", '{:03.3f}'.format(flux_angles.Ha_6563[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "H1r_6563Ae", '{:03.3f}'.format(error)
 
         error=nfes.flux_Error(flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "H1r_4861A", '{:03.3f}'.format(flux_angles.Hb_4861[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("H1r_4861A", '{:03.3f}'.format(flux_angles.Hb_4861[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "H1r_4861Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.Hg_4340[i],flux_angles_error.Hg_4340[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "H1r_4341A", '{:03.3f}'.format(flux_angles.Hg_4340[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("H1r_4341A", '{:03.3f}'.format(flux_angles.Hg_4340[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "H1r_4341Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.Hd_4101[i],flux_angles_error.Hd_4101[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "H1r_4102A", '{:03.3f}'.format(flux_angles.Hd_4101[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("H1r_4102A", '{:03.3f}'.format(flux_angles.Hd_4101[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "H1r_4102Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.HeIIa_4686[i],flux_angles_error.HeIIa_4686[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "He2r_4686A", '{:03.3f}'.format(flux_angles.HeIIa_4686[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("He2r_4686A", '{:03.3f}'.format(flux_angles.HeIIa_4686[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "He2r_4686Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.HeIIb_5412[i],flux_angles_error.HeIIb_5412[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "He2r_5411A", '{:03.3f}'.format(flux_angles.HeIIb_5412[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("He2r_5411A", '{:03.3f}'.format(flux_angles.HeIIb_5412[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "He2r_5411Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.HeIa_5876[i],flux_angles_error.HeIa_5876[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "He1r_5876A", '{:03.3f}'.format(flux_angles.HeIa_5876[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("He1r_5876A", '{:03.3f}'.format(flux_angles.HeIa_5876[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "He1r_5876Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.HeIb_6678[i],flux_angles_error.HeIb_6678[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "He1r_6678A", '{:03.3f}'.format(flux_angles.HeIb_6678[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("He1r_6678A", '{:03.3f}'.format(flux_angles.HeIb_6678[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "He1r_6678Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.SIIa_6716[i],flux_angles_error.SIIa_6716[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "S2_6716A", '{:03.3f}'.format(flux_angles.SIIa_6716[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("S2_6716A", '{:03.3f}'.format(flux_angles.SIIa_6716[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "S2_6716Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.SIIb_6731[i],flux_angles_error.SIIb_6731[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "S2_6731A", '{:03.3f}'.format(flux_angles.SIIb_6731[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("S2_6731A", '{:03.3f}'.format(flux_angles.SIIb_6731[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "S2_6731Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.SIIIa_6312[i],flux_angles_error.SIIIa_6312[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "S3_6312A", '{:03.3f}'.format(flux_angles.SIIIa_6312[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("S3_6312A", '{:03.3f}'.format(flux_angles.SIIIa_6312[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "S3_6312Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.SIIIb_9069[i],flux_angles_error.SIIIb_9069[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "S3_9069A", '{:03.3f}'.format(flux_angles.SIIIb_9069[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("S3_9069A", '{:03.3f}'.format(flux_angles.SIIIb_9069[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "S3_9069Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.NI_5199[i],flux_angles_error.NI_5199[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "N1_5200A", '{:03.3f}'.format(flux_angles.NI_5199[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("N1_5200A", '{:03.3f}'.format(flux_angles.NI_5199[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "N1_5200Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.NIIa_5755[i],flux_angles_error.NIIa_5755[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "N2_5755A", '{:03.3f}'.format(flux_angles.NIIa_5755[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("N2_5755A", '{:03.3f}'.format(flux_angles.NIIa_5755[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "N2_5755Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.NIIb_6548[i],flux_angles_error.NIIb_6548[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "N2_6548A", '{:03.3f}'.format(flux_angles.NIIb_6548[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("N2_6548A", '{:03.3f}'.format(flux_angles.NIIb_6548[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "N2_6548Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.NIIc_6584[i],flux_angles_error.NIIc_6584[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "N2_6584A", '{:03.3f}'.format(flux_angles.NIIc_6584[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("N2_6584A", '{:03.3f}'.format(flux_angles.NIIc_6584[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "N2_6584Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIa_5577[i],flux_angles_error.OIa_5577[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O1_5577A", '{:03.3f}'.format(flux_angles.OIa_5577[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O1_5577A", '{:03.3f}'.format(flux_angles.OIa_5577[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O1_5577Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIb_6300[i],flux_angles_error.OIb_6300[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O1_6300A", '{:03.3f}'.format(flux_angles.OIb_6300[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O1_6300A", '{:03.3f}'.format(flux_angles.OIb_6300[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O1_6300Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIc_6363[i],flux_angles_error.OIc_6363[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O1_6364A", '{:03.3f}'.format(flux_angles.OIc_6363[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O1_6364A", '{:03.3f}'.format(flux_angles.OIc_6363[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O1_6364Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIa_3727[i],flux_angles_error.OIIa_3727[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O2_3726A", '{:03.3f}'.format(flux_angles.OIIa_3727[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O2_3726A", '{:03.3f}'.format(flux_angles.OIIa_3727[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O2_3726Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIb_3729[i],flux_angles_error.OIIb_3729[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O2_3729A", '{:03.3f}'.format(flux_angles.OIIb_3729[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O2_3729A", '{:03.3f}'.format(flux_angles.OIIb_3729[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O2_3729Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIc_7320[i],flux_angles_error.OIIc_7320[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O2_7319A+", '{:03.3f}'.format(flux_angles.OIIc_7320[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O2_7319A+", '{:03.3f}'.format(flux_angles.OIIc_7320[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O2_7319A+e", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIId_7330[i],flux_angles_error.OIId_7330[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O2_7330A+", '{:03.3f}'.format(flux_angles.OIId_7330[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O2_7330A+", '{:03.3f}'.format(flux_angles.OIId_7330[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O2_7330A+e", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIIa_4363[i],flux_angles_error.OIIIa_4363[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O3_4363A", '{:03.3f}'.format(flux_angles.OIIIa_4363[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O3_4363A", '{:03.3f}'.format(flux_angles.OIIIa_4363[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O3_4363Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIIb_4959[i],flux_angles_error.OIIIb_4959[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O3_4959A", '{:03.3f}'.format(flux_angles.OIIIb_4959[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O3_4959A", '{:03.3f}'.format(flux_angles.OIIIb_4959[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O3_4959Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.OIIIc_5007[i],flux_angles_error.OIIIc_5007[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "O3_5007A", '{:03.3f}'.format(flux_angles.OIIIc_5007[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("O3_5007A", '{:03.3f}'.format(flux_angles.OIIIc_5007[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "O3_5007Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.ClIIIa_5517[i],flux_angles_error.ClIIIa_5517[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])        
-        print >>file3, "Cl3_5518A", '{:03.3f}'.format(flux_angles.ClIIIa_5517[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("Cl3_5518A", '{:03.3f}'.format(flux_angles.ClIIIa_5517[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "Cl3_5518Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.ClIIIb_5538[i],flux_angles_error.ClIIIb_5538[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Cl3_5538A", '{:03.3f}'.format(flux_angles.ClIIIb_5538[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)        
+        print("Cl3_5538A", '{:03.3f}'.format(flux_angles.ClIIIb_5538[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)        
 #        print >>file3, "Cl3_5538Ae", '{:03.3f}'.format(error)        
         
         error=nfes.flux_Error(flux_angles.NeIIIa_3868[i],flux_angles_error.NeIIIa_3868[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Ne3_3869A", '{:03.3f}'.format(flux_angles.NeIIIa_3868[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("Ne3_3869A", '{:03.3f}'.format(flux_angles.NeIIIa_3868[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "Ne3_3869Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.NeIIIb_3967[i],flux_angles_error.NeIIIb_3967[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Ne3_3968A", '{:03.3f}'.format(flux_angles.NeIIIb_3967[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)                
+        print("Ne3_3968A", '{:03.3f}'.format(flux_angles.NeIIIb_3967[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)                
 #        print >>file3, "Ne3_3968Ae", '{:03.3f}'.format(error)                
         
         error=nfes.flux_Error(flux_angles.ArIII_7136[i],flux_angles_error.ArIII_7136[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Ar3_7136A", '{:03.3f}'.format(flux_angles.ArIII_7136[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("Ar3_7136A", '{:03.3f}'.format(flux_angles.ArIII_7136[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "Ar3_7136Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.ArIVa_4712[i],flux_angles_error.ArIVa_4712[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Ar4_4711A", '{:03.3f}'.format(flux_angles.ArIVa_4712[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("Ar4_4711A", '{:03.3f}'.format(flux_angles.ArIVa_4712[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "Ar4_4711Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.ArIVb_4740[i],flux_angles_error.ArIVb_4740[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "Ar4_4740A", '{:03.3f}'.format(flux_angles.ArIVb_4740[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("Ar4_4740A", '{:03.3f}'.format(flux_angles.ArIVb_4740[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "Ar4_4740Ae", '{:03.3f}'.format(error)
         
         error=nfes.flux_Error(flux_angles.CI_8727[i],flux_angles_error.CI_8727[i],flux_angles.Hb_4861[i],flux_angles_error.Hb_4861[i])
-        print >>file3, "C1_8728A", '{:03.3f}'.format(flux_angles.CI_8727[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error)
+        print("C1_8728A", '{:03.3f}'.format(flux_angles.CI_8727[i]*100/flux_angles.Hb_4861[i]),'{:03.3f}'.format(error), file=file3)
 #        print >>file3, "C1_8728Ae", '{:03.3f}'.format(error)
 #        print >>file3, "C2_????A", '{:03.3f}'.format(flux_angles.CII_6461[i]*100/flux_angles.Hb_4861[i])
         
@@ -513,10 +496,10 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
         obs.def_EBV(label1="H1r_6563A", label2="H1r_4861A", r_theo=2.85)
         obs_fake.def_EBV(label1="H1r_6563A", label2="H1r_4861A", r_theo=2.85)
 
-        print >>file10, "######################################################################################"
-        print >>file10, "######################################################################################"
-        print >>file10, "PyNeb: cH(b) = {:.2f} +/- {:.2f}".format(obs.extinction.cHbeta[0],np.std(obs_fake.extinction.cHbeta))," slit number=",i
-        print >>file10, "PyNeb: E(B-V) = {:.2f} +/- {:.2f}".format(obs.extinction.E_BV[0],np.std(obs_fake.extinction.E_BV))," slit number=",i
+        print("######################################################################################", file=file10)
+        print("######################################################################################", file=file10)
+        print("PyNeb: cH(b) = {:.2f} +/- {:.2f}".format(obs.extinction.cHbeta[0],np.std(obs_fake.extinction.cHbeta))," slit number=",i, file=file10)
+        print("PyNeb: E(B-V) = {:.2f} +/- {:.2f}".format(obs.extinction.E_BV[0],np.std(obs_fake.extinction.E_BV))," slit number=",i, file=file10)
     
 
         obs.extinction.law = extinction_law
@@ -675,7 +658,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
 
             Te_error.NIISII[i]=np.std(np.nan_to_num(a))
             Ne_error.NIISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (NII-SII): Te_NII  = {0:5.0f}, Ne_SII = {1:7.1f}  cm-1'.format(Te.NIISII[i], Ne.NIISII[i])," slit number=",i 
+            print('PyNeb: low zones (NII-SII): Te_NII  = {0:5.0f}, Ne_SII = {1:7.1f}  cm-1'.format(Te.NIISII[i], Ne.NIISII[i])," slit number=",i, file=file10) 
     
         if (index_Te_OI=="yes" and index_Te_OI2=="no" and index_Ne_SII=="yes"):
             a, b = diags.getCrossTemDen('[OI] 5577/6300+', '[SII] 6731/6716', obs=obs_fake)
@@ -698,7 +681,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OISII[i]=np.std(np.nan_to_num(a))
             Ne_error.OISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OI-SII): Te_OI  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OISII[i],Ne.OISII[i])," slit number=",i 
+            print('PyNeb: low zones (OI-SII): Te_OI  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OISII[i],Ne.OISII[i])," slit number=",i, file=file10) 
         
         if (index_Te_OI=="no" and index_Te_OI2=="yes" and index_Ne_SII=="yes"):
             a, b = diags.getCrossTemDen('[OI] 5577/6300', '[SII] 6731/6716', obs=obs_fake)
@@ -721,7 +704,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OISII[i]=np.std(np.nan_to_num(a))
             Ne_error.OISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OI-SII): Te_OI  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OISII[i],Ne.OISII[i])," slit number=",i 
+            print('PyNeb: low zones (OI-SII): Te_OI  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OISII[i],Ne.OISII[i])," slit number=",i, file=file10) 
         
         if (index_Te_OII=="yes" and index_Ne_SII=="yes"):
             a, b = diags.getCrossTemDen('[OII] 3727+/7325+', '[SII] 6731/6716', obs=obs_fake)
@@ -744,7 +727,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIISII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OII-SII): Te_OII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OIISII[i], Ne.OIISII[i])," slit number=",i 
+            print('PyNeb: low zones (OII-SII): Te_OII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OIISII[i], Ne.OIISII[i])," slit number=",i, file=file10) 
     
         if (index_Te_OIII=="yes" and index_Ne_SII=="yes"):
             a, b = diags.getCrossTemDen('[OIII] 4363/5007+', '[SII] 6731/6716', obs=obs_fake)
@@ -767,7 +750,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIIISII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIIISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (OIII-SII): Te_OIII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OIIISII[i], Ne.OIIISII[i])," slit number=",i 
+            print('PyNeb: medium zones (OIII-SII): Te_OIII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.OIIISII[i], Ne.OIIISII[i])," slit number=",i, file=file10) 
 
         if (index_Te_SIII=="yes" and index_Ne_SII=="yes"):
             a, b = diags.getCrossTemDen('[SIII] 6312/9069', '[SII] 6731/6716', obs=obs_fake)
@@ -790,7 +773,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.SIIISII[i]=np.std(np.nan_to_num(a))
             Ne_error.SIIISII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (SIII-SII): Te_SIII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.SIIISII[i], Ne.SIIISII[i])," slit number=",i   
+            print('PyNeb: medium zones (SIII-SII): Te_SIII  = {0:5.0f},Ne_SII = {1:7.1f}  cm-1'.format(Te.SIIISII[i], Ne.SIIISII[i])," slit number=",i, file=file10)   
         
         if (index_Te_OII=="yes" and index_Ne_OII=="yes"):
             a, b = diags.getCrossTemDen('[OII] 3727+/7325+', '[OII] 3726/3729', obs=obs_fake)
@@ -813,7 +796,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIIOII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIIOII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OII-OII): Te_OII  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIIOII[i], Ne.OIIOII[i])," slit number=",i 
+            print('PyNeb: low zones (OII-OII): Te_OII  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIIOII[i], Ne.OIIOII[i])," slit number=",i, file=file10) 
     
         if (index_Te_NII=="yes" and index_Ne_OII=="yes"):
             a, b = diags.getCrossTemDen('[NII] 5755/6584+', '[OII] 3726/3729', obs=obs_fake)
@@ -836,7 +819,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.NIIOII[i]=np.std(np.nan_to_num(a))
             Ne_error.NIIOII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (NII-OII): Te_NII  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.NIIOII[i],Ne.NIIOII[i])," slit number=",i 
+            print('PyNeb: low zones (NII-OII): Te_NII  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.NIIOII[i],Ne.NIIOII[i])," slit number=",i, file=file10) 
                   
         if (index_Te_OI=="yes" and index_Te_OI2=="no" and index_Ne_OII=="yes"):
             a, b = diags.getCrossTemDen('[OI] 5577/6300+', '[OII] 3726/3729', obs=obs_fake)
@@ -859,7 +842,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIOII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIOII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OI-OII): Te_OI  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIOII[i], Ne.OIOII[i])," slit number=",i 
+            print('PyNeb: low zones (OI-OII): Te_OI  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIOII[i], Ne.OIOII[i])," slit number=",i, file=file10) 
   
         if (index_Te_OI=="no" and index_Te_OI2=="yes" and index_Ne_OII=="yes"):
             a, b = diags.getCrossTemDen('[OI] 5577/6300', '[OII] 3726/3729', obs=obs_fake)
@@ -882,7 +865,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIOII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIOII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: low zones (OI-OII): Te_OI  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIOII[i], Ne.OIOII[i])," slit number=",i 
+            print('PyNeb: low zones (OI-OII): Te_OI  = {0:5.0f},Ne_OII = {1:7.1f}  cm-1'.format(Te.OIOII[i], Ne.OIOII[i])," slit number=",i, file=file10) 
   
         if (index_Te_OIII=="yes" and index_Ne_ClIII=="yes"):
             a, b = diags.getCrossTemDen('[OIII] 4363/5007+', '[ClIII] 5538/5518', obs=obs_fake)
@@ -905,7 +888,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIIIClIII[i]=np.std(np.nan_to_num(a))
             Ne_error.OIIIClIII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (OIII-ClIII): Te_OIII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.OIIIClIII[i],Ne.OIIIClIII[i])," slit number=",i           
+            print('PyNeb: medium zones (OIII-ClIII): Te_OIII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.OIIIClIII[i],Ne.OIIIClIII[i])," slit number=",i, file=file10)           
                   
         if (index_Te_SIII=="yes" and index_Ne_ClIII=="yes"):
             a, b = diags.getCrossTemDen('[SIII] 6312/9069', '[ClIII] 5538/5518', obs=obs_fake)         
@@ -928,7 +911,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.SIIIClIII[i]=np.std(np.nan_to_num(a))
             Ne_error.SIIIClIII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (SIII-ClIII): Te_SIII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.SIIIClIII[i], Ne.SIIIClIII[i])," slit number=",i 
+            print('PyNeb: medium zones (SIII-ClIII): Te_SIII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.SIIIClIII[i], Ne.SIIIClIII[i])," slit number=",i, file=file10) 
     
         if (index_Te_OIII=="yes" and index_Ne_ArVI=="yes"):
             a, b = diags.getCrossTemDen('[OIII] 4363/5007+', '[ArIV] 4740/4711', obs=obs_fake)
@@ -951,7 +934,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.OIIIArVI[i]=np.std(np.nan_to_num(a))
             Ne_error.OIIIArVI[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (OIII-ArVI): Te_OIII  = {0:5.0f},Ne_ArVI = {1:7.1f}  cm-1'.format(Te.OIIIArVI[i], Ne.OIIIArVI[i])," slit number=",i           
+            print('PyNeb: medium zones (OIII-ArVI): Te_OIII  = {0:5.0f},Ne_ArVI = {1:7.1f}  cm-1'.format(Te.OIIIArVI[i], Ne.OIIIArVI[i])," slit number=",i, file=file10)           
         
         if (index_Te_SIII=="yes" and index_Ne_ArVI=="yes"):
             a, b = diags.getCrossTemDen('[SIII] 6312/9069', '[ArIV] 4740/4711', obs=obs_fake)
@@ -974,7 +957,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.SIIIArVI[i]=np.std(np.nan_to_num(a))
             Ne_error.SIIIArVI[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (SIII-ArVI): Te_SIII  = {0:5.0f},Ne_ArVI = {1:7.1f}  cm-1'.format(Te.SIIIArVI[i],Ne.SIIIArVI[i])," slit number=",i 
+            print('PyNeb: medium zones (SIII-ArVI): Te_SIII  = {0:5.0f},Ne_ArVI = {1:7.1f}  cm-1'.format(Te.SIIIArVI[i],Ne.SIIIArVI[i])," slit number=",i, file=file10) 
        
         if (index_Te_NII=="yes" and index_Ne_ClIII=="yes"):
             a, b = diags.getCrossTemDen('[NII] 5755/6584+', '[ClIII] 5538/5518', obs=obs_fake)
@@ -997,21 +980,21 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
             
             Te_error.NIIClIII[i]=np.std(np.nan_to_num(a))
             Ne_error.NIIClIII[i]=np.std(np.nan_to_num(b))
-            print >>file10, 'PyNeb: medium zones (NII-ClIII): Te_NII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.NIIClIII[i],Ne.NIIClIII[i])," slit number=",i 
+            print('PyNeb: medium zones (NII-ClIII): Te_NII  = {0:5.0f},Ne_ClIII = {1:7.1f}  cm-1'.format(Te.NIIClIII[i],Ne.NIIClIII[i])," slit number=",i, file=file10) 
 
         
-        print >>file4, '{:06.0f}'.format(Te.NIISII[i]), '{:06.0f}'.format(Ne.NIISII[i]),'{:06.0f}'.format(Te.OISII[i]),'{:06.0f}'.format(Ne.OISII[i]),'{:06.0f}'.format(Te.OIISII[i]),'{:06.0f}'.format(Ne.OIISII[i]),'{:06.0f}'.format(Te.OIIISII[i]),'{:07.0f}'.format(Ne.OIIISII[i]),'{:07.0f}'.format(Te.SIIISII[i]),'{:06.0f}'.format(Ne.SIIISII[i]),'{:06.0f}'.format(Te.OIIOII[i]),'{:06.0f}'.format(Ne.OIIOII[i]),'{:06.0f}'.format(Te.NIIOII[i]),'{:06.0f}'.format(Ne.NIIOII[i]),'{:06.0f}'.format(Te.OIOII[i]),'{:06.0f}'.format(Ne.OIOII[i]),'{:07.0f}'.format(Te.OIIIClIII[i]),'{:08.0f}'.format(Ne.OIIIClIII[i]),'{:07.0f}'.format(Te.SIIIClIII[i]),'{:08.0f}'.format(Ne.SIIIClIII[i]),'{:07.0f}'.format(Te.OIIIArVI[i]),'{:07.0f}'.format(Ne.OIIIArVI[i]),'{:07.0f}'.format(Te.SIIIArVI[i]),'{:07.0f}'.format(Ne.SIIIArVI[i]),'{:07.0f}'.format(Te.NIIClIII[i]),'{:07.0f}'.format(Ne.NIIClIII[i])
+        print('{:06.0f}'.format(Te.NIISII[i]), '{:06.0f}'.format(Ne.NIISII[i]),'{:06.0f}'.format(Te.OISII[i]),'{:06.0f}'.format(Ne.OISII[i]),'{:06.0f}'.format(Te.OIISII[i]),'{:06.0f}'.format(Ne.OIISII[i]),'{:06.0f}'.format(Te.OIIISII[i]),'{:07.0f}'.format(Ne.OIIISII[i]),'{:07.0f}'.format(Te.SIIISII[i]),'{:06.0f}'.format(Ne.SIIISII[i]),'{:06.0f}'.format(Te.OIIOII[i]),'{:06.0f}'.format(Ne.OIIOII[i]),'{:06.0f}'.format(Te.NIIOII[i]),'{:06.0f}'.format(Ne.NIIOII[i]),'{:06.0f}'.format(Te.OIOII[i]),'{:06.0f}'.format(Ne.OIOII[i]),'{:07.0f}'.format(Te.OIIIClIII[i]),'{:08.0f}'.format(Ne.OIIIClIII[i]),'{:07.0f}'.format(Te.SIIIClIII[i]),'{:08.0f}'.format(Ne.SIIIClIII[i]),'{:07.0f}'.format(Te.OIIIArVI[i]),'{:07.0f}'.format(Ne.OIIIArVI[i]),'{:07.0f}'.format(Te.SIIIArVI[i]),'{:07.0f}'.format(Ne.SIIIArVI[i]),'{:07.0f}'.format(Te.NIIClIII[i]),'{:07.0f}'.format(Ne.NIIClIII[i]), file=file4)
       
-        print >>file4, '{:06.0f}'.format(Te_error.NIISII[i]), '{:06.0f}'.format(Ne_error.NIISII[i]),'{:06.0f}'.format(Te_error.OISII[i]),'{:06.0f}'.format(Ne_error.OISII[i]),'{:06.0f}'.format(Te_error.OIISII[i]),'{:06.0f}'.format(Ne_error.OIISII[i]),'{:06.0f}'.format(Te_error.OIIISII[i]),'{:07.0f}'.format(Ne_error.OIIISII[i]),'{:07.0f}'.format(Te_error.SIIISII[i]),'{:06.0f}'.format(Ne_error.SIIISII[i]),'{:06.0f}'.format(Te_error.OIIOII[i]),'{:06.0f}'.format(Ne_error.OIIOII[i]),'{:06.0f}'.format(Te_error.NIIOII[i]),'{:06.0f}'.format(Ne_error.NIIOII[i]),'{:06.0f}'.format(Te_error.OIOII[i]),'{:06.0f}'.format(Ne_error.OIOII[i]),'{:07.0f}'.format(Te_error.OIIIClIII[i]),'{:08.0f}'.format(Ne_error.OIIIClIII[i]),'{:07.0f}'.format(Te_error.SIIIClIII[i]),'{:08.0f}'.format(Ne_error.SIIIClIII[i]),'{:07.0f}'.format(Te_error.OIIIArVI[i]),'{:07.0f}'.format(Ne_error.OIIIArVI[i]),'{:07.0f}'.format(Te_error.SIIIArVI[i]),'{:07.0f}'.format(Ne_error.SIIIArVI[i]),'{:07.0f}'.format(Te_error.NIIClIII[i]),'{:07.0f}'.format(Ne_error.NIIClIII[i])
+        print('{:06.0f}'.format(Te_error.NIISII[i]), '{:06.0f}'.format(Ne_error.NIISII[i]),'{:06.0f}'.format(Te_error.OISII[i]),'{:06.0f}'.format(Ne_error.OISII[i]),'{:06.0f}'.format(Te_error.OIISII[i]),'{:06.0f}'.format(Ne_error.OIISII[i]),'{:06.0f}'.format(Te_error.OIIISII[i]),'{:07.0f}'.format(Ne_error.OIIISII[i]),'{:07.0f}'.format(Te_error.SIIISII[i]),'{:06.0f}'.format(Ne_error.SIIISII[i]),'{:06.0f}'.format(Te_error.OIIOII[i]),'{:06.0f}'.format(Ne_error.OIIOII[i]),'{:06.0f}'.format(Te_error.NIIOII[i]),'{:06.0f}'.format(Ne_error.NIIOII[i]),'{:06.0f}'.format(Te_error.OIOII[i]),'{:06.0f}'.format(Ne_error.OIOII[i]),'{:07.0f}'.format(Te_error.OIIIClIII[i]),'{:08.0f}'.format(Ne_error.OIIIClIII[i]),'{:07.0f}'.format(Te_error.SIIIClIII[i]),'{:08.0f}'.format(Ne_error.SIIIClIII[i]),'{:07.0f}'.format(Te_error.OIIIArVI[i]),'{:07.0f}'.format(Ne_error.OIIIArVI[i]),'{:07.0f}'.format(Te_error.SIIIArVI[i]),'{:07.0f}'.format(Ne_error.SIIIArVI[i]),'{:07.0f}'.format(Te_error.NIIClIII[i]),'{:07.0f}'.format(Ne_error.NIIClIII[i]), file=file4)
 
         ###########################
         ### calculate, print and save ionic abundances
         ##########################
         ion_abun,ion_abun_error,atom_abun_fake=iasss.ionicabundances(obs,obs_fake,Te,Te_error,Te_fake,Ne,Ne_error,Ne_fake,i,line_names,lines_available,ion_abun,ion_abun_error,param_estimated,param_requered,param_mod_name)
         
-        print >>file5, '{:5.3e}'.format(ion_abun.HeIa[i]), '{:5.3e}'.format(ion_abun.HeIb[i]),'{:5.4e}'.format(ion_abun.HeIIa[i]),'{:5.4e}'.format(ion_abun.HeIIb[i]),'{:5.2e}'.format(ion_abun.NI[i]),'{:5.2e}'.format(ion_abun.NIIa[i]),'{:5.2e}'.format(ion_abun.NIIb[i]),'{:5.2e}'.format(ion_abun.NIIc[i]),'{:5.2e}'.format(ion_abun.OIa[i]),'{:5.2e}'.format(ion_abun.OIb[i]),'{:5.2e}'.format(ion_abun.OIc[i]),'{:5.2e}'.format(ion_abun.OIIa[i]),'{:5.2e}'.format(ion_abun.OIIb[i]),'{:5.2e}'.format(ion_abun.OIIc[i]),'{:5.2e}'.format(ion_abun.OIId[i]),'{:5.4e}'.format(ion_abun.OIIIa[i]),'{:5.4e}'.format(ion_abun.OIIIb[i]),'{:5.4e}'.format(ion_abun.OIIIc[i]),'{:5.2e}'.format(ion_abun.SIIa[i]),'{:5.2e}'.format(ion_abun.SIIb[i]),'{:5.3e}'.format(ion_abun.SIIIa[i]),'{:5.3e}'.format(ion_abun.SIIIb[i]),'{:5.4e}'.format(ion_abun.NeIIIa[i]),'{:5.4e}'.format(ion_abun.NeIIIb[i]),'{:5.4e}'.format(ion_abun.ClIIIa[i]),'{:5.4e}'.format(ion_abun.ClIIIb[i]),'{:5.4e}'.format(ion_abun.ArIII[i]),'{:5.5e}'.format(ion_abun.ArIVa[i]),'{:5.5e}'.format(ion_abun.ArIVb[i])
+        print('{:5.3e}'.format(ion_abun.HeIa[i]), '{:5.3e}'.format(ion_abun.HeIb[i]),'{:5.4e}'.format(ion_abun.HeIIa[i]),'{:5.4e}'.format(ion_abun.HeIIb[i]),'{:5.2e}'.format(ion_abun.NI[i]),'{:5.2e}'.format(ion_abun.NIIa[i]),'{:5.2e}'.format(ion_abun.NIIb[i]),'{:5.2e}'.format(ion_abun.NIIc[i]),'{:5.2e}'.format(ion_abun.OIa[i]),'{:5.2e}'.format(ion_abun.OIb[i]),'{:5.2e}'.format(ion_abun.OIc[i]),'{:5.2e}'.format(ion_abun.OIIa[i]),'{:5.2e}'.format(ion_abun.OIIb[i]),'{:5.2e}'.format(ion_abun.OIIc[i]),'{:5.2e}'.format(ion_abun.OIId[i]),'{:5.4e}'.format(ion_abun.OIIIa[i]),'{:5.4e}'.format(ion_abun.OIIIb[i]),'{:5.4e}'.format(ion_abun.OIIIc[i]),'{:5.2e}'.format(ion_abun.SIIa[i]),'{:5.2e}'.format(ion_abun.SIIb[i]),'{:5.3e}'.format(ion_abun.SIIIa[i]),'{:5.3e}'.format(ion_abun.SIIIb[i]),'{:5.4e}'.format(ion_abun.NeIIIa[i]),'{:5.4e}'.format(ion_abun.NeIIIb[i]),'{:5.4e}'.format(ion_abun.ClIIIa[i]),'{:5.4e}'.format(ion_abun.ClIIIb[i]),'{:5.4e}'.format(ion_abun.ArIII[i]),'{:5.5e}'.format(ion_abun.ArIVa[i]),'{:5.5e}'.format(ion_abun.ArIVb[i]), file=file5)
       
-        print >>file5, '{:5.3e}'.format(ion_abun_error.HeIa[i]), '{:5.3e}'.format(ion_abun_error.HeIb[i]),'{:5.4e}'.format(ion_abun_error.HeIIa[i]),'{:5.4e}'.format(ion_abun_error.HeIIb[i]),'{:5.2e}'.format(ion_abun_error.NI[i]),'{:5.2e}'.format(ion_abun_error.NIIa[i]),'{:5.2e}'.format(ion_abun_error.NIIb[i]),'{:5.2e}'.format(ion_abun_error.NIIc[i]),'{:5.2e}'.format(ion_abun_error.OIa[i]),'{:5.2e}'.format(ion_abun_error.OIb[i]),'{:5.2e}'.format(ion_abun_error.OIc[i]),'{:5.2e}'.format(ion_abun_error.OIIa[i]),'{:5.2e}'.format(ion_abun_error.OIIb[i]),'{:5.2e}'.format(ion_abun_error.OIIc[i]),'{:5.2e}'.format(ion_abun_error.OIId[i]),'{:5.4e}'.format(ion_abun_error.OIIIa[i]),'{:5.4e}'.format(ion_abun_error.OIIIb[i]),'{:5.4e}'.format(ion_abun_error.OIIIc[i]),'{:5.2e}'.format(ion_abun_error.SIIa[i]),'{:5.2e}'.format(ion_abun_error.SIIb[i]),'{:5.3e}'.format(ion_abun_error.SIIIa[i]),'{:5.3e}'.format(ion_abun_error.SIIIb[i]),'{:5.4e}'.format(ion_abun_error.NeIIIa[i]),'{:5.4e}'.format(ion_abun_error.NeIIIb[i]),'{:5.4e}'.format(ion_abun_error.ClIIIa[i]),'{:5.4e}'.format(ion_abun_error.ClIIIb[i]),'{:5.4e}'.format(ion_abun_error.ArIII[i]),'{:5.5e}'.format(ion_abun_error.ArIVa[i]),'{:5.5e}'.format(ion_abun_error.ArIVb[i])
+        print('{:5.3e}'.format(ion_abun_error.HeIa[i]), '{:5.3e}'.format(ion_abun_error.HeIb[i]),'{:5.4e}'.format(ion_abun_error.HeIIa[i]),'{:5.4e}'.format(ion_abun_error.HeIIb[i]),'{:5.2e}'.format(ion_abun_error.NI[i]),'{:5.2e}'.format(ion_abun_error.NIIa[i]),'{:5.2e}'.format(ion_abun_error.NIIb[i]),'{:5.2e}'.format(ion_abun_error.NIIc[i]),'{:5.2e}'.format(ion_abun_error.OIa[i]),'{:5.2e}'.format(ion_abun_error.OIb[i]),'{:5.2e}'.format(ion_abun_error.OIc[i]),'{:5.2e}'.format(ion_abun_error.OIIa[i]),'{:5.2e}'.format(ion_abun_error.OIIb[i]),'{:5.2e}'.format(ion_abun_error.OIIc[i]),'{:5.2e}'.format(ion_abun_error.OIId[i]),'{:5.4e}'.format(ion_abun_error.OIIIa[i]),'{:5.4e}'.format(ion_abun_error.OIIIb[i]),'{:5.4e}'.format(ion_abun_error.OIIIc[i]),'{:5.2e}'.format(ion_abun_error.SIIa[i]),'{:5.2e}'.format(ion_abun_error.SIIb[i]),'{:5.3e}'.format(ion_abun_error.SIIIa[i]),'{:5.3e}'.format(ion_abun_error.SIIIb[i]),'{:5.4e}'.format(ion_abun_error.NeIIIa[i]),'{:5.4e}'.format(ion_abun_error.NeIIIb[i]),'{:5.4e}'.format(ion_abun_error.ClIIIa[i]),'{:5.4e}'.format(ion_abun_error.ClIIIb[i]),'{:5.4e}'.format(ion_abun_error.ArIII[i]),'{:5.5e}'.format(ion_abun_error.ArIVa[i]),'{:5.5e}'.format(ion_abun_error.ArIVb[i]), file=file5)
         
       
         ###########################
@@ -1019,9 +1002,9 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
         ##########################
         elem_abun_KB,elem_ICF_KB,elem_abun_DIMS,elem_ICF_DIMS,elem_abun_KB_error,elem_ICF_KB_error,elem_abun_DIMS_error,elem_ICF_DIMS_error,elem_abun_KB_ratio,elem_abun_KB_ratio_error,elem_abun_DIMS_ratio,elem_abun_DIMS_ratio_error=eaIsss.total_abundances_ICFs(ion_abun,ion_abun_error,atom_abun_fake,i,line_names,lines_available,elem_abun_KB,elem_ICF_KB,elem_abun_DIMS,elem_ICF_DIMS,elem_abun_KB_error,elem_ICF_KB_error,elem_abun_DIMS_error,elem_ICF_DIMS_error,elem_abun_KB_ratio,elem_abun_KB_ratio_error,elem_abun_DIMS_ratio,elem_abun_DIMS_ratio_error,param_mod_name)
     
-        print >>file6, '{:5.2e}'.format(elem_abun_KB.He[i]), '{:5.2e}'.format(elem_abun_KB.N[i]),'{:09.5f}'.format(elem_ICF_KB.N[i]),'{:5.2e}'.format(elem_abun_DIMS.N[i]),'{:09.5f}'.format(elem_ICF_DIMS.N[i]),'{:5.2e}'.format(elem_abun_KB.O[i]),'{:09.5f}'.format(elem_ICF_KB.O[i]),'{:5.2e}'.format(elem_abun_DIMS.O[i]),'{:09.5f}'.format(elem_ICF_DIMS.O[i]),'{:5.2e}'.format(elem_abun_KB.S[i]),'{:09.5f}'.format(elem_ICF_KB.S[i]),'{:5.2e}'.format(elem_abun_DIMS.S[i]),'{:09.5f}'.format(elem_ICF_DIMS.S[i]),'{:5.2e}'.format(elem_abun_KB.Ne[i]),'{:09.5f}'.format(elem_ICF_KB.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS.Ne[i]),'{:5.2e}'.format(elem_abun_KB.Cl[i]),'{:09.5f}'.format(elem_ICF_KB.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS.Cl[i]),'{:5.2e}'.format(elem_abun_KB.Ar[i]),'{:09.5f}'.format(elem_ICF_KB.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i])
+        print('{:5.2e}'.format(elem_abun_KB.He[i]), '{:5.2e}'.format(elem_abun_KB.N[i]),'{:09.5f}'.format(elem_ICF_KB.N[i]),'{:5.2e}'.format(elem_abun_DIMS.N[i]),'{:09.5f}'.format(elem_ICF_DIMS.N[i]),'{:5.2e}'.format(elem_abun_KB.O[i]),'{:09.5f}'.format(elem_ICF_KB.O[i]),'{:5.2e}'.format(elem_abun_DIMS.O[i]),'{:09.5f}'.format(elem_ICF_DIMS.O[i]),'{:5.2e}'.format(elem_abun_KB.S[i]),'{:09.5f}'.format(elem_ICF_KB.S[i]),'{:5.2e}'.format(elem_abun_DIMS.S[i]),'{:09.5f}'.format(elem_ICF_DIMS.S[i]),'{:5.2e}'.format(elem_abun_KB.Ne[i]),'{:09.5f}'.format(elem_ICF_KB.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS.Ne[i]),'{:5.2e}'.format(elem_abun_KB.Cl[i]),'{:09.5f}'.format(elem_ICF_KB.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS.Cl[i]),'{:5.2e}'.format(elem_abun_KB.Ar[i]),'{:09.5f}'.format(elem_ICF_KB.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]), file=file6)
         
-        print >>file6, '{:5.2e}'.format(elem_abun_KB_error.He[i]), '{:5.2e}'.format(elem_abun_KB_error.N[i]),'{:09.5f}'.format(elem_ICF_KB_error.N[i]),'{:5.2e}'.format(elem_abun_DIMS_error.N[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.N[i]),'{:5.2e}'.format(elem_abun_KB_error.O[i]),'{:09.5f}'.format(elem_ICF_KB_error.O[i]),'{:5.2e}'.format(elem_abun_DIMS_error.O[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.O[i]),'{:5.2e}'.format(elem_abun_KB_error.S[i]),'{:09.5f}'.format(elem_ICF_KB_error.S[i]),'{:5.2e}'.format(elem_abun_DIMS_error.S[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.S[i]),'{:5.2e}'.format(elem_abun_KB_error.Ne[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ne[i]),'{:5.2e}'.format(elem_abun_KB_error.Cl[i]),'{:09.5f}'.format(elem_ICF_KB_error.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Cl[i]),'{:5.2e}'.format(elem_abun_KB_error.Ar[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio_error.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i])
+        print('{:5.2e}'.format(elem_abun_KB_error.He[i]), '{:5.2e}'.format(elem_abun_KB_error.N[i]),'{:09.5f}'.format(elem_ICF_KB_error.N[i]),'{:5.2e}'.format(elem_abun_DIMS_error.N[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.N[i]),'{:5.2e}'.format(elem_abun_KB_error.O[i]),'{:09.5f}'.format(elem_ICF_KB_error.O[i]),'{:5.2e}'.format(elem_abun_DIMS_error.O[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.O[i]),'{:5.2e}'.format(elem_abun_KB_error.S[i]),'{:09.5f}'.format(elem_ICF_KB_error.S[i]),'{:5.2e}'.format(elem_abun_DIMS_error.S[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.S[i]),'{:5.2e}'.format(elem_abun_KB_error.Ne[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ne[i]),'{:5.2e}'.format(elem_abun_KB_error.Cl[i]),'{:09.5f}'.format(elem_ICF_KB_error.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Cl[i]),'{:5.2e}'.format(elem_abun_KB_error.Ar[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio_error.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]), file=file6)
         
     
         os.remove("test.dat")

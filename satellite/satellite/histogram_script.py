@@ -4,26 +4,10 @@
 # (C) Stavros Akras
 
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
 import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-import numpy as np
 
 from scipy.stats import norm
-import seaborn as sns
-import sys
 from satellite import mean_value_script as mvs
 
 ### values and errors as input
@@ -147,9 +131,9 @@ def histogram_plots(data,data_err,name,line_names,lines_available,param_mod_name
         plt.savefig("output_plots/hist"+name+".png")
         plt.savefig("output_plots/hist"+name+".pdf")
 #    plt.show()
-        print >>file10, "#######################################################"
-        print >>file10, "#######################################################"
-        print >>file10, name,':(mean value)',datamu, "+/- (std value)", datastd
+        print("#######################################################", file=file10)
+        print("#######################################################", file=file10)
+        print(name,':(mean value)',datamu, "+/- (std value)", datastd, file=file10)
 
     file10.close()
     
@@ -274,9 +258,9 @@ def histogram_plots2(data,name,line_names,lines_available,param_mod_name,param_m
         plt.savefig("output_plots/hist"+name+".png")
         plt.savefig("output_plots/hist"+name+".pdf")
 #    plt.show()
-        print >>file10, "#######################################################"
-        print >>file10, "#######################################################"
-        print >>file10, name,':(mean value)',datamu, "+/- (std value)", datastd
+        print("#######################################################", file=file10)
+        print("#######################################################", file=file10)
+        print(name,':(mean value)',datamu, "+/- (std value)", datastd, file=file10)
 
     file10.close()
     

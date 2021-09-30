@@ -6,20 +6,10 @@
 # to right and from bottom to top.
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
 import matplotlib.pyplot as plt
 from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
 import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
 import math
 from matplotlib.colors import LogNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -72,14 +62,14 @@ def analysis_specific_line(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,x_CS
         
         #x,y must be the opposite!
         centery_new=centerx
-        centerx_new=centery-(lengthslit/2)
+        centerx_new=int(centery-(lengthslit/2))
 
         
         k=0
         sum=sumerror=0.0  
         for i in range(centerx_new,centerx_new+lengthslit_new):
             if (widthslit_new % 2)==0:
-                for j in range(centery_new-widthslit_new/2,centery_new+widthslit_new/2): 
+                for j in range(centery_new-widthslit_new//2,centery_new+widthslit_new//2): 
  
                     if (flux_rot[i,j] ==0):
                         sum=sum  
@@ -88,7 +78,7 @@ def analysis_specific_line(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,x_CS
                         sumerror=sumerror+flux_err_rot[i,j]**2
                         k=k+1       
             else:
-                for j in range(centery_new-(widthslit_new-1)/2,centery_new+(widthslit_new-1)/2+1):
+                for j in range(centery_new-(widthslit_new-1)//2,centery_new+(widthslit_new-1)//2+1):
                     if (flux_rot[i,j] ==0):
                         sum=sum  
                     if flux_rot[i,j] > 0 and ha_rot[i,j] >= hb_rot[i,j]*2.86  and hb_rot[i,j] > 0:

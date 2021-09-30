@@ -3,30 +3,11 @@
 # in the specific slits analysis module.
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
-import numpy as np
-import seaborn as sns
 import pyneb as pn
-import os, fnmatch
 from numpy import inf
 
 
-from satellite import diagnotic_diagrams_script as dds
-from satellite import ionicabundances_angles_script as iaas
 from satellite import norm_flux_error_script as nfes
 
 def total_abundances_ICFs(ion_abun,ion_abun_error,atom_abun_fake,i,line_names,lines_available,elem_abun_KB,elem_ICF_KB,elem_abun_DIMS,elem_ICF_DIMS,elem_abun_KB_error,elem_ICF_KB_error,elem_abun_DIMS_error,elem_ICF_DIMS_error,elem_abun_KB_ratio,elem_abun_KB_ratio_error,elem_abun_DIMS_ratio,elem_abun_DIMS_ratio_error,param_mod_name):

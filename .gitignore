@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+satellite/test/general_output_file.txt
+satellite/test/my_log.txt
+satellite/test/output_lineratios_specific_slit.txt
+satellite/test/output_linesintensities_specific_slit.txt
+satellite/test/PyNeb_output_ionic_abund_specific_slits.txt
+satellite/test/PyNeb_output_Te_and_Ne_specific_slits.txt
+satellite/test/PyNeb_output_total_abund_ICFs_specific_slits.txt

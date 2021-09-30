@@ -5,26 +5,9 @@
 # and output_lineratios_specific_slit.txt)
 # (C) Stavros Akras
 
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from numpy import array
-import matplotlib.pyplot as plt
-from scipy.ndimage.interpolation import rotate
-from astropy.io import fits
-from astropy.io.fits import getdata
-from matplotlib.colors import Normalize
-from matplotlib.patches import Ellipse
-from matplotlib.patches import Rectangle
-from scipy.interpolate import spline
-import matplotlib.patches as patches
-import matplotlib.font_manager as font_manager
-import random
-import math
 import pyneb as pn
 
-
-
-from satellite import slit_line_flux_script as slfs
 from satellite import print_results_script as prs
 from satellite import specific_line_analysis_script as slas
 from satellite import norm_flux_error_script as nfes
@@ -284,10 +267,10 @@ def specficPA_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_av
     ratio_HeIa_Ha_err,ratio_HeIb_Ha_err,ratio_HeIIa_Hb_err,ratio_HeIIb_Hb_err,ratio_HeIa_HeIIa_err,ratio_HeIa_HeIIb_err,ratio_NIIc_Ha_err,ratio_NIIbc_Ha_err,ratio_NIIbc_NIIa_err,ratio_NIIbc_OIIIbc_err,ratio_NI_Hb_err,ratio_SIIab_Ha_err,ratio_SIIa_SIIb_err,ratio_SIIab_SIIIab_err,ratio_OIbc_Ha_err,ratio_OIbc_OIa_err,ratio_OIbc_OIIIbc_err,ratio_OIbc_OIIcd_err,ratio_OIbc_OIIab_err,ratio_OIb_Ha_err,ratio_OIIIc_Hb_err,ratio_OIIIbc_Hb_err,ratio_OIIIbc_OIIIa_err,ratio_OIIab_Hb_err,ratio_OIIab_OIIIbc_err,ratio_OIIcd_OIIIbc_err,ratio_ArIVa_ArIVb_err,ratio_ArIVab_Hb_err,ratio_NeIIIab_Hb_err,ratio_ClIIIa_ClIIIb_err,ratio_ClIIIab_Hb_err,ratio_CI_Ha_err,ratio_CII_Ha_err=[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]
 
     file1 = open('output_linesintensities_specific_slit.txt','w')
-    print >>file1,"ang ","cHb ","OII3727","OII3729","NeIII3868", "NeIII3967","Hd    ", "Hg    ","OIII4363","HeII4686","ArIV4712","ArIV4740","Hb    ","OIII4959","OIII5007","NI5200","HeI5412","ClIII5517","ClIII5538","OI5577","NII5755","HeI5876","OI6300","SIII6312","OI6363","CII6461","NII6548","Ha     ","NII6584","HeI6678","SII6716","SII6731","ArIII7136","OII7320","OII7330","CI8727","SIII9069",'Total f(Hb)'
+    print("ang ","cHb ","OII3727","OII3729","NeIII3868", "NeIII3967","Hd    ", "Hg    ","OIII4363","HeII4686","ArIV4712","ArIV4740","Hb    ","OIII4959","OIII5007","NI5200","HeI5412","ClIII5517","ClIII5538","OI5577","NII5755","HeI5876","OI6300","SIII6312","OI6363","CII6461","NII6548","Ha     ","NII6584","HeI6678","SII6716","SII6731","ArIII7136","OII7320","OII7330","CI8727","SIII9069",'Total f(Hb)', file=file1)
 
     file2 = open('output_lineratios_specific_slit.txt','w')
-    print >>file2,"ang","c_Hb ","c_Hg ","c_Hd ","log(HeI_5876s/HI_6563s)","log(HeI_6678s/HI_6563s)","log(HeII_5412s/HI_4861s)","log(HeII_4686s/HI_4861s)","log(HeI_5876s/HeII_4686s)","log(HeI_5876s/HeII_5412s)","log(N2_6583s/HI_6563s)","log(N2_6548s+N2_6583s)/HI_6563s)","log((N2_6548s+N2_6583s)/N2_5755s)","log((N2_6548s+N2_6583s)/(O3_4959s+O3_5007s))","log(N1_5199s/HI_4861s)","log((S2_6716s+S2_6731s)/HI_6563s)","log(S2_6716s/S2_6731s)","log((S2_6716s+S2_6731s)/(S3_6312s+S3_9069s))","log((O1_6300s+O1_6363s)/HI_6563s)","log((O1_6300s+O1_6363s)/O1_5577s)","log((O1_6300s+O1_6363s)/(O3_4959s+O3_5007s))","log((O1_6300s+O1_6363s)/(O2_7320s+O2_7330s))","log((O1_6300s+O1_6363s)/(O2_3727s+O2_3729s))","log(O1_6300s/HI_6563s)","log(O3_5007s/HI_4861s)","log((O3_4959s+O3_5007s)/HI_4861s)","log((O3_4959s+O3_5007s)/O3_4363s)","log((O2_3727s+O2_3729s)/HI_4861s)","log((O2_3727s+O2_3729s)/(O3_4959s+O3_5007s))","log((O2_7320s+O2_7330s)/(O3_4959s+O3_5007s))","log(Ar4_4712s/Ar4_4740s)","log((Ar4_4712s+Ar4_4740s)/HI_4861s)","log((Ne3_3868s+Ne3_3967s)/HI_4861s)","log(Cl3_5517s/Cl3_5538s)","log((Cl3_5517s+Cl3_5538s)/HI_4861s)","log(C1_8727s/HI_6563s)","log(C2_6461s/HI_6563s)"   
+    print("ang","c_Hb ","c_Hg ","c_Hd ","log(HeI_5876s/HI_6563s)","log(HeI_6678s/HI_6563s)","log(HeII_5412s/HI_4861s)","log(HeII_4686s/HI_4861s)","log(HeI_5876s/HeII_4686s)","log(HeI_5876s/HeII_5412s)","log(N2_6583s/HI_6563s)","log(N2_6548s+N2_6583s)/HI_6563s)","log((N2_6548s+N2_6583s)/N2_5755s)","log((N2_6548s+N2_6583s)/(O3_4959s+O3_5007s))","log(N1_5199s/HI_4861s)","log((S2_6716s+S2_6731s)/HI_6563s)","log(S2_6716s/S2_6731s)","log((S2_6716s+S2_6731s)/(S3_6312s+S3_9069s))","log((O1_6300s+O1_6363s)/HI_6563s)","log((O1_6300s+O1_6363s)/O1_5577s)","log((O1_6300s+O1_6363s)/(O3_4959s+O3_5007s))","log((O1_6300s+O1_6363s)/(O2_7320s+O2_7330s))","log((O1_6300s+O1_6363s)/(O2_3727s+O2_3729s))","log(O1_6300s/HI_6563s)","log(O3_5007s/HI_4861s)","log((O3_4959s+O3_5007s)/HI_4861s)","log((O3_4959s+O3_5007s)/O3_4363s)","log((O2_3727s+O2_3729s)/HI_4861s)","log((O2_3727s+O2_3729s)/(O3_4959s+O3_5007s))","log((O2_7320s+O2_7330s)/(O3_4959s+O3_5007s))","log(Ar4_4712s/Ar4_4740s)","log((Ar4_4712s+Ar4_4740s)/HI_4861s)","log((Ne3_3868s+Ne3_3967s)/HI_4861s)","log(Cl3_5517s/Cl3_5538s)","log((Cl3_5517s+Cl3_5538s)/HI_4861s)","log(C1_8727s/HI_6563s)","log(C2_6461s/HI_6563s)", file=file2)   
 
 
     xcoor_CS=param_model_values[index_xcoor_CS]
@@ -792,110 +775,110 @@ def specficPA_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_av
  
  
             file3 = open('test.dat','w')
-            print >>file3, "LINE test err"
+            print("LINE test err", file=file3)
 
             
             error=nfes.flux_Error(dataHanew[slit_number],dataHanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "H1r_6563A", '{:03.3f}'.format(dataHanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("H1r_6563A", '{:03.3f}'.format(dataHanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
             
             error=nfes.flux_Error(dataHbnew[slit_number],dataHbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "H1r_4861A", '{:03.3f}'.format(dataHbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("H1r_4861A", '{:03.3f}'.format(dataHbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
                 
             error=nfes.flux_Error(dataHgnew[slit_number],dataHgnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "H1r_4341A", '{:03.3f}'.format(dataHgnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("H1r_4341A", '{:03.3f}'.format(dataHgnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataHdnew[slit_number],dataHdnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "H1r_4102A", '{:03.3f}'.format(dataHdnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("H1r_4102A", '{:03.3f}'.format(dataHdnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataHeIIanew[slit_number],dataHeIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "He2r_4686A", '{:03.3f}'.format(dataHeIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("He2r_4686A", '{:03.3f}'.format(dataHeIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataHeIIbnew[slit_number],dataHeIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "He2r_5411A", '{:03.3f}'.format(dataHeIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("He2r_5411A", '{:03.3f}'.format(dataHeIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataHeIanew[slit_number],dataHeIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "He1r_5876A", '{:03.3f}'.format(dataHeIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("He1r_5876A", '{:03.3f}'.format(dataHeIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataHeIbnew[slit_number],dataHeIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "He1r_6678A", '{:03.3f}'.format(dataHeIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("He1r_6678A", '{:03.3f}'.format(dataHeIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataSIIanew[slit_number],dataSIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "S2_6716A", '{:03.3f}'.format(dataSIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("S2_6716A", '{:03.3f}'.format(dataSIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataSIIbnew[slit_number],dataSIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "S2_6731A", '{:03.3f}'.format(dataSIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("S2_6731A", '{:03.3f}'.format(dataSIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataSIIIanew[slit_number],dataSIIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "S3_6312A", '{:03.3f}'.format(dataSIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("S3_6312A", '{:03.3f}'.format(dataSIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataSIIIbnew[slit_number],dataSIIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "S3_9069A", '{:03.3f}'.format(dataSIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("S3_9069A", '{:03.3f}'.format(dataSIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataNInew[slit_number],dataNInew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "N1_5200A", '{:03.3f}'.format(dataNInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("N1_5200A", '{:03.3f}'.format(dataNInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataNIIanew[slit_number],dataNIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "N2_5755A", '{:03.3f}'.format(dataNIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("N2_5755A", '{:03.3f}'.format(dataNIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataNIIbnew[slit_number],dataNIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "N2_6548A", '{:03.3f}'.format(dataNIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("N2_6548A", '{:03.3f}'.format(dataNIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataNIIcnew[slit_number],dataNIIcnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "N2_6584A", '{:03.3f}'.format(dataNIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("N2_6584A", '{:03.3f}'.format(dataNIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIanew[slit_number],dataOIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O1_5577A", '{:03.3f}'.format(dataOIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O1_5577A", '{:03.3f}'.format(dataOIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIbnew[slit_number],dataOIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O1_6300A", '{:03.3f}'.format(dataOIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O1_6300A", '{:03.3f}'.format(dataOIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIcnew[slit_number],dataOIcnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O1_6364A", '{:03.3f}'.format(dataOIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O1_6364A", '{:03.3f}'.format(dataOIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIanew[slit_number],dataOIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O2_3726A", '{:03.3f}'.format(dataOIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O2_3726A", '{:03.3f}'.format(dataOIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIbnew[slit_number],dataOIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O2_3729A", '{:03.3f}'.format(dataOIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O2_3729A", '{:03.3f}'.format(dataOIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIcnew[slit_number],dataOIIcnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O2_7319A+", '{:03.3f}'.format(dataOIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O2_7319A+", '{:03.3f}'.format(dataOIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIdnew[slit_number],dataOIIdnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O2_7330A+", '{:03.3f}'.format(dataOIIdnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O2_7330A+", '{:03.3f}'.format(dataOIIdnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIIanew[slit_number],dataOIIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O3_4363A", '{:03.3f}'.format(dataOIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O3_4363A", '{:03.3f}'.format(dataOIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIIbnew[slit_number],dataOIIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O3_4959A", '{:03.3f}'.format(dataOIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O3_4959A", '{:03.3f}'.format(dataOIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataOIIIcnew[slit_number],dataOIIIcnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "O3_5007A", '{:03.3f}'.format(dataOIIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("O3_5007A", '{:03.3f}'.format(dataOIIIcnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataClIIIanew[slit_number],dataClIIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])        
-            print >>file3, "Cl3_5518A", '{:03.3f}'.format(dataClIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("Cl3_5518A", '{:03.3f}'.format(dataClIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
             
             error=nfes.flux_Error(dataClIIIbnew[slit_number],dataClIIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Cl3_5538A", '{:03.3f}'.format(dataClIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)        
+            print("Cl3_5538A", '{:03.3f}'.format(dataClIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)        
         
             error=nfes.flux_Error(dataNeIIIanew[slit_number],dataNeIIIanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Ne3_3869A", '{:03.3f}'.format(dataNeIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("Ne3_3869A", '{:03.3f}'.format(dataNeIIIanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataNeIIIbnew[slit_number],dataNeIIIbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Ne3_3968A", '{:03.3f}'.format(dataNeIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)                
+            print("Ne3_3968A", '{:03.3f}'.format(dataNeIIIbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)                
         
             error=nfes.flux_Error(dataArIIInew[slit_number],dataArIIInew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Ar3_7136A", '{:03.3f}'.format(dataArIIInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("Ar3_7136A", '{:03.3f}'.format(dataArIIInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataArIVanew[slit_number],dataArIVanew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Ar4_4711A", '{:03.3f}'.format(dataArIVanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("Ar4_4711A", '{:03.3f}'.format(dataArIVanew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataArIVbnew[slit_number],dataArIVbnew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "Ar4_4740A", '{:03.3f}'.format(dataArIVbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("Ar4_4740A", '{:03.3f}'.format(dataArIVbnew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
         
             error=nfes.flux_Error(dataCInew[slit_number],dataCInew_err[slit_number],dataHbnew[slit_number],dataHbnew_err[slit_number])
-            print >>file3, "C1_8728A", '{:03.3f}'.format(dataCInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error)
+            print("C1_8728A", '{:03.3f}'.format(dataCInew[slit_number]*100/dataHbnew[slit_number]),'{:03.3f}'.format(error), file=file3)
  
  
             file3.close() 
@@ -1086,7 +1069,7 @@ def specficPA_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_av
                 HeIIb_err[slit_number]=HeIIb[slit_number]*np.sqrt(par1**2+par2**2+par3**2)
                     
             index_extra_error=line_names.index("HeI_5876e")          
-            print index_extra_error,lines_available[index_extra_error]
+            print(index_extra_error,lines_available[index_extra_error])
             if lines_available[index_extra_error]=="yes":
                 HeIa[slit_number]=float(obs.getIntens()['He1r_5876A'])
                 Hb[slit_number]=float(obs.getIntens()['H1r_4861A'])
@@ -1798,19 +1781,19 @@ def specficPA_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_av
         ratio_angles_error.CI8727_Ha.append(ratio_CI_Ha_err[slit_number])
         ratio_angles_error.CII6461_Ha.append(ratio_CII_Ha_err[slit_number])
         
-        print >>file1, "######################################"," specific slit number: ", slit_number+1 ," ##############################"
+        print("######################################"," specific slit number: ", slit_number+1 ," ##############################", file=file1)
 
     
-        print >>file1, '{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb[slit_number]),'{:07.3f}'.format(OIIa[slit_number]), '{:07.3f}'.format(OIIb[slit_number]),'{:09.3f}'.format(NeIIIa[slit_number]),'{:09.3f}'.format(NeIIIb[slit_number]),'{:06.2f}'.format(Hd[slit_number]),'{:06.2f}'.format(Hg[slit_number]),'{:08.3f}'.format(OIIIa[slit_number]),'{:08.3f}'.format(HeIIa[slit_number]),'{:08.3f}'.format(ArIVa[slit_number]),'{:08.3f}'.format(ArIVb[slit_number]),'{:06.2f}'.format(Hb[slit_number]),'{:08.3f}'.format(OIIIb[slit_number]),'{:08.3f}'.format(OIIIc[slit_number]),'{:06.3f}'.format(NI[slit_number]),'{:07.3f}'.format(HeIIb[slit_number]),'{:09.3f}'.format(ClIIIa[slit_number]),'{:09.3f}'.format(ClIIIb[slit_number]),'{:06.3f}'.format(OIa[slit_number]),'{:07.3f}'.format(NIIa[slit_number]),'{:07.3f}'.format(HeIa[slit_number]),'{:06.3f}'.format(OIb[slit_number]),'{:08.3f}'.format(SIIIa[slit_number]), '{:06.3f}'.format(OIc[slit_number]),'{:07.3f}'.format(CII[slit_number]),'{:07.3f}'.format(NIIb[slit_number]),'{:06.3f}'.format(Ha[slit_number]),'{:07.3f}'.format(NIIc[slit_number]),'{:07.3f}'.format(HeIb[slit_number]),'{:07.3f}'.format(SIIa[slit_number]),'{:07.3f}'.format(SIIb[slit_number]),'{:09.3f}'.format(ArIII[slit_number]),'{:07.3f}'.format(OIIc[slit_number]),'{:07.3f}'.format(OIId[slit_number]),'{:06.3f}'.format(CI[slit_number]),'{:08.3f}'.format(SIIIb[slit_number]),'{:05.4e}'.format(flux_angles.Hb_4861[i]*energy_conversion)
+        print('{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb[slit_number]),'{:07.3f}'.format(OIIa[slit_number]), '{:07.3f}'.format(OIIb[slit_number]),'{:09.3f}'.format(NeIIIa[slit_number]),'{:09.3f}'.format(NeIIIb[slit_number]),'{:06.2f}'.format(Hd[slit_number]),'{:06.2f}'.format(Hg[slit_number]),'{:08.3f}'.format(OIIIa[slit_number]),'{:08.3f}'.format(HeIIa[slit_number]),'{:08.3f}'.format(ArIVa[slit_number]),'{:08.3f}'.format(ArIVb[slit_number]),'{:06.2f}'.format(Hb[slit_number]),'{:08.3f}'.format(OIIIb[slit_number]),'{:08.3f}'.format(OIIIc[slit_number]),'{:06.3f}'.format(NI[slit_number]),'{:07.3f}'.format(HeIIb[slit_number]),'{:09.3f}'.format(ClIIIa[slit_number]),'{:09.3f}'.format(ClIIIb[slit_number]),'{:06.3f}'.format(OIa[slit_number]),'{:07.3f}'.format(NIIa[slit_number]),'{:07.3f}'.format(HeIa[slit_number]),'{:06.3f}'.format(OIb[slit_number]),'{:08.3f}'.format(SIIIa[slit_number]), '{:06.3f}'.format(OIc[slit_number]),'{:07.3f}'.format(CII[slit_number]),'{:07.3f}'.format(NIIb[slit_number]),'{:06.3f}'.format(Ha[slit_number]),'{:07.3f}'.format(NIIc[slit_number]),'{:07.3f}'.format(HeIb[slit_number]),'{:07.3f}'.format(SIIa[slit_number]),'{:07.3f}'.format(SIIb[slit_number]),'{:09.3f}'.format(ArIII[slit_number]),'{:07.3f}'.format(OIIc[slit_number]),'{:07.3f}'.format(OIId[slit_number]),'{:06.3f}'.format(CI[slit_number]),'{:08.3f}'.format(SIIIb[slit_number]),'{:05.4e}'.format(flux_angles.Hb_4861[i]*energy_conversion), file=file1)
 
-        print >>file1, '{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb_err[slit_number]),'{:07.3f}'.format(OIIa_err[slit_number]), '{:07.3f}'.format(OIIb_err[slit_number]),'{:09.3f}'.format(NeIIIa_err[slit_number]),'{:09.3f}'.format(NeIIIb_err[slit_number]),'{:06.2f}'.format(Hd_err[slit_number]),'{:06.2f}'.format(Hg_err[slit_number]),'{:08.3f}'.format(OIIIa_err[slit_number]),'{:08.3f}'.format(HeIIa_err[slit_number]),'{:08.3f}'.format(ArIVa_err[slit_number]),'{:08.3f}'.format(ArIVb_err[slit_number]),'{:06.2f}'.format(Hb_err[slit_number]),'{:08.3f}'.format(OIIIb_err[slit_number]),'{:08.3f}'.format(OIIIc_err[slit_number]),'{:06.3f}'.format(NI_err[slit_number]),'{:07.3f}'.format(HeIIb_err[slit_number]),'{:09.3f}'.format(ClIIIa_err[slit_number]),'{:09.3f}'.format(ClIIIb_err[slit_number]),'{:06.3f}'.format(OIa_err[slit_number]),'{:07.3f}'.format(NIIa_err[slit_number]),'{:07.3f}'.format(HeIa_err[slit_number]),'{:06.3f}'.format(OIb_err[slit_number]),'{:08.3f}'.format(SIIIa_err[slit_number]), '{:06.3f}'.format(OIc_err[slit_number]),'{:07.3f}'.format(CII_err[slit_number]),'{:07.3f}'.format(NIIb_err[slit_number]),'{:06.3f}'.format(Ha_err[slit_number]),'{:07.3f}'.format(NIIc_err[slit_number]),'{:07.3f}'.format(HeIb_err[slit_number]),'{:07.3f}'.format(SIIa_err[slit_number]),'{:07.3f}'.format(SIIb_err[slit_number]),'{:09.3f}'.format(ArIII_err[slit_number]),'{:07.3f}'.format(OIIc_err[slit_number]),'{:07.3f}'.format(OIId_err[slit_number]),'{:06.3f}'.format(CI_err[slit_number]),'{:08.3f}'.format(SIIIb_err[slit_number]),'{:05.4e}'.format(flux_angles_error.Hb_4861[i]*energy_conversion)
+        print('{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb_err[slit_number]),'{:07.3f}'.format(OIIa_err[slit_number]), '{:07.3f}'.format(OIIb_err[slit_number]),'{:09.3f}'.format(NeIIIa_err[slit_number]),'{:09.3f}'.format(NeIIIb_err[slit_number]),'{:06.2f}'.format(Hd_err[slit_number]),'{:06.2f}'.format(Hg_err[slit_number]),'{:08.3f}'.format(OIIIa_err[slit_number]),'{:08.3f}'.format(HeIIa_err[slit_number]),'{:08.3f}'.format(ArIVa_err[slit_number]),'{:08.3f}'.format(ArIVb_err[slit_number]),'{:06.2f}'.format(Hb_err[slit_number]),'{:08.3f}'.format(OIIIb_err[slit_number]),'{:08.3f}'.format(OIIIc_err[slit_number]),'{:06.3f}'.format(NI_err[slit_number]),'{:07.3f}'.format(HeIIb_err[slit_number]),'{:09.3f}'.format(ClIIIa_err[slit_number]),'{:09.3f}'.format(ClIIIb_err[slit_number]),'{:06.3f}'.format(OIa_err[slit_number]),'{:07.3f}'.format(NIIa_err[slit_number]),'{:07.3f}'.format(HeIa_err[slit_number]),'{:06.3f}'.format(OIb_err[slit_number]),'{:08.3f}'.format(SIIIa_err[slit_number]), '{:06.3f}'.format(OIc_err[slit_number]),'{:07.3f}'.format(CII_err[slit_number]),'{:07.3f}'.format(NIIb_err[slit_number]),'{:06.3f}'.format(Ha_err[slit_number]),'{:07.3f}'.format(NIIc_err[slit_number]),'{:07.3f}'.format(HeIb_err[slit_number]),'{:07.3f}'.format(SIIa_err[slit_number]),'{:07.3f}'.format(SIIb_err[slit_number]),'{:09.3f}'.format(ArIII_err[slit_number]),'{:07.3f}'.format(OIIc_err[slit_number]),'{:07.3f}'.format(OIId_err[slit_number]),'{:06.3f}'.format(CI_err[slit_number]),'{:08.3f}'.format(SIIIb_err[slit_number]),'{:05.4e}'.format(flux_angles_error.Hb_4861[i]*energy_conversion), file=file1)
         
 #fluxes in ergs/s/cm^2 are the sum from the images.  
-        print >>file2, "######################################"," specific slit number: ", slit_number+1 ," ##############################"
+        print("######################################"," specific slit number: ", slit_number+1 ," ##############################", file=file2)
 
-        print >>file2,'{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb[slit_number]),'{:04.3f}'.format(cHg[slit_number]),'{:04.3f}'.format(cHd[slit_number]),'{:05.3f}'.format(ratio_HeIa_Ha[slit_number]),'{:05.3f}'.format(ratio_HeIb_Ha[slit_number]),'{:05.3f}'.format(ratio_HeIIa_Hb[slit_number]),'{:05.3f}'.format(ratio_HeIIb_Hb[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIa[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIb[slit_number]),'{:05.3f}'.format(ratio_NIIc_Ha[slit_number]),'{:05.3f}'.format(ratio_NIIbc_Ha[slit_number]),'{:05.3f}'.format(ratio_NIIbc_NIIa[slit_number]),'{:05.3f}'.format(ratio_NIIbc_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_NI_Hb[slit_number]),'{:05.3f}'.format(ratio_SIIab_Ha[slit_number]),'{:05.3f}'.format(ratio_SIIa_SIIb[slit_number]),'{:05.3f}'.format(ratio_SIIab_SIIIab[slit_number]),'{:05.3f}'.format(ratio_OIbc_Ha[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIa[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIcd[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIab[slit_number]),'{:05.3f}'.format(ratio_OIb_Ha[slit_number]),'{:05.3f}'.format(ratio_OIIIc_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_OIIIa[slit_number]),'{:05.3f}'.format(ratio_OIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIab_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_OIIcd_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_ArIVa_ArIVb[slit_number]),'{:05.3f}'.format(ratio_ArIVab_Hb[slit_number]),'{:05.3f}'.format(ratio_NeIIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_ClIIIa_ClIIIb[slit_number]),'{:05.3f}'.format(ratio_ClIIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_CI_Ha[slit_number]),'{:05.3f}'.format(ratio_CII_Ha[slit_number])
+        print('{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb[slit_number]),'{:04.3f}'.format(cHg[slit_number]),'{:04.3f}'.format(cHd[slit_number]),'{:05.3f}'.format(ratio_HeIa_Ha[slit_number]),'{:05.3f}'.format(ratio_HeIb_Ha[slit_number]),'{:05.3f}'.format(ratio_HeIIa_Hb[slit_number]),'{:05.3f}'.format(ratio_HeIIb_Hb[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIa[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIb[slit_number]),'{:05.3f}'.format(ratio_NIIc_Ha[slit_number]),'{:05.3f}'.format(ratio_NIIbc_Ha[slit_number]),'{:05.3f}'.format(ratio_NIIbc_NIIa[slit_number]),'{:05.3f}'.format(ratio_NIIbc_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_NI_Hb[slit_number]),'{:05.3f}'.format(ratio_SIIab_Ha[slit_number]),'{:05.3f}'.format(ratio_SIIa_SIIb[slit_number]),'{:05.3f}'.format(ratio_SIIab_SIIIab[slit_number]),'{:05.3f}'.format(ratio_OIbc_Ha[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIa[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIcd[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIab[slit_number]),'{:05.3f}'.format(ratio_OIb_Ha[slit_number]),'{:05.3f}'.format(ratio_OIIIc_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_OIIIa[slit_number]),'{:05.3f}'.format(ratio_OIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_OIIab_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_OIIcd_OIIIbc[slit_number]),'{:05.3f}'.format(ratio_ArIVa_ArIVb[slit_number]),'{:05.3f}'.format(ratio_ArIVab_Hb[slit_number]),'{:05.3f}'.format(ratio_NeIIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_ClIIIa_ClIIIb[slit_number]),'{:05.3f}'.format(ratio_ClIIIab_Hb[slit_number]),'{:05.3f}'.format(ratio_CI_Ha[slit_number]),'{:05.3f}'.format(ratio_CII_Ha[slit_number]), file=file2)
     
-        print >>file2,'{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb_err[slit_number]),'{:04.3f}'.format(cHg_err[slit_number]),'{:04.3f}'.format(cHd_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_Ha_err[slit_number]),'{:05.3f}'.format(ratio_HeIb_Ha_err[slit_number]),'{:05.3f}'.format(ratio_HeIIa_Hb_err[slit_number]),'{:05.3f}'.format(ratio_HeIIb_Hb_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIa_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIb_err[slit_number]),'{:05.3f}'.format(ratio_NIIc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_NIIa_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_NI_Hb_err[slit_number]),'{:05.3f}'.format(ratio_SIIab_Ha_err[slit_number]),'{:05.3f}'.format(ratio_SIIa_SIIb_err[slit_number]),'{:05.3f}'.format(ratio_SIIab_SIIIab_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIa_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIcd_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIab_err[slit_number]),'{:05.3f}'.format(ratio_OIb_Ha_err[slit_number]),'{:05.3f}'.format(ratio_OIIIc_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_OIIIa_err[slit_number]),'{:05.3f}'.format(ratio_OIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIab_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_OIIcd_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_ArIVa_ArIVb_err[slit_number]),'{:05.3f}'.format(ratio_ArIVab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_NeIIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_ClIIIa_ClIIIb_err[slit_number]),'{:05.3f}'.format(ratio_ClIIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_CI_Ha_err[slit_number]),'{:05.3f}'.format(ratio_CII_Ha_err[slit_number])
+        print('{:03.0f}'.format(ang[slit_number]),'{:04.3f}'.format(cHb_err[slit_number]),'{:04.3f}'.format(cHg_err[slit_number]),'{:04.3f}'.format(cHd_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_Ha_err[slit_number]),'{:05.3f}'.format(ratio_HeIb_Ha_err[slit_number]),'{:05.3f}'.format(ratio_HeIIa_Hb_err[slit_number]),'{:05.3f}'.format(ratio_HeIIb_Hb_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIa_err[slit_number]),'{:05.3f}'.format(ratio_HeIa_HeIIb_err[slit_number]),'{:05.3f}'.format(ratio_NIIc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_NIIa_err[slit_number]),'{:05.3f}'.format(ratio_NIIbc_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_NI_Hb_err[slit_number]),'{:05.3f}'.format(ratio_SIIab_Ha_err[slit_number]),'{:05.3f}'.format(ratio_SIIa_SIIb_err[slit_number]),'{:05.3f}'.format(ratio_SIIab_SIIIab_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_Ha_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIa_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIcd_err[slit_number]),'{:05.3f}'.format(ratio_OIbc_OIIab_err[slit_number]),'{:05.3f}'.format(ratio_OIb_Ha_err[slit_number]),'{:05.3f}'.format(ratio_OIIIc_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIIbc_OIIIa_err[slit_number]),'{:05.3f}'.format(ratio_OIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_OIIab_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_OIIcd_OIIIbc_err[slit_number]),'{:05.3f}'.format(ratio_ArIVa_ArIVb_err[slit_number]),'{:05.3f}'.format(ratio_ArIVab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_NeIIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_ClIIIa_ClIIIb_err[slit_number]),'{:05.3f}'.format(ratio_ClIIIab_Hb_err[slit_number]),'{:05.3f}'.format(ratio_CI_Ha_err[slit_number]),'{:05.3f}'.format(ratio_CII_Ha_err[slit_number]), file=file2)
         
     
         slit_number=slit_number+1
