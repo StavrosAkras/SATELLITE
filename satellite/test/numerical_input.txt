@@ -12,7 +12,7 @@ slit_width_in_spaxels        20
 slit_length_in_spaxels      160
 S79_H83_CCM89               031
 PYNEB_21_01                   0
-number_fake_obs_MC            1
+number_fake_obs_MC            3
 
 angle_for_radial_flux        79    
 pixel_scale                 100

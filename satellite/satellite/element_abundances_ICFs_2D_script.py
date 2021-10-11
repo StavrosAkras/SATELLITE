@@ -396,7 +396,8 @@ def total_abundances_ICFs(ion_abun,ion_abun_error,atom_abun_fake,i,j,line_names,
         atom_abun = {'He2': He2_ab, 'He3':He3_ab,'O2': O2_ab, 'O3': O3_ab, 'N2':N2_ab,'S2': S2_ab, 'S3': S3_ab,'Ne3': Ne3_ab,'Ar3': Ar3_ab,'Ar4': Ar4_ab,'Cl3': Cl3_ab}
         atom_abun_for_DIMS_S = {'He2': He2_ab, 'He3':He3_ab,'O2': O2_ab, 'O3': O3_ab, 'N2':N2_ab,'S2': S2_ab, 'S3': S3_ab_for_DIMS,'Ne3': Ne3_ab,'Ar3': Ar3_ab,'Ar4': Ar4_ab,'Cl3': Cl3_ab}
 
-
+    print(atom_abun,"sto element_abundances_ICFs_2D_script")
+#    print(atom_abun_for_DIMS_S,"sto element_abundances_ICFs_2D_script")
     icf = pn.ICF()
 
     ##########################################

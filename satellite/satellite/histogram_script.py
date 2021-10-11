@@ -5,6 +5,7 @@
 
 
 import numpy as np
+#import matplotlib
 import matplotlib.pyplot as plt
 
 from scipy.stats import norm
@@ -56,7 +57,9 @@ def histogram_plots(data,data_err,name,line_names,lines_available,param_mod_name
     plt.ylabel("Counts",fontsize=21,labelpad=6)
     ax1.tick_params(axis='x', labelsize=21, pad=6)
     ax1.tick_params(axis='y', labelsize=21, pad=6)
-    ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4),labelsize=22)
+    #ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4),labelsize=22)
+    ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4))
+    plt.rc('font', size=22)
     xmin, xmax = plt.xlim()
     
     
@@ -183,7 +186,9 @@ def histogram_plots2(data,name,line_names,lines_available,param_mod_name,param_m
     plt.ylabel("Counts",fontsize=21,labelpad=6)
     ax1.tick_params(axis='x', labelsize=21, pad=6)
     ax1.tick_params(axis='y', labelsize=21, pad=6)
-    ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4),labelsize=22)
+#    ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4),labelsize=22)
+    ax1.ticklabel_format(axis='x',style='sci',scilimits=(1,4))
+    plt.rc('font', size=22)
     plt.xlim(xmin,xmax)
     
     index_name=param_estimated.index(name)

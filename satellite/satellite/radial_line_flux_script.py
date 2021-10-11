@@ -27,8 +27,8 @@ def radialfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width,pi
         hb_rot=rotate(hbb,angle,order=5)
         size_rotx=flux_rot.shape[0]
         size_roty=flux_rot.shape[1]    
-        centerx=(size_rotx)/2
-        centery=(size_roty)/2
+        centerx=(size_rotx)//2
+        centery=(size_roty)//2
         
         
         widthslit_new=int(widthslit/pixels_conversion)
@@ -48,7 +48,7 @@ def radialfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width,pi
             for i in range(centerx,centerx+lengthslit_new): # i anebainei pros ta panw
                 sum=sumerror=0.0
                 if (widthslit_new % 2)==0:
-                    for j in range(centery-widthslit_new/2,centery+widthslit_new/2): # to j einai orizontia
+                    for j in range(centery-widthslit_new//2,centery+widthslit_new//2): # to j einai orizontia
                         if (flux_rot[i,j] ==0):
                             sum=sum
                         if flux_rot[i,j] > 0 and ha_rot[i,j] >= hb_rot[i,j]*2.86  and hb_rot[i,j] > 0:
@@ -64,7 +64,7 @@ def radialfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width,pi
                     k=k+1
                     
                 else:
-                    for j in range(centery-(widthslit_new-1)/2,centery+(widthslit_new-1)/2+1): # to j einai orizontia
+                    for j in range(centery-(widthslit_new-1)//2,centery+(widthslit_new-1)//2+1): # to j einai orizontia
                         if (flux_rot[i,j] ==0):
                             sum=sum
                         if flux_rot[i,j] > 0 and ha_rot[i,j] >= hb_rot[i,j]*2.86  and hb_rot[i,j] > 0:

@@ -211,7 +211,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
     index_line=line_names.index("HI_6563s")
     if lines_available[index_line]=="yes" and lines_radial[index_line]=="radial_yes":
         flux_radial.Ha_6563,flux_radial_error.Ha_6563,radial_dis_arc=rlfs.radialfluxline(flux2D.Ha_6563,flux2D_error.Ha_6563,angle_for_radial,flux2D.Ha_6563,flux2D.Hb_4861,slitwidth,slitlength,maxsize,pixscale)
- 
+         
         flux_radial.Ha_6563,flux_radial_error.Ha_6563,radial_dis_arc=tuas.testing_unequal_arrays(flux_radial.Ha_6563,flux_radial_error.Ha_6563,radial_dis_arc,pixscale,slitlength)
         
         index_extra_error=line_names.index("HI_6563e")          
@@ -1889,6 +1889,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
 
     fig,ax4=plt.subplots(figsize=(12,7))
 
+#    radial=[]
     max_flux,rad_formax=fms.maxvalue(flux_radial_derred.Ha_6563,radial_dis_arc3,param_mod_name,param_model_values,pixscale)
     radial=flux_radial_derred.Ha_6563/max_flux
     plt.plot(radial_dis_arc3,radial,label="HI 6563")

@@ -7,5 +7,5 @@ setuptools.setup( name='satellite',
 	author='Stavros Akras',
 	author_email='stavrosakras@gmail.com',
 	packages=setuptools.find_packages(),
-	install_requires=['matplotlib','numpy','seaborn','astropy','scipy','pyneb']
+	install_requires=['matplotlib','numpy','seaborn','astropy','scipy','PyNeb']
 	)	

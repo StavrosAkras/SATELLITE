@@ -25,8 +25,8 @@ def slitfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width):
         hb_rot=rotate(hbb,angle,order=5)
         size_rotx=flux_rot.shape[0]
         size_roty=flux_rot.shape[1]    
-        centerx=(size_rotx)/2
-        centery=(size_roty)/2
+        centerx=(size_rotx)//2
+        centery=(size_roty)//2
         
         widthslit_new=int(widthslit/pixels_conversion)
         lengthslit_new=int(lengthslit/pixels_conversion)
@@ -37,7 +37,7 @@ def slitfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width):
             sum=sumerror=0.0
             for i in range(centerx,centerx+lengthslit_new): # i increases vertially from bottom 
                 if (widthslit_new % 2)==0:
-                    for j in range(centery-widthslit_new/2,centery+widthslit_new/2): # j increases horizontally from left
+                    for j in range(centery-widthslit_new//2,centery+widthslit_new//2): # j increases horizontally from left
                     ### Fluxes and errors
                         if (flux_rot[i,j] ==0):
                             sum=sum  
@@ -48,7 +48,7 @@ def slitfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width):
 
                             
                 else:
-                    for j in range(centery-(widthslit_new-1)/2,centery+(widthslit_new-1)/2+1): 
+                    for j in range(centery-(widthslit_new-1)//2,centery+(widthslit_new-1)//2+1): 
                         if (flux_rot[i,j] ==0):
                             sum=sum  
                         if flux_rot[i,j] > 0 and ha_rot[i,j] >= hb_rot[i,j]*2.86  and hb_rot[i,j] > 0:
@@ -63,8 +63,8 @@ def slitfluxline(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,max_width):
         if widthslit==max_width and lengthslit==max_width:
             k=0
             sum=0.0
-            for i in range(centerx-lengthslit/2,centerx+lengthslit/2): # i increases vertically from bottom 
-                for j in range(centery-widthslit/2,centery+widthslit/2): # j increases horizontally from left
+            for i in range(centerx-lengthslit//2,centerx+lengthslit//2): # i increases vertically from bottom 
+                for j in range(centery-widthslit//2,centery+widthslit//2): # j increases horizontally from left
                     if (flux_rot[i,j] ==0):
                         sum=sum  
                     if flux_rot[i,j] > 0 and ha_rot[i,j] >= hb_rot[i,j]*2.86  and hb_rot[i,j] > 0:
