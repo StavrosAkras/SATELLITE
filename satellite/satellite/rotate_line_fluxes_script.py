@@ -281,7 +281,7 @@ def rotate_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_avail
     file2 = open('output_lineratios_per_angles.txt','w')
     print("ang","c_Hb ","c_Hg ","c_Hd ","log(HeI_5876s/HI_6563s)","log(HeI_6678s/HI_6563s)","log(HeII_5412s/HI_4861s)","log(HeII_4686s/HI_4861s)","log(HeI_5876s/HeII_4686s)","log(HeI_5876s/HeII_5412s)","log(N2_6583s/HI_6563s)","log(N2_6548s+N2_6583s)/HI_6563s)","log((N2_6548s+N2_6583s)/N2_5755s)","log((N2_6548s+N2_6583s)/(O3_4959s+O3_5007s))","log(N1_5199s/HI_4861s)","log((S2_6716s+S2_6731s)/HI_6563s)","log(S2_6716s/S2_6731s)","log((S2_6716s+S2_6731s)/(S3_6312s+S3_9069s))","log((O1_6300s+O1_6363s)/HI_6563s)","log((O1_6300s+O1_6363s)/O1_5577s)","log((O1_6300s+O1_6363s)/(O3_4959s+O3_5007s))","log((O1_6300s+O1_6363s)/(O2_7320s+O2_7330s))","log((O1_6300s+O1_6363s)/(O2_3727s+O2_3729s))","log(O1_6300s/HI_6563s)","log(O3_5007s/HI_4861s)","log((O3_4959s+O3_5007s)/HI_4861s)","log((O3_4959s+O3_5007s)/O3_4363s)","log((O2_3727s+O2_3729s)/HI_4861s)","log((O2_3727s+O2_3729s)/(O3_4959s+O3_5007s))","log((O2_7320s+O2_7330s)/(O3_4959s+O3_5007s))","log(Ar4_4712s/Ar4_4740s)","log((Ar4_4712s+Ar4_4740s)/HI_4861s)","log((Ne3_3868s+Ne3_3967s)/HI_4861s)","log(Cl3_5517s/Cl3_5538s)","log((Cl3_5517s+Cl3_5538s)/HI_4861s)","log(C1_8727s/HI_6563s)","log(C2_6461s/HI_6563s)", file=file2)   
 
-    pn.log_.open_file('my_log.txt')
+    #pn.log_.open_file('my_log.txt')
     
     #In this "for", the fluxes of various emission lines requested by the used  
     # are calculated for a specific PA range, minmum and maximum provided by the used
@@ -900,7 +900,7 @@ def rotate_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_avail
             if name_ext=='No_correction': name_ext=str('No') + ' ' + str('correction')
             RV_ext=float(param_model_values[index_extlaw])*0.1
 
-            pn.log_.level = 3 # set this to 3 to have more details
+            pn.log_.level = -5 # set this to 3 to have more details
             # Adopt an extinction law
             extinction_law = name_ext
 
@@ -1802,7 +1802,7 @@ def rotate_line_fluxes(flux2D,flux2D_error,line_names,line_ext_error,lines_avail
     if param_requered[index_line1]=="yes" :
         fig,ax1=plt.subplots(figsize=(12,7))
         plt.errorbar(ang,cHb,yerr=cHb_err,label=r'c(H$\beta$)')
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'c(H$\beta$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)

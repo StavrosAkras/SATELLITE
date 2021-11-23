@@ -32,8 +32,8 @@ def analysis_specific_line(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,x_CS
         xoffset=x_slit_old-x_CS_old
         yoffset=y_slit_old-y_CS_old
 
-        centerx=(size_rotx)/2+(xoffset*math.cos((-1)*math.pi*angle/180)-yoffset*math.sin((-1)*math.pi*angle/180))
-        centery=(size_roty)/2+(xoffset*math.sin((-1)*math.pi*angle/180)+yoffset*math.cos((-1)*math.pi*angle/180))
+        centerx=(size_rotx)//2+(xoffset*math.cos((-1)*math.pi*angle/180)-yoffset*math.sin((-1)*math.pi*angle/180))
+        centery=(size_roty)//2+(xoffset*math.sin((-1)*math.pi*angle/180)+yoffset*math.cos((-1)*math.pi*angle/180))
 
 ################################################################################################
 ### This part is for the slit position testing module which is used to test the position of the 
@@ -62,7 +62,7 @@ def analysis_specific_line(flux,flux_err,angle,haa,hbb,widthslit,lengthslit,x_CS
         
         #x,y must be the opposite!
         centery_new=centerx
-        centerx_new=int(centery-(lengthslit/2))
+        centerx_new=int(centery-(lengthslit//2))
 
         
         k=0

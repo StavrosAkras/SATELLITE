@@ -20,7 +20,7 @@ def statistic_numbers(data_array,sx,sy):
     a2=np.percentile(data, 5)
     a3=np.percentile(data, 25)
     a4=np.percentile(data, 50)
-    a5=np.percentile(data, 70)
+    a5=np.percentile(data, 75)
     a6=np.percentile(data, 95)
     a7=np.mean(data)
     a8=np.std(data)

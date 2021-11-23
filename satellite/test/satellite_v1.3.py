@@ -23,8 +23,6 @@
 
 import warnings
 import datetime
-#import imutils
-#import cv2
 
 from satellite import read_input_script as read
 from satellite import read_input_lines_parameters_script as read_ilps
@@ -162,56 +160,6 @@ sizey=param_model_values[index_size]
 pixscale=float(param_model_values[index_pixel_scale])*0.01
 minx=miny=0
 print('x=',sizex,'y=', sizey,'pixel scale=',pixscale, file=file10)   
-
-#######################################################################################################
-# calculated the exctinction coefficient based of the Ha,Hb,Hg and Hd line images
-# and returns the table of the extinction. 
-#######################################################################################################   
-#datachb,datachg,datachd,datachber,datachger,datachder=ext.extinction(flux2D.Ha_6563,flux2D.Hb_4861,flux2D.Hg_4340,flux2D.Hd_4101,flux2D_error.Ha_6563,flux2D_error.Hb_4861,flux2D_error.Hg_4340,flux2D_error.Hd_4101,sizex,sizey,line_names,lines_available,param_estimated,param_requered)
-
-
-#######################################################################################################
-#convert the tables to fits images and save the corresponding images.
-#######################################################################################################   
-#sfs.save_image(datachb,hdr,'c_Hb',param_estimated,param_requered)
-#sfs.save_image(datachg,hdr,'c_Hg',param_estimated,param_requered)
-#sfs.save_image(datachd,hdr,'c_Hd',param_estimated,param_requered)
-#sfs.save_image(datachber,hdr,'c_Hb_error',param_estimated,param_requered)
-#sfs.save_image(datachber,hdr,'c_Hg_error',param_estimated,param_requered)
-#sfs.save_image(datachber,hdr,'c_Hd_error',param_estimated,param_requered)
-
-#hs.histogram_plots(datachb,datachber,'c_Hb',line_names,lines_available,param_mod_name,param_model_values,param_estimated,param_requered)  
-     
-#dataposChb,dataposChg,dataposChd=[],[],[]
-
-#dataposChb=pvs.positivevalues(datachb,flux2D.Ha_6563,flux2D.Hb_4861,sizex,sizey,-1)
-#meanChb=mvs.meanvalue(dataposChb,0) 
-#stdCHb=svs.stdvalue(dataposChb,meanChb,0)
-
-#dataposChg=pvs.positivevalues(datachg,flux2D.Ha_6563,flux2D.Hb_4861,sizex,sizey,-1)
-#meanChg=mvs.meanvalue(dataposChg,0) 
-#stdCHg=svs.stdvalue(dataposChg,meanChg,0)
-
-#dataposChd=pvs.positivevalues(datachd,flux2D.Ha_6563,flux2D.Hb_4861,sizex,sizey,-1)
-#meanChd=mvs.meanvalue(dataposChd,0) 
-#stdCHd=svs.stdvalue(dataposChd,meanChd,0)
-
-#Xb=3.6 #(Fitzpatrick law 1999)
-#b_v=meanChb/(0.4*Xb)
-#b_v=0.61*meanChb+0.024*meanChb*meanChb # from Pyneb
-#print >>file10, "#######################################################################################"
-#print >>file10, "average: c(Hb)","%.3f" % meanChb,"std_c(Hb)","%.3f" % stdCHb, "E(B-V)", "%.3f" % b_v, "with outliers"
-#print >>file10, "average: c(Hg)","%.3f" % meanChg,"std_c(Hg)","%.3f" % stdCHg, "E(B-V)","with outliers"
-#print >>file10, "average: c(Hd)","%.3f" % meanChd,"std_c(Hd)","%.3f" % stdCHd, "E(B-V)","with outliers"
-#print >>file10, "#######################################################################################"
-# keeps only the value of the table "> 0"
-#dataposChb= [x for x in dataposChb if x > 0]
-
-#meanchb,stdchb= ceos.estimates_without_outliers(dataposChb,datachb,sizex,sizey)
-#b_v=meanChb/(0.4*Xb)
-#print >>file10, "average: c(Hb)","%.3f" % meanchb,"std_c(Hb)","%.3f" % stdchb, "E(B-V)","%.3f" % b_v, "without outliers"
-#print >>file10, "#######################################################################################"
-
 
 #######################################################################################################
 # calculate line fluxes, normalized lines relative to Hbeta, and a number of line ratios for radial slits with PA from X1 to X2 given by the user.

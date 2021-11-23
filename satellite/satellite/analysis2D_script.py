@@ -99,7 +99,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
 
         
         
-    pn.log_.open_file('my_log.txt')
+    #pn.log_.open_file('my_log.txt')
     
     Chbeta_pyneb=np.zeros((sizex, sizey))
     Chbeta_error_pyneb=np.zeros((sizex, sizey))
@@ -548,7 +548,7 @@ def analysis2D(flux2D,flux2D_error,flux_angles_norm,ang,line_names,line_ext_erro
                 if name_ext=='No_correction': name_ext=str('No') + ' ' + str('correction')
                 RV_ext=float(param_model_values[index_extlaw])*0.1
         
-                pn.log_.level = 3 # set this to 3 to have more details
+                pn.log_.level = -5 # set this to 3 to have more details
                 # Adopt an extinction law
                 extinction_law = name_ext
 

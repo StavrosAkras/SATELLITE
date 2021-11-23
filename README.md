@@ -15,18 +15,16 @@ The Spectroscopic Analysis Tool for intEgraL fieLd unIt daTacubEs
 characterization of extended photo-ionised nebulae such as planetary
 nebulae, H II regions or galaxies in the optical regime observed with
 any integral field unit (IFU). SATELLITE has been written in
-python and was developed to be an automatic and
-user-friendly code. The user does not need any programming or coding
-knowledge.
+python and was developed to be an automatic and user-friendly code. 
+The user does not need any programming or coding knowledge.
 
 The capabilities and performance of the satellite code
-(v0.1) were first presented in  using the IFU data of the Abell 14 PN
-obtained with VIMOS@ESO. satellite v1.2 has been applied to
-three more PNe: Hen 2-108 (VIMOS) (Miranda Marques et al. 2021,
-submitted), NGC 7009 (MUSE), and NGC 6778 (MUSE) (Akras et al. 2021,
-submitted).
+(v1.0) were presented using the IFU data of the Abell~14 PN obtained with VIMOS@ESO. 
+Satellite v1.3 has been applied to three more PNe: Hen 2-108 (VIMOS) 
+(Miranda Marques et al. 2021, submitted), NGC 7009 (MUSE), and NGC 6778 
+(MUSE) (Akras et al. 2021, submitted).
 
-satellite carries out a spectroscopic analysis of extended
+Satellite carries out a spectroscopic analysis of extended
 ionized nebulae through 1D and 2D approach on a list of 35 emission line
 (the brightest and more frequently detected in ionized nebulae) via a
 number of pseudo-slits that simulate slit spectrometry and 2D emission
@@ -122,7 +120,7 @@ NGC 7009 and its MUSE data from the Science Verification phase .
 
 # Set up and Run the SATELLITE Code
 
-Satellite has been successfully run/tested in Fedora 23 operation systems and Python version 2.7.11. 
+Satellite has been successfully run/tested in Fedora 23 operation systems and Python version 3.9.7. 
 To use the satellite code, it is also necessary to install a number of libraries such as matplotlib, numpy, scipy,
 astropy, and seaborn libraries. 
 
@@ -153,21 +151,21 @@ download the data from the website <https://www.chiantidatabase.org/>.
 
 ## GitHub repository
 
-1) Download satellite from GitHub
-(https://github.com/StavrosAkras/SATELLITE)
-command: "**git clone https://github.com/StavrosAkras/SATELLITE.git**"
 
-A new folder will be created namely SATELLITE with all the necessary
-files.
+1) Download {\sc satellite} from GitHub (https://github.com/StavrosAkras/SATELLITE) 
+command: "** git clone https://github.com/StavrosAkras/SATELLITE.git **"
+A new folder will be created namely SATELLITE with all the necessary files.
 
 2) run setup.py in the satellite folder 
-command: "**python setup.py install** "
-Setup.py also installs all the necessary python packages need to use satellite included pyneb.
+command: "**python setup.py install**"
+Setup.py also installs all the necessary python packages need to use satellite included Pyneb
 
-3) from the test directory, run the code command: "**./test_satellite.py > outputLog.txt.** "
+3) run the code 
+command: "** ./satellite $>$ outputLog.txt **" 
 
 A number of general comments provided from the different modules of the
 code are written in the *outputLog.txt* ASCII file.
+
 
 # READ INPUT DATA
 
@@ -374,7 +372,7 @@ The atomic data can also be changed by the user. All the options
 available in the PyNeb package can be used by adding in the
 *numerical\_input.txt* the words: IRAF\_09\_orig, IRAF\_09,
 PYNEB\_13\_01, PYNEB\_14\_01, PYNEB\_14\_02, PYNEB\_14\_03’,
-’PYNEB\_16\_01, , PYNEB\_17\_01, PYNEB\_17\_02, PYNEB\_18\_01,
+’PYNEB\_16\_01, PYNEB\_17\_01, PYNEB\_17\_02, PYNEB\_18\_01,
 PYNEB\_20\_01, and PYNEB\_21\_01. The atomic data from Chianti group can
 also be used (adding the word ’’Chianti‘‘in the
 *numerical\_input.txt*) but they have to be downloaded from
@@ -665,7 +663,7 @@ diagnostic diagrams in the *2D\_analysis\_module* module.
 
 ## radial analysis module
 
-The final module in the current version of satellite (v1.2) conducts a radial spectroscopic analysis considering a pseudo-slit with
+The final module in the current version of satellite (v1.3) conducts a radial spectroscopic analysis considering a pseudo-slit with
 specific width, length and position angle (parameter=angle\_for\_radial\_flux) provided by the user in the
 *numerical\_input.txt* file. The user must also select the emission lines that will be used for this analysis. This can be made in
 the third column of the *input.txt* file: radial\_yes, or radial\_no.

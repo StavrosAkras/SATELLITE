@@ -276,7 +276,7 @@ def TeNe(flux_angles,flux_angles_error,dist,line_names,lines_available,param_est
     ####################
     ### for all the angle in the rotation angle task###
     ####################
-    pn.log_.open_file('my_log.txt')
+    #pn.log_.open_file('my_log.txt')
     file10 = open('general_output_file.txt','a')
 
     index_atomicData=12
@@ -310,7 +310,7 @@ def TeNe(flux_angles,flux_angles_error,dist,line_names,lines_available,param_est
 
     minn=min(x for x in radial_length if x != 0)
     # plot a specific rage of radius from 0 up to 11 row/column (minn)
-#    minn=12
+#    minn=13
     
     for i in range(0,minn):
         dist2.append(0)
@@ -588,7 +588,7 @@ def TeNe(flux_angles,flux_angles_error,dist,line_names,lines_available,param_est
         if name_ext=='No_correction': name_ext=str('No') + ' ' + str('correction')
         RV_ext=float(param_model_values[index_extlaw])*0.1
     
-        pn.log_.level = 3 # set this to 3 to have more details
+        pn.log_.level = -5 # set this to 3 to have more details
         # Adopt an extinction law
         extinction_law = name_ext
 
@@ -1111,10 +1111,10 @@ def TeNe(flux_angles,flux_angles_error,dist,line_names,lines_available,param_est
 
         elem_abun_KB,elem_ICF_KB,elem_abun_DIMS,elem_ICF_DIMS,elem_abun_KB_error,elem_ICF_KB_error,elem_abun_DIMS_error,elem_ICF_DIMS_error,elem_abun_KB_ratio,elem_abun_KB_ratio_error,elem_abun_DIMS_ratio,elem_abun_DIMS_ratio_error=eaIrs.total_abundances_ICFs(ion_abun,ion_abun_error,atom_abun_fake,i,line_names,lines_available,elem_abun_KB,elem_ICF_KB,elem_abun_DIMS,elem_ICF_DIMS,elem_abun_KB_error,elem_ICF_KB_error,elem_abun_DIMS_error,elem_ICF_DIMS_error,elem_abun_KB_ratio,elem_abun_KB_ratio_error,elem_abun_DIMS_ratio,elem_abun_DIMS_ratio_error,param_mod_name)
         
-        print('{:03.0f}'.format(dist[i]),'{:5.2e}'.format(elem_abun_KB.He[i]), '{:5.2e}'.format(elem_abun_KB.N[i]),'{:09.0f}'.format(elem_ICF_KB.N[i]),'{:5.2e}'.format(elem_abun_DIMS.N[i]),'{:09.0f}'.format(elem_ICF_DIMS.N[i]   ),'{:5.2e}'.format(elem_abun_KB.O[i]),'{:09.0f}'.format(elem_ICF_KB.O[i]),'{:5.2e}'.format(elem_abun_DIMS.O[i]),'{:09.0f}'.format(elem_ICF_DIMS.O[i]),'{:5.2e}'.format(elem_abun_KB.S[i]),'{:09.0f}'.format(elem_ICF_KB.S[i]),'{:5.2e}'.format(elem_abun_DIMS.S[i]),'{:09.0f}'.format(elem_ICF_DIMS.S[i]),'{:5.2e}'.format(elem_abun_KB.Ne[i]),'{:09.0f}'.format(elem_ICF_KB.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS.Ne[i]),'{:09.0f}'.format(elem_ICF_DIMS.Ne[i]),'{:5.2e}'.format(elem_abun_KB.Cl[i]),'{:09.0f}'.format(elem_ICF_KB.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS.Cl[i]),'{:09.0f}'.format(elem_ICF_DIMS.Cl[i]),'{:5.2e}'.format(elem_abun_KB.Ar[i]),'{:09.0f}'.format(elem_ICF_KB.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS.Ar[i]),'{:09.0f}'.format(elem_ICF_DIMS.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]), file=file6)
+        print('{:03.2f}'.format(dist[i]),'{:5.2e}'.format(elem_abun_KB.He[i]), '{:5.2e}'.format(elem_abun_KB.N[i]),'{:09.0f}'.format(elem_ICF_KB.N[i]),'{:5.2e}'.format(elem_abun_DIMS.N[i]),'{:09.0f}'.format(elem_ICF_DIMS.N[i]   ),'{:5.2e}'.format(elem_abun_KB.O[i]),'{:09.0f}'.format(elem_ICF_KB.O[i]),'{:5.2e}'.format(elem_abun_DIMS.O[i]),'{:09.0f}'.format(elem_ICF_DIMS.O[i]),'{:5.2e}'.format(elem_abun_KB.S[i]),'{:09.0f}'.format(elem_ICF_KB.S[i]),'{:5.2e}'.format(elem_abun_DIMS.S[i]),'{:09.0f}'.format(elem_ICF_DIMS.S[i]),'{:5.2e}'.format(elem_abun_KB.Ne[i]),'{:09.0f}'.format(elem_ICF_KB.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS.Ne[i]),'{:09.0f}'.format(elem_ICF_DIMS.Ne[i]),'{:5.2e}'.format(elem_abun_KB.Cl[i]),'{:09.0f}'.format(elem_ICF_KB.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS.Cl[i]),'{:09.0f}'.format(elem_ICF_DIMS.Cl[i]),'{:5.2e}'.format(elem_abun_KB.Ar[i]),'{:09.0f}'.format(elem_ICF_KB.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS.Ar[i]),'{:09.0f}'.format(elem_ICF_DIMS.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio.ClO[i]), file=file6)
  
  
-        print('{:03.0f}'.format(dist[i]),'{:5.2e}'.format(elem_abun_KB_error.He[i]), '{:5.2e}'.format(elem_abun_KB_error.N[i]),'{:09.5f}'.format(elem_ICF_KB_error.N[i]),'{:5.2e}'.format(elem_abun_DIMS_error.N[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.N[i]   ),'{:5.2e}'.format(elem_abun_KB_error.O[i]),'{:09.5f}'.format(elem_ICF_KB_error.O[i]),'{:5.2e}'.format(elem_abun_DIMS_error.O[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.O[i]),'{:5.2e}'.format(elem_abun_KB_error.S[i]),'{:09.5f}'.format(elem_ICF_KB_error.S[i]),'{:5.2e}'.format(elem_abun_DIMS_error.S[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.S[i]),'{:5.2e}'.format(elem_abun_KB_error.Ne[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ne[i]),'{:5.2e}'.format(elem_abun_KB_error.Cl[i]),'{:09.5f}'.format(elem_ICF_KB_error.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Cl[i]),'{:5.2e}'.format(elem_abun_KB_error.Ar[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio_error.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]), file=file6)
+        print('{:03.2f}'.format(dist[i]),'{:5.2e}'.format(elem_abun_KB_error.He[i]), '{:5.2e}'.format(elem_abun_KB_error.N[i]),'{:09.5f}'.format(elem_ICF_KB_error.N[i]),'{:5.2e}'.format(elem_abun_DIMS_error.N[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.N[i]   ),'{:5.2e}'.format(elem_abun_KB_error.O[i]),'{:09.5f}'.format(elem_ICF_KB_error.O[i]),'{:5.2e}'.format(elem_abun_DIMS_error.O[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.O[i]),'{:5.2e}'.format(elem_abun_KB_error.S[i]),'{:09.5f}'.format(elem_ICF_KB_error.S[i]),'{:5.2e}'.format(elem_abun_DIMS_error.S[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.S[i]),'{:5.2e}'.format(elem_abun_KB_error.Ne[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ne[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ne[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ne[i]),'{:5.2e}'.format(elem_abun_KB_error.Cl[i]),'{:09.5f}'.format(elem_ICF_KB_error.Cl[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Cl[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Cl[i]),'{:5.2e}'.format(elem_abun_KB_error.Ar[i]),'{:09.5f}'.format(elem_ICF_KB_error.Ar[i]),'{:5.2e}'.format(elem_abun_DIMS_error.Ar[i]),'{:09.5f}'.format(elem_ICF_DIMS_error.Ar[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.NO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.SO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.SO[i]), '{:9.2e}'.format(elem_abun_KB_ratio_error.NeO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.NeO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]),'{:9.2e}'.format(elem_abun_KB_ratio_error.ClO[i]),'{:10.2e}'.format(elem_abun_DIMS_ratio_error.ClO[i]), file=file6)
          
                 
         os.remove("test.dat")
@@ -1122,7 +1122,7 @@ def TeNe(flux_angles,flux_angles_error,dist,line_names,lines_available,param_est
     file5.close() 
     file10.close()
 
-    pn.log_.close_file()
+    #pn.log_.close_file()
     
 #############################################################################################
 

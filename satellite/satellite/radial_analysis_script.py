@@ -1131,8 +1131,10 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
     max_len=max(len(flux_radial.Ha_6563),len(flux_radial.Hb_4861),len(flux_radial.Hg_4340),len(flux_radial.Hd_4101),len(flux_radial.HeIa_5876),len(flux_radial.HeIb_6678),len(flux_radial.HeIIa_4686),len(flux_radial.HeIIb_5412),len(flux_radial.OIa_5577),len(flux_radial.OIb_6300),len(flux_radial.OIc_6363),len(flux_radial.OIIa_3727),len(flux_radial.OIIb_3729),len(flux_radial.OIIc_7320),len(flux_radial.OIId_7330),len(flux_radial.OIIIa_4363),len(flux_radial.OIIIb_4959),len(flux_radial.OIIIc_5007),len(flux_radial.NI_5199),len(flux_radial.NIIa_5755),len(flux_radial.NIIb_6548),len(flux_radial.NIIc_6584),len(flux_radial.SIIa_6716),len(flux_radial.SIIb_6731),len(flux_radial.SIIIa_6312),len(flux_radial.SIIIb_9069),len(flux_radial.NeIIIa_3868),len(flux_radial.NeIIIb_3967),len(flux_radial.ArIII_7136),len(flux_radial.ArIVa_4712),len(flux_radial.ArIVb_4740),len(flux_radial.ClIIIa_5517),len(flux_radial.ClIIIb_5538),len(flux_radial.CI_8727),len(flux_radial.CII_6461))
     
     radial_dis_arc3=[]
-    jrad=0    
+    jrad=0
+#    mmin=13
     for kk in range(0,max_len):
+#    for kk in range(0,mmin):
         
         if flux_radial.Hb_4861[jrad]>0 and flux_radial.Ha_6563[jrad]>0:
             
@@ -1331,7 +1333,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
             if name_ext=='No_correction': name_ext=str('No') + ' ' + str('correction')
             RV_ext=float(param_model_values[index_extlaw])*0.1
         
-            pn.log_.level = 3 # set this to 3 to have more details
+            pn.log_.level = -5 # set this to 3 to have more details
             # Adopt an extinction law
             extinction_law = name_ext
         
@@ -1772,7 +1774,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
     ##############################################################################
     ##############################################################################
 
-    plt.legend(loc='upper right')
+    plt.legend(loc='upper right',ncol=2,fontsize=12)
     plt.xlabel("Distance from CS (arcsec)",fontsize=21,labelpad=6)
     plt.ylabel("Normalized flux (reddered) ",fontsize=21,labelpad=6)
     ax3.tick_params(axis='x', labelsize=21, pad=6)
@@ -2237,7 +2239,7 @@ def radial_analysis(flux2D,flux2D_error,line_names,line_ext_error,lines_availabl
         print('{:03.3f}'.format(radial_dis_arc3[i]),'{:06.3f}'.format(flux_radial_derred.CII_6461[i]), file=file22)
     
     
-    plt.legend(loc='upper right')
+    plt.legend(loc='upper right',ncol=2,fontsize=12)
     plt.xlabel("Distance from CS (arcsec)",fontsize=21,labelpad=6)
     plt.ylabel("Normalized flux (dereddered) ",fontsize=21,labelpad=6)
     ax4.tick_params(axis='x', labelsize=21, pad=6)

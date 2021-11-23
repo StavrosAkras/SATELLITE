@@ -275,7 +275,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
     ####################
     ### for all the angle in the rotation angle task###
     ####################
-    pn.log_.open_file('my_log.txt')
+    #pn.log_.open_file('my_log.txt')
     file10 = open('general_output_file.txt','a')
 
     index_atomicData=12
@@ -471,7 +471,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
         RV_ext=float(param_model_values[index_extlaw])*0.1
         
         
-        pn.log_.level = 3 # set this to 3 to have more details
+        pn.log_.level = -5 # set this to 3 to have more details
         # Adopt an extinction law
         extinction_law = name_ext
 
@@ -1012,7 +1012,7 @@ def TeNe(flux_angles,flux_angles_error,line_names,lines_available,param_estimate
     file5.close()
     file10.close()
 
-    pn.log_.close_file()
+    #pn.log_.close_file()
 
 
     return Te,Ne      

@@ -277,7 +277,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ####################
     ### for all the angle in the rotation angle task###
     ####################
-    pn.log_.open_file('my_log.txt')
+    #pn.log_.open_file('my_log.txt')
     file10 = open('general_output_file.txt','a')
 
     
@@ -474,7 +474,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         if name_ext=='No_correction': name_ext=str('No') + ' ' + str('correction')
         RV_ext=float(param_model_values[index_extlaw])*0.1
         
-        pn.log_.level = 3 # set this to 3 to have more details
+        pn.log_.level = -5 # set this to 3 to have more details
         # Adopt an extinction law
         extinction_law = name_ext
 
@@ -1018,7 +1018,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     file5.close() 
     file10.close()
 
-    pn.log_.close_file()
+    #pn.log_.close_file()
 
 
 #############################################################################################
@@ -1038,7 +1038,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.NIISII,yerr=Ne_error.NIISII,label="Ne ([S II])")
 #        plt.plot(ang,Te.NIISII,label="Te ([N II])")
 #        plt.plot(ang,Ne.NIISII,label="Ne ([S II])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1059,7 +1059,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         
         fig,ax1=plt.subplots(figsize=(12,7))
         plt.errorbar(ang,Te.NIISII,yerr=Te_error.NIISII) 
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[N II] (K)",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1078,7 +1078,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         
         fig,ax1=plt.subplots(figsize=(12,7))
         plt.errorbar(ang,Ne.NIISII,yerr=Ne_error.NIISII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[S II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1102,7 +1102,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         
         plt.errorbar(ang,Te.OISII,yerr=Te_error.OISII,label="Te ([O I])")
         plt.errorbar(ang,Ne.OISII,yerr=Ne_error.OISII,label="Ne ([S II])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1125,7 +1125,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OISII,yerr=Te_error.OISII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O I] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1146,7 +1146,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OISII,yerr=Ne_error.OISII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[S II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1172,7 +1172,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIISII,yerr=Ne_error.OIISII,label="Ne ([S II])")  
 #        plt.plot(ang,Te.OIISII,label="Te ([O II])")
 #        plt.plot(ang,Ne.OIISII,label="Ne ([S II])") 
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1195,7 +1195,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIISII,yerr=Te_error.OIISII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O II] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1216,7 +1216,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIISII,yerr=Ne_error.OIISII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[S II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1242,7 +1242,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIIISII,yerr=Ne_error.OIIISII,label="Ne ([S II])")  
 #        plt.plot(ang,Te.OIIISII,label="Te ([O III])")
 #        plt.plot(ang,Ne.OIIISII,label="Ne ([S II])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$) ',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1265,7 +1265,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIIISII,yerr=Te_error.OIIISII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O III] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1286,7 +1286,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIIISII,yerr=Ne_error.OIIISII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[S II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1313,8 +1313,8 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.SIIISII,yerr=Ne_error.SIIISII,label="Ne ([S II])")  
 #        plt.plot(ang,Te.OISII,label="Te ([S III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([S II])") 
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
-        plt.ylabel(r'Te (K)/Ne[S II] (cm$^{-3}$) ',fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
+        plt.ylabel(r'Te (K)/Ne (cm$^{-3}$) ',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
         ax1.yaxis.get_offset_text().set_fontsize(18)
@@ -1336,7 +1336,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.SIIISII,yerr=Te_error.SIIISII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[S III] (K)",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1357,7 +1357,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.SIIISII,yerr=Ne_error.SIIISII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[S II] (cm$^{-3}$) ',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1383,7 +1383,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIIOII,yerr=Ne_error.OIIOII,label="Ne ([O II])")  
 #        plt.plot(ang,Te.OISII,label="Te ([O II])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([O II])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1406,7 +1406,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIIOII,yerr=Te_error.OIIOII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O II] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1427,7 +1427,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIIOII,yerr=Ne_error.OIIOII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[O II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1453,7 +1453,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.NIIOII,yerr=Ne_error.NIIOII,label="Ne ([O II])")  
 #        plt.plot(ang,Te.OISII,label="Te ([N II])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([O II])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1476,7 +1476,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.NIIOII,yerr=Te_error.NIIOII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[N II] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1497,7 +1497,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.NIIOII,yerr=Ne_error.NIIOII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[O II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1522,7 +1522,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIOII,yerr=Ne_error.OIOII,label="Ne ([O II])")  
 #        plt.plot(ang,Te.OISII,label="Te ([O I])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([O II])")
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$) ',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1545,7 +1545,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIOII,yerr=Te_error.OIOII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O I] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1566,7 +1566,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIOII,yerr=Ne_error.OIOII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[O II] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1593,7 +1593,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIIIClIII,yerr=Ne_error.OIIIClIII,label="Ne ([Cl III])")  
 #        plt.plot(ang,Te.OISII,label="Te ([O III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([Cl III])") 
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1617,7 +1617,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIIIClIII,yerr=Te_error.OIIIClIII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O III] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1639,7 +1639,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIIIClIII,yerr=Ne_error.OIIIClIII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[Cl III] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1664,7 +1664,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.SIIIClIII,yerr=Ne_error.SIIIClIII,label="Ne ([Cl III])")  
 #        plt.plot(ang,Te.OISII,label="Te ([S III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([Cl III])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1687,7 +1687,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.SIIIClIII,yerr=Te_error.SIIIClIII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[S III] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1708,7 +1708,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.SIIIClIII,yerr=Ne_error.SIIIClIII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[Cl III] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1734,7 +1734,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.OIIIArVI,yerr=Ne_error.OIIIArVI,label="Ne ([Ar VI])")  
 #        plt.plot(ang,Te.OISII,label="Te ([O III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([Ar VI])")  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1757,7 +1757,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.OIIIArVI,yerr=Te_error.OIIIArVI)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[O III] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1778,7 +1778,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.OIIIArVI,yerr=Ne_error.OIIIArVI)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[Ar VI] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1803,7 +1803,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.SIIIArVI,yerr=Ne_error.SIIIArVI,label="Ne ([Ar VI])")  
 #        plt.plot(ang,Te.OISII,label="Te ([S III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([Ar VI])")
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1826,7 +1826,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.SIIIArVI,yerr=Te_error.SIIIArVI)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[S III] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1847,7 +1847,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.SIIIArVI,yerr=Ne_error.SIIIArVI)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[Ar VI] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1874,7 +1874,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         plt.errorbar(ang,Ne.NIIClIII,yerr=Ne_error.NIIClIII,label="Ne ([Cl III])")  
 #        plt.plot(ang,Te.OISII,label="Te ([S III])")
 #        plt.plot(ang,Ne.OISII,label="Ne ([Ar VI])")
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Te (K)/Ne (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1897,7 +1897,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Te.NIIClIII,yerr=Te_error.NIIClIII)
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel("Te[N II] (K) ",fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1918,7 +1918,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
         ymax=float(par_plotymax[index_plotname])
         
         plt.errorbar(ang,Ne.NIIClIII,yerr=Ne_error.NIIClIII)  
-        plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+        plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
         plt.ylabel(r'Ne[Cl III] (cm$^{-3}$)',fontsize=21,labelpad=6)
         ax1.tick_params(axis='x', labelsize=21, pad=6)
         ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -1953,7 +1953,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -1986,7 +1986,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2027,7 +2027,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
 
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2064,7 +2064,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2094,7 +2094,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2121,7 +2121,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
 
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2147,7 +2147,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2175,7 +2175,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ionic and Total abudnance (X/H+) ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(-3,4),axis='both')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2205,7 +2205,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("N/O abundance ratio ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(0,0),axis='y')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2227,7 +2227,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("S/O abundance ratio ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(0,0),axis='y')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2249,7 +2249,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ne/O abundance ratio ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(0,0),axis='y')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2270,7 +2270,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Cl/O abundance ratio ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(0,0),axis='y')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2292,7 +2292,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("Ar/O abundance ratio ",fontsize=21,labelpad=6)
     ax2.ticklabel_format(style='sci',scilimits=(0,0),axis='y')
     ax2.tick_params(axis='x', labelsize=21, pad=6)
@@ -2322,7 +2322,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymax=float(par_plotymax[index_plotname])
 
 
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("ICFs ",fontsize=21,labelpad=6)
     ax1.tick_params(axis='x', labelsize=21, pad=6)
     ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -2343,7 +2343,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("ICFs ",fontsize=21,labelpad=6)
     ax1.tick_params(axis='x', labelsize=21, pad=6)
     ax1.tick_params(axis='y', labelsize=21, pad=6)
@@ -2367,7 +2367,7 @@ def TeNe(flux_angles,flux_angles_error,ang,line_names,lines_available,param_esti
     ymin=float(par_plotymin[index_plotname])
     ymax=float(par_plotymax[index_plotname])
     
-    plt.xlabel("Position angle of simulated slits (degrees)",fontsize=21,labelpad=6)
+    plt.xlabel("Position angle of pseudo-slits (degrees)",fontsize=21,labelpad=6)
     plt.ylabel("ICFs ",fontsize=21,labelpad=6)
     ax1.tick_params(axis='x', labelsize=21, pad=6)
     ax1.tick_params(axis='y', labelsize=21, pad=6)
